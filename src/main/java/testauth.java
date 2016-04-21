@@ -19,19 +19,19 @@ public class testauth {
      public static void main(String[] args) throws Exception
 {
 
-	//main class
-	Class.forName("com.mysql.jdbc.Driver");
 	//load the jdbc driver class
+	Class.forName("com.mysql.jdbc.Driver");
+	/*make connection with the database*/
 	Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/db1","root","");/* red colored part has to be as per your database*/
-	/*make connection with the database(db name ecommerce, user is root and password is not set in my case put yours in those places with password if you have set password for the database*/
+	/*select instances from the table*/
 	PreparedStatement statement = con.prepareStatement("Select * from users");
-	/*sql structure to select instances from the table*/
+	/*execution of the database query*/
 	ResultSet result = statement.executeQuery();
-	/*execution of the database query*/ 
-	
+	 
+	/*print the result with three attributes from the table 'products in my case' */
 	while(result.next()){
 		System.out.println(result.getString(1) +"\t"+ result.getString(2)+ "\t" + result.getString(3)+ "\t" + result.getString(4));
-		/*print the result with three attributes from the table 'products in my case' */
+		
 		}
 	}
 }
