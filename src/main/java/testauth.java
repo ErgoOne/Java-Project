@@ -3,7 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.TimeZone;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,9 +20,7 @@ public class testauth {
 {
 
 	//main class
-	TimeZone timeZone = TimeZone.getTimeZone("Europe/Paris"); // e.g. "Europe/Rome"
-        TimeZone.setDefault(timeZone);
-	Class.forName("com.mysql.cj.jdbc.Driver");
+	Class.forName("com.mysql.jdbc.Driver");
 	//load the jdbc driver class
 	Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/db1","root","");/* red colored part has to be as per your database*/
 	/*make connection with the database(db name ecommerce, user is root and password is not set in my case put yours in those places with password if you have set password for the database*/
