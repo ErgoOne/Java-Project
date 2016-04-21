@@ -3,6 +3,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.TimeZone;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -17,11 +18,13 @@ import java.sql.ResultSet;
 public class testauth {
      public static void main(String[] args) throws Exception
 {
+
 	//main class
-	
-	Class.forName("com.mysql.jdbc.Driver");
+	TimeZone timeZone = TimeZone.getTimeZone("Europe/Paris"); // e.g. "Europe/Rome"
+        TimeZone.setDefault(timeZone);
+	Class.forName("com.mysql.cj.jdbc.Driver");
 	//load the jdbc driver class
-	Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/ecommerce","root","");/* red colored part has to be as per your database*/
+	Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/db1","root","");/* red colored part has to be as per your database*/
 	/*make connection with the database(db name ecommerce, user is root and password is not set in my case put yours in those places with password if you have set password for the database*/
 	PreparedStatement statement = con.prepareStatement("Select * from users");
 	/*sql structure to select instances from the table*/
@@ -34,4 +37,4 @@ public class testauth {
 		}
 	}
 }
-}
+
