@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+package newPackage1;
 
-/**
- *
- * @author 21506997
- */
+import javax.swing.JOptionPane;
+
 public class Principale extends javax.swing.JFrame {
 
     /**
@@ -15,6 +10,9 @@ public class Principale extends javax.swing.JFrame {
     public Principale() {
         initComponents();
     }
+    
+    JOptionPane jco = new JOptionPane();
+    String identif = JOptionPane.showInputDialog(null, "Veuillez rentrer votre identifiant.", JOptionPane.QUESTION_MESSAGE);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -187,6 +185,7 @@ public class Principale extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new Principale().setVisible(true);
             }

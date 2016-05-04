@@ -1,3 +1,5 @@
+package newPackage1;
+
 
 import java.sql.Connection;
 import java.sql.DriverManager;
