@@ -29,11 +29,12 @@ public class testauth {
 	PreparedStatement statement = con.prepareStatement("Select * from users");
 	/*execution of the database query*/
 	ResultSet result = statement.executeQuery();
-	 
+	 //map mp
 	/*print the result with three attributes from the table 'products in my case' */
 	while(result.next()){
 		System.out.println(result.getString(1) +"\t"+ result.getString(2)+ "\t" + result.getString(3)+ "\t" + result.getString(4));
-		
+		// u=new User(login,...)
+                // mp.put(pseudo,u)
 		}
 	}
 }
