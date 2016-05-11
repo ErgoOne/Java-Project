@@ -10,5 +10,5 @@ package newPackage1;
  * @author Badr
  */
 public enum TypeDroit {
-    R,RW,ADMIN,NONE
+    r,rw,admin,none
 }

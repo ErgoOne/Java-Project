@@ -10,5 +10,15 @@ package newPackage1;
  * @author Badr
  */
 public class User {
+    private String pseudo;
+    
+    public User(String p)
+    {
+    this.pseudo=p;
+    }
+
+    String getPseudo() {
+        return pseudo;
+            }
     
 }
