@@ -5,11 +5,12 @@ import java.util.Iterator;
 import java.util.Set;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import static newPackage1.DButilities.auth;
 
 public class Principale extends javax.swing.JFrame {
 
    public static int a=1;
-   public static String test="hmar";
+   //public static String test="hmar";
 
    
     public Principale() {
@@ -211,7 +212,9 @@ public class Principale extends javax.swing.JFrame {
             
             JOptionPane jco = new JOptionPane();
    String reponse = jco.showInputDialog(null, "Veuillez rentrer votre identifiant.","Connexion", JOptionPane.YES_NO_CANCEL_OPTION);
-        if(reponse.length()!=0 && reponse.equals(test))
+   
+   int rep=auth(reponse);     
+   if(rep==1)
         {
             JOptionPane.showMessageDialog(null, "Bienvenue " + reponse+".", "Authentification réussie", JOptionPane.INFORMATION_MESSAGE);
             break;
