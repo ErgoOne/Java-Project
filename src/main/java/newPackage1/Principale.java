@@ -1,13 +1,26 @@
 package newPackage1;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 
 public class Principale extends javax.swing.JFrame {
 
    public static int a=1;
+   public static String test="hmar";
+
+   
     public Principale() {
         initComponents();
+    
+   
+		
+    Room room1 = new Room ("nom", "desc");
+    
+        
+          
     }
 
   
@@ -23,10 +36,10 @@ public class Principale extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollBar1 = new javax.swing.JScrollBar();
-        jButton4 = new javax.swing.JButton();
+        jButtonDeconnexion = new javax.swing.JButton();
         toggleProfil = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
-        jToggleButton3 = new javax.swing.JToggleButton();
+        jToggleCreerSalon = new javax.swing.JToggleButton();
+        jToggleMesSalons = new javax.swing.JToggleButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -71,10 +84,10 @@ public class Principale extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton4.setText("Déconnexion");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        jButtonDeconnexion.setText("Déconnexion");
+        jButtonDeconnexion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                jButtonDeconnexionActionPerformed(evt);
             }
         });
 
@@ -85,19 +98,19 @@ public class Principale extends javax.swing.JFrame {
             }
         });
 
-        buttonGroup1.add(jToggleButton2);
-        jToggleButton2.setText("Créer Salon");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(jToggleCreerSalon);
+        jToggleCreerSalon.setText("Créer Salon");
+        jToggleCreerSalon.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                jToggleCreerSalonActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jToggleButton3);
-        jToggleButton3.setText("Mes salons");
-        jToggleButton3.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup1.add(jToggleMesSalons);
+        jToggleMesSalons.setText("Mes salons");
+        jToggleMesSalons.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton3ActionPerformed(evt);
+                jToggleMesSalonsActionPerformed(evt);
             }
         });
 
@@ -128,11 +141,11 @@ public class Principale extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton2)
+                .addComponent(jToggleCreerSalon)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jToggleButton3)
+                .addComponent(jToggleMesSalons)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
-                .addComponent(jButton4)
+                .addComponent(jButtonDeconnexion)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -143,9 +156,9 @@ public class Principale extends javax.swing.JFrame {
                 .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(toggleProfil)
-                    .addComponent(jToggleButton2)
-                    .addComponent(jToggleButton3)
-                    .addComponent(jButton4))
+                    .addComponent(jToggleCreerSalon)
+                    .addComponent(jToggleMesSalons)
+                    .addComponent(jButtonDeconnexion))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -164,27 +177,27 @@ public class Principale extends javax.swing.JFrame {
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(28, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
+    private void jToggleMesSalonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleMesSalonsActionPerformed
        
-    }//GEN-LAST:event_jToggleButton3ActionPerformed
+    }//GEN-LAST:event_jToggleMesSalonsActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButtonDeconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeconnexionActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jButtonDeconnexionActionPerformed
 
     private void toggleProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleProfilActionPerformed
      
     }//GEN-LAST:event_toggleProfilActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void jToggleCreerSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCreerSalonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }//GEN-LAST:event_jToggleCreerSalonActionPerformed
   
  
     /**
@@ -198,15 +211,15 @@ public class Principale extends javax.swing.JFrame {
             
             JOptionPane jco = new JOptionPane();
    String reponse = jco.showInputDialog(null, "Veuillez rentrer votre identifiant.","Connexion", JOptionPane.YES_NO_CANCEL_OPTION);
-        if(reponse.length()==0)
+        if(reponse.length()!=0 && reponse.equals(test))
         {
-            JOptionPane.showMessageDialog(null, "Erreur ! Veuillez retaper votre identifiant.", "Erreur", JOptionPane.INFORMATION_MESSAGE);
-            
+            JOptionPane.showMessageDialog(null, "Bienvenue " + reponse+".", "Authentification réussie", JOptionPane.INFORMATION_MESSAGE);
+            break;
         }
         else
             {
-            JOptionPane.showMessageDialog(null, "Bienvenue " + reponse+".", "Authentification réussie", JOptionPane.INFORMATION_MESSAGE);
-            break;
+            JOptionPane.showMessageDialog(null, "Erreur ! Veuillez retaper votre identifiant.", "Erreur", JOptionPane.INFORMATION_MESSAGE);
+            
             }
         }while(a==1);
     
@@ -244,7 +257,7 @@ public class Principale extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButtonDeconnexion;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -256,8 +269,8 @@ public class Principale extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleButton2;
-    private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleCreerSalon;
+    private javax.swing.JToggleButton jToggleMesSalons;
     private javax.swing.JToggleButton toggleProfil;
     // End of variables declaration//GEN-END:variables
 }
