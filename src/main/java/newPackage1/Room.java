@@ -11,14 +11,19 @@ package newPackage1;
  */
 public class Room {
     private String nom;
+    private String desc;
     
-    public Room (String n)
+    public Room (String n, String d)
     {
         this.nom=n;
+         this.desc=d;
     }
 
     String getName() {
         return nom;
+    }
+    String getDesc() {
+        return desc;
     }
     
 }

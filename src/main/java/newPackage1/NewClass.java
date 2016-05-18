@@ -22,7 +22,7 @@ public class NewClass {
         int tmp;
         User u1 = new User("Margx");
         
-        Room r1 = new Room("R1");
+        Room r1 = new Room("R1","blabla");
         //Room r2 = new Room();
         //--
         test=getDroitUR(u1,r1);
