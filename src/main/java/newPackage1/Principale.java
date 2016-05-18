@@ -17,7 +17,7 @@ public class Principale extends javax.swing.JFrame {
     
    
 		
-    Room room1 = new Room ("nom", "desc");
+   // Room room1 = new Room ("nom", "desc");
     
         
           
