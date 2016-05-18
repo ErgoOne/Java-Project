@@ -9,16 +9,16 @@ package newPackage1;
  *
  * @author Badr
  */
-public class User {
-    private String pseudo;
+public class Room {
+    private String nom;
     
-    public User(String p)
+    public Room (String n)
     {
-    this.pseudo=p;
+        this.nom=n;
     }
 
-    String getPseudo() {
-        return pseudo;
-            }
+    String getName() {
+        return nom;
+    }
     
 }
