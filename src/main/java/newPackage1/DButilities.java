@@ -20,13 +20,13 @@ import java.util.logging.Logger;
 public class DButilities {
     
 
-    static int auth(User user){
+    static int auth(String user){
     int tmp;
     try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select pseudo from users where pseudo=?";
+            String sql = "Select pseudo from users where pseudo='"+user+"'";
 
             /*          + utilisateur.getPseudo()
                     + "' AND nom='" + r.getName()
@@ -35,7 +35,7 @@ public class DButilities {
             System.err.println(sql);
 
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, user.getPseudo());
+            //statement.setString(1, user.getPseudo());
             /*execution of the database query*/
             ResultSet result = statement.executeQuery();
             //map mp
