@@ -93,4 +93,34 @@ public class DButilities {
         }
  
     }
+     static void CreerRoom(Room r2,String d, User u){
+          try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "INSERT INTO room (Nom, Descrptif) VALUES ('"+r2.getName()+"', '"+d+"')";
+            //String sql2= "INSERT INTO creerroom (Pseudo, Nom) VALUES('?', '?');";
+
+            System.err.println(sql);
+            //System.err.println(sql2);
+
+            PreparedStatement statement = con.prepareStatement(sql);
+            //statement.setString(1, r2.getName());
+           // statement.setString(2, d);
+     
+            ResultSet result = statement.executeQuery();
+            //ResultSetMetaData resultMeta = result.getMetaData();
+            
+           /* 
+            PreparedStatement statement2 = con.prepareStatement(sql2);
+            statement2.setString(1, u.getPseudo());
+            statement2.setString(2, r.getName());
+     
+            ResultSet result2 = statement2.executeQuery();
+            //ResultSetMetaData resultMeta2 = result2.getMetaData();
+        */
+         } catch (ClassNotFoundException | SQLException ex) {
+        Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+     }
 }
