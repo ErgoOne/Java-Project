@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
  *
  * @author Badr
  */
+
 public class DButilities {
 
     static TypeDroit getDroitUR(User utilisateur, Room r) {
@@ -66,5 +68,29 @@ public class DButilities {
 
         return tmp;
     }
+    static void AfficherRoom(){
+      
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "Select * from room";
 
+            System.err.println(sql);
+
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
+         
+            while (result.next()) {
+                for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
+            System.out.print(result.getObject(i).toString()+"\n");
+                }
+            }
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+    }
 }

@@ -7,6 +7,7 @@ package newPackage1;
 
 import java.util.HashMap;
 import java.util.Map;
+import static newPackage1.DButilities.AfficherRoom;
 import static newPackage1.DButilities.getDroitUR;
 
 /**
@@ -25,6 +26,8 @@ public class NewClass {
         //--
         test=getDroitUR(u1,r1);
         System.out.println("res : "+test);
+       
+        AfficherRoom(); //Requete sql pour afficher les rooms enregistrée dans la bdd
         
         /*Map<Room, TypeDroit> du1 = new HashMap<>();
         du1.put(r2, TypeDroit.NONE);
