@@ -5,6 +5,7 @@
  */
 package newPackage1;
 
+import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,7 +22,48 @@ import java.util.logging.Logger;
 
 public class DButilities {
     
+    
 
+    static void getUser(User u)
+    {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            String user=u.getPseudo();
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "Select nom,email,telephone,statut from users where pseudo='"+user+"'";
+
+            /*          + utilisateur.getPseudo()
+                    + "' AND nom='" + r.getName()
+                    + "'  ";*/
+ /*select instances from the table*/
+            System.err.println(sql);
+
+            PreparedStatement statement = con.prepareStatement(sql);
+            //statement.setString(1, user.getPseudo());
+            /*execution of the database query*/
+            ResultSet result = statement.executeQuery();
+            //map mp
+            /*print the result with three attributes from the table 'products in my case' */
+            ResultSetMetaData resultMeta = result.getMetaData();
+            ArrayList<String> a= new ArrayList<>();
+            while (result.next()) {
+                for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
+                    a.add((String)result.getObject(i));
+                }
+            }
+            u.setNom(a.get(0));
+            u.setEmail(a.get(1));
+            u.setTel(a.get(2));
+            u.setStatus(a.get(3));
+            u.hello();
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+         
+        }
+ 
+    }
+    
     static int auth(String user){
     int tmp;
     try {
