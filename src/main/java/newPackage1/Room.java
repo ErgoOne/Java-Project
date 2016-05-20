@@ -5,6 +5,8 @@
  */
 package newPackage1;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Badr
@@ -37,5 +39,7 @@ public class Room {
     String getDesc() {
         return desc;
     }
+    
+    HashMap<User, String> msg;
     
 }

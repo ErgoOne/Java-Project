@@ -98,6 +98,7 @@ public class DButilities {
         }
     return tmp;
     }
+    
     static TypeDroit getDroitUR(User utilisateur, Room r) {
         TypeDroit tmp = TypeDroit.none;
 
