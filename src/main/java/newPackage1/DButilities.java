@@ -174,7 +174,7 @@ public class DButilities {
 
         return tmp;
     }
-    static void AfficherRoom(){
+    static void putRoomtoSalon(Salon s){
       
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -191,7 +191,9 @@ public class DButilities {
             
             while (result.next()) {
                 for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
-            System.out.print(result.getString(i)+"\n");
+            //System.out.print(result.getString(i)+"\n");
+            s.addRoom(result.getString(i),result.getString(i+1) );//Ajouter les room de la BD dans la salon
+            i++;
                 }
             }
 
