@@ -1,5 +1,6 @@
 package newPackage1;
 
+import java.awt.Panel;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -152,7 +153,7 @@ public class Principale extends javax.swing.JFrame {
 
         jLabel14.setText(".");
 
-        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En ligne", "Occupé", "Hors ligne" }));
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En ligne", "Occupé" }));
         jComboBoxStatus.setName("Statut"); // NOI18N
         jComboBoxStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,6 +284,8 @@ public class Principale extends javax.swing.JFrame {
 
     private void jToggleCreerSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCreerSalonActionPerformed
         // TODO add your handling code here:
+       // jLabel8.setIcon(null);
+        //toggleProfilActionPerformed(null);
     }//GEN-LAST:event_jToggleCreerSalonActionPerformed
 
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed

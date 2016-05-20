@@ -49,12 +49,7 @@ public class DButilities {
             /*make connection with the database*/
             String user=u.getPseudo();
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            // On update la base comme quoi le user est en ligne
-            String sql2 = "UPDATE users SET statut='on' WHERE pseudo='"+user+"'";
-            Statement stmt = null;
-            stmt = con.createStatement();
-            stmt.executeUpdate(sql2);
-            stmt.close();
+            
             // On récupere les infos du users pour la classe user et pour les afficher.
             String sql = "Select pseudo,nom,email,telephone,statut from users where pseudo='"+user+"'";
             /*          + utilisateur.getPseudo()
@@ -81,6 +76,15 @@ public class DButilities {
             u.setNom(a.get(1));
             u.setEmail(a.get(2));
             u.setTel(a.get(3));
+            if (a.get(4).equals("off"))
+            {
+                // On update la base comme quoi le user est en ligne dans le cas ou il est Off
+            String sql2 = "UPDATE users SET statut='on' WHERE pseudo='"+user+"'";
+            Statement stmt = null;
+            stmt = con.createStatement();
+            stmt.executeUpdate(sql2);
+            stmt.close();
+            }
             u.setStatus(a.get(4));
             u.hello();
             con.close();
