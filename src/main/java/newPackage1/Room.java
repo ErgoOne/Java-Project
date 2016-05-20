@@ -40,6 +40,10 @@ public class Room {
         return desc;
     }
     
-    HashMap<User, String> msg;
-    
+
+   public void Hello()
+    {
+        System.out.println("\nROOM : "+getNom()+" "+getDesc()+"");
+    }
+
 }

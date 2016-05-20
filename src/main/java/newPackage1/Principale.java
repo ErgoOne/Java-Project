@@ -4,26 +4,28 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 import javax.swing.ButtonGroup;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static newPackage1.DButilities.auth;
 
 public class Principale extends javax.swing.JFrame {
 
    public static int a=1;
-   //public static String test="hmar";
+   public static String s="toto";
+   
 
    
     public Principale() {
+       
         initComponents();
-    
-   
-		
-   // Room room1 = new Room ("nom", "desc");
-    
+         toggleProfil.setSelected(true);
+        
+       
         
           
     }
-
+      
   
  
     @SuppressWarnings("unchecked")
@@ -48,6 +50,11 @@ public class Principale extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         jLabel1.setText("Bienvenue sur le chat  STRI, veuillez rentrer votre identifiant.");
 
@@ -126,6 +133,16 @@ public class Principale extends javax.swing.JFrame {
 
         jLabel9.setText("Pseudo :");
 
+        jLabel10.setText(".");
+
+        jLabel11.setText(".");
+
+        jLabel12.setText(".");
+
+        jLabel13.setText(".");
+
+        jLabel14.setText(".");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,6 +177,13 @@ public class Principale extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel7)))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel14))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,20 +205,30 @@ public class Principale extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jLabel3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel5)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel11))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel12))
                         .addGap(10, 10, 10)
-                        .addComponent(jLabel7)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel13))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel14))
                         .addGap(151, 151, 151)
                         .addComponent(jLabel6)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(29, Short.MAX_VALUE))))
         );
 
         pack();
@@ -209,7 +243,12 @@ public class Principale extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDeconnexionActionPerformed
 
     private void toggleProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleProfilActionPerformed
-     
+       jLabel10.setText("toto");
+       jLabel11.setText("toto");
+       jLabel12.setText("toto");
+       jLabel13.setText("toto");
+       jLabel14.setText("toto");
+       
     }//GEN-LAST:event_toggleProfilActionPerformed
 
     private void jToggleCreerSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCreerSalonActionPerformed
@@ -223,12 +262,12 @@ public class Principale extends javax.swing.JFrame {
     public static void main(String args[]) {
        
          
-        do
-        {
-            
-            JOptionPane jco = new JOptionPane();
+      do
+        {   
+           
+            JOptionPane jco = new JOptionPane();  
    String reponse = jco.showInputDialog(null, "Veuillez rentrer votre identifiant.","Connexion", JOptionPane.YES_NO_CANCEL_OPTION);
-   
+   s=reponse;
    int rep=auth(reponse);     
    if(rep==1)
         {
@@ -237,14 +276,10 @@ public class Principale extends javax.swing.JFrame {
         }
         else
             {
-            JOptionPane.showMessageDialog(null, "Erreur ! Veuillez retaper votre identifiant.", "Erreur", JOptionPane.INFORMATION_MESSAGE);
-            
+            JOptionPane.showMessageDialog(null, "Erreur !", "Erreur", JOptionPane.INFORMATION_MESSAGE);
+            System.exit(0);
             }
-        }while(a==1);
-    
-    
-    ButtonGroup group = new ButtonGroup(); 
-    
+      }while(a==1);
         
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -270,6 +305,9 @@ public class Principale extends javax.swing.JFrame {
             public void run() {
                 new Principale().setVisible(true);
                 
+                
+              
+                 
             }
         });
     }
@@ -279,6 +317,11 @@ public class Principale extends javax.swing.JFrame {
     private javax.swing.JButton jButtonDeconnexion;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
