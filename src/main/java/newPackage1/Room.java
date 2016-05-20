@@ -10,6 +10,18 @@ package newPackage1;
  * @author Badr
  */
 public class Room {
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
+
+    public String getNom() {
+        return nom;
+    }
     private String nom;
     private String desc;
     

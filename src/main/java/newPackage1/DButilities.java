@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -169,22 +170,28 @@ public class DButilities {
         }
  
     }
-     static void CreerRoom(Room r2,String d, User u){
+     static void CreerRoom(Room r2, User u){
           try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "INSERT INTO room (Nom, Descrptif) VALUES ('"+r2.getName()+"', '"+d+"')";
+            String sql = "INSERT INTO room (Nom, Descrptif) VALUES ('"+r2.getName()+"', '"+r2.getDesc()+"')";
             //String sql2= "INSERT INTO creerroom (Pseudo, Nom) VALUES('?', '?');";
+              Statement stmt = null;
+            stmt = con.createStatement();
+            stmt.executeUpdate(sql);
+ 
+            
+            
 
-            System.err.println(sql);
+            //System.err.println(sql);
             //System.err.println(sql2);
 
-            PreparedStatement statement = con.prepareStatement(sql);
+            //PreparedStatement statement = con.prepareStatement(sql);
             //statement.setString(1, r2.getName());
            // statement.setString(2, d);
      
-            ResultSet result = statement.executeQuery();
+            //ResultSet result = statement.executeQuery();
             //ResultSetMetaData resultMeta = result.getMetaData();
             
            /* 
