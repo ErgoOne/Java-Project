@@ -33,7 +33,6 @@ public class DButilities {
             String user=u.getPseudo();
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
             String sql = "Select nom,email,telephone,statut from users where pseudo='"+user+"'";
-
             /*          + utilisateur.getPseudo()
                     + "' AND nom='" + r.getName()
                     + "'  ";*/
@@ -54,11 +53,6 @@ public class DButilities {
                     a.add((String)result.getString(i));
                 }
             }
-            u.setNom(a.get(0));
-            u.setEmail(a.get(1));
-            u.setTel(a.get(2));
-            u.setStatus(a.get(3));
-            u.hello();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
          
