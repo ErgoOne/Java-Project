@@ -8,18 +8,22 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static newPackage1.DButilities.auth;
+import static newPackage1.DButilities.getUser;
 
 public class Principale extends javax.swing.JFrame {
 
    public static int a=1;
    public static String s="toto";
+   public User u=new User("test");
+    
    
 
    
     public Principale() {
-       
+ 
         initComponents();
-         toggleProfil.setSelected(true);
+        
+         
         
        
         
@@ -55,6 +59,7 @@ public class Principale extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        jComboBoxStatus = new javax.swing.JComboBox<>();
 
         jLabel1.setText("Bienvenue sur le chat  STRI, veuillez rentrer votre identifiant.");
 
@@ -143,6 +148,14 @@ public class Principale extends javax.swing.JFrame {
 
         jLabel14.setText(".");
 
+        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En ligne", "Occupé", "Hors ligne" }));
+        jComboBoxStatus.setName("Statut"); // NOI18N
+        jComboBoxStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxStatusActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -163,27 +176,32 @@ public class Principale extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
                         .addComponent(jButtonDeconnexion))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(30, 30, 30)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel9)
-                                            .addComponent(jLabel5)
-                                            .addComponent(jLabel3)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel7)))))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel14))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel8)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(30, 30, 30)
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel9)
+                                                    .addComponent(jLabel5)
+                                                    .addComponent(jLabel3)))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel7)))))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel11)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel13)
+                                    .addComponent(jLabel14)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(36, 36, 36)
+                                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -226,7 +244,9 @@ public class Principale extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jLabel14))
-                        .addGap(151, 151, 151)
+                        .addGap(31, 31, 31)
+                        .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(100, 100, 100)
                         .addComponent(jLabel6)
                         .addContainerGap(29, Short.MAX_VALUE))))
         );
@@ -243,17 +263,24 @@ public class Principale extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonDeconnexionActionPerformed
 
     private void toggleProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleProfilActionPerformed
-       jLabel10.setText("toto");
-       jLabel11.setText("toto");
-       jLabel12.setText("toto");
-       jLabel13.setText("toto");
-       jLabel14.setText("toto");
+                u.setPseudo(s);
+                getUser(u);
+        jLabel10.setText(u.getNom());
+       jLabel11.setText(u.getEmail());
+       jLabel12.setText(u.getPseudo());
+       jLabel13.setText(u.getTel());
+       jLabel14.setText(u.getStatus());
        
     }//GEN-LAST:event_toggleProfilActionPerformed
 
     private void jToggleCreerSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCreerSalonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jToggleCreerSalonActionPerformed
+
+    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
+        String g=jComboBoxStatus.getSelectedItem().toString();
+        jLabel14.setText(g);
+    }//GEN-LAST:event_jComboBoxStatusActionPerformed
   
  
     /**
@@ -280,7 +307,8 @@ public class Principale extends javax.swing.JFrame {
             System.exit(0);
             }
       }while(a==1);
-        
+      
+      
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -315,6 +343,7 @@ public class Principale extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonDeconnexion;
+    private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
