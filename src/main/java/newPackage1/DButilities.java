@@ -48,6 +48,7 @@ public class DButilities {
             /*print the result with three attributes from the table 'products in my case' */
             ResultSetMetaData resultMeta = result.getMetaData();
             ArrayList<String> a= new ArrayList<>();
+            
             while (result.next()) {
                 for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
                     a.add((String)result.getString(i));
