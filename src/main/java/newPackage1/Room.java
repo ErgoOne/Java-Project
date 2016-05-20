@@ -5,6 +5,8 @@
  */
 package newPackage1;
 
+import java.util.HashMap;
+
 /**
  *
  * @author Badr
@@ -38,4 +40,10 @@ public class Room {
         return desc;
     }
     
+
+   public void Hello()
+    {
+        System.out.println("\nROOM : "+getNom()+" "+getDesc()+"");
+    }
+
 }

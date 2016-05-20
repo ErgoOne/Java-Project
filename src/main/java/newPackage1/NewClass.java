@@ -11,6 +11,7 @@ import static newPackage1.DButilities.auth;
 import static newPackage1.DButilities.AfficherRoom;
 import static newPackage1.DButilities.CreerRoom;
 import static newPackage1.DButilities.getDroitUR;
+import static newPackage1.DButilities.getRoom;
 import static newPackage1.DButilities.getUser;
 
 /**
@@ -21,14 +22,15 @@ public class NewClass {
 
     public static void main(String[] args) {
         //--
-        /*TypeDroit test;
+        TypeDroit test;
         int tmp;
-       */ User u1 = new User("atila");
-        getUser(u1);/*
+        User u1 = new User("atila");
+        //getUser(u1);
 
-      
-        String texte="Salon de css";
-        Room r1 = new Room("R3","blabla");*/
+        
+        Room r1 = new Room("R8","bob marley");
+        
+        getRoom(r1);
         //Room r2 = new Room();
         //--
         /*test=getDroitUR(u1,r1);
@@ -38,7 +40,7 @@ public class NewClass {
       //Requete sql pour afficher les rooms enregistrée dans la bdd
        /* CreerRoom(r1,texte,u1);*/
         //CreerRoom(r1, u1);
-        //AfficherRoom();
+        AfficherRoom();
      
         /*Map<Room, TypeDroit> du1 = new HashMap<>();
         du1.put(r2, TypeDroit.NONE);
