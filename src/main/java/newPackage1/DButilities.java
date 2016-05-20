@@ -48,9 +48,10 @@ public class DButilities {
             /*print the result with three attributes from the table 'products in my case' */
             ResultSetMetaData resultMeta = result.getMetaData();
             ArrayList<String> a= new ArrayList<>();
+            
             while (result.next()) {
                 for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
-                    a.add((String)result.getObject(i));
+                    a.add((String)result.getString(i));
                 }
             }
             u.setNom(a.get(0));
@@ -161,7 +162,7 @@ public class DButilities {
          
             while (result.next()) {
                 for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
-            System.out.print(result.getObject(i).toString()+"\n");
+            System.out.print(result.getString(i)+"\n");
                 }
             }
 
