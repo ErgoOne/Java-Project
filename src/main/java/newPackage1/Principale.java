@@ -285,7 +285,7 @@ public class Principale extends javax.swing.JFrame {
     private void jToggleCreerSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCreerSalonActionPerformed
         // TODO add your handling code here:
        // jLabel8.setIcon(null);
-        toggleProfilActionPerformed(evt);
+        //toggleProfilActionPerformed(evt);
     }//GEN-LAST:event_jToggleCreerSalonActionPerformed
 
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
