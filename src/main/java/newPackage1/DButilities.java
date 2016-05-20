@@ -25,6 +25,23 @@ public class DButilities {
     
     
 
+    static void chgStatUser(User u,String stat) // Set le statut sur la bd à off
+    {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            String user=u.getPseudo();
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");
+            String sql2 = "UPDATE users SET statut='"+stat+"' WHERE pseudo='"+user+"'";
+            Statement stmt = null;
+            stmt = con.createStatement();
+            stmt.executeUpdate(sql2);
+            stmt.close();
+            con.close();
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     static void getUser(User u)
     {
         try {
@@ -32,7 +49,14 @@ public class DButilities {
             /*make connection with the database*/
             String user=u.getPseudo();
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select nom,email,telephone,statut from users where pseudo='"+user+"'";
+            // On update la base comme quoi le user est en ligne
+            String sql2 = "UPDATE users SET statut='on' WHERE pseudo='"+user+"'";
+            Statement stmt = null;
+            stmt = con.createStatement();
+            stmt.executeUpdate(sql2);
+            stmt.close();
+            // On récupere les infos du users pour la classe user et pour les afficher.
+            String sql = "Select pseudo,nom,email,telephone,statut from users where pseudo='"+user+"'";
             /*          + utilisateur.getPseudo()
                     + "' AND nom='" + r.getName()
                     + "'  ";*/
@@ -53,10 +77,11 @@ public class DButilities {
                     a.add((String)result.getString(i));
                 }
             }
-            u.setNom(a.get(0));
-            u.setEmail(a.get(1));
-            u.setTel(a.get(2));
-            u.setStatus(a.get(3));
+            u.setPseudo(a.get(0));
+            u.setNom(a.get(1));
+            u.setEmail(a.get(2));
+            u.setTel(a.get(3));
+            u.setStatus(a.get(4));
             u.hello();
             con.close();
         } catch (ClassNotFoundException | SQLException ex) {

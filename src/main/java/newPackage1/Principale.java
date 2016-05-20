@@ -7,7 +7,9 @@ import javax.swing.ButtonGroup;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.xml.bind.annotation.XmlElementDecl;
 import static newPackage1.DButilities.auth;
+import static newPackage1.DButilities.chgStatUser;
 import static newPackage1.DButilities.getUser;
 
 public class Principale extends javax.swing.JFrame {
@@ -15,7 +17,9 @@ public class Principale extends javax.swing.JFrame {
    public static int a=1;
    public static String s="toto";
    public User u=new User("test");
-    
+   public Statut st=new Statut();
+   
+         
    
 
    
@@ -259,17 +263,21 @@ public class Principale extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleMesSalonsActionPerformed
 
     private void jButtonDeconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeconnexionActionPerformed
+        chgStatUser(u,"off");// Update la bd pour dire que le user est offline
+        u=null;
+        st=null;
         System.exit(0);
     }//GEN-LAST:event_jButtonDeconnexionActionPerformed
 
     private void toggleProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleProfilActionPerformed
                 u.setPseudo(s);
                 getUser(u);
+         
         jLabel10.setText(u.getNom());
        jLabel11.setText(u.getEmail());
        jLabel12.setText(u.getPseudo());
        jLabel13.setText(u.getTel());
-       jLabel14.setText(u.getStatus());
+       jLabel14.setText(st.getstat(u.getStatus())); // On change les valeurs de la bd par des trucs lisibles
        
     }//GEN-LAST:event_toggleProfilActionPerformed
 
@@ -280,6 +288,7 @@ public class Principale extends javax.swing.JFrame {
     private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
         String g=jComboBoxStatus.getSelectedItem().toString();
         jLabel14.setText(g);
+        chgStatUser(u, st.getstat(g)); // Changement du statut sur la base.
     }//GEN-LAST:event_jComboBoxStatusActionPerformed
   
  
@@ -304,7 +313,7 @@ public class Principale extends javax.swing.JFrame {
         else
             {
             JOptionPane.showMessageDialog(null, "Erreur !", "Erreur", JOptionPane.INFORMATION_MESSAGE);
-            System.exit(0);
+            //System.exit(0);
             }
       }while(a==1);
       
@@ -332,6 +341,7 @@ public class Principale extends javax.swing.JFrame {
             @Override
             public void run() {
                 new Principale().setVisible(true);
+                
                 
                 
               
