@@ -37,5 +37,8 @@ public class Room {
     String getDesc() {
         return desc;
     }
-    
+   public void Hello()
+    {
+        System.out.println("\nROOM : "+getNom()+" "+getDesc()+"");
+    }
 }

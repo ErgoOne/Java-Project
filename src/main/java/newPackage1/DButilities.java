@@ -159,7 +159,7 @@ public class DButilities {
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
             ResultSetMetaData resultMeta = result.getMetaData();
-         
+            
             while (result.next()) {
                 for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
             System.out.print(result.getString(i)+"\n");
@@ -176,18 +176,27 @@ public class DButilities {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "INSERT INTO room (Nom, Descrptif) VALUES ('"+r2.getName()+"', '"+r2.getDesc()+"')";
-            //String sql2= "INSERT INTO creerroom (Pseudo, Nom) VALUES('?', '?');";
-              Statement stmt = null;
+            String sql = "INSERT INTO room VALUES ('"+r2.getName()+"', '"+r2.getDesc()+"')";
+            String sql2= "INSERT INTO creerroom VALUES('"+u.getPseudo()+"', '"+r2.getName()+"')";
+            Statement stmt = null;
             stmt = con.createStatement();
-            stmt.executeUpdate(sql);
- 
+            int statut=stmt.executeUpdate(sql);
             
+                if(statut==1){
+            System.err.println("la requete a fonctionner");
+                    }else{
+                    System.err.println("erreur insert");
+                }
+            Statement stmt2 = null;
+            stmt2 = con.createStatement();
+            int statut2 = stmt2.executeUpdate(sql2);
             
-
-            //System.err.println(sql);
-            //System.err.println(sql2);
-
+             if(statut2==1){
+            System.err.println("la deuxieme requete a fonctionner");
+                    }else{
+                    System.err.println("erreur insert");
+                }
+            con.close();
             //PreparedStatement statement = con.prepareStatement(sql);
             //statement.setString(1, r2.getName());
            // statement.setString(2, d);
@@ -206,7 +215,38 @@ public class DButilities {
          } catch (ClassNotFoundException | SQLException ex) {
         Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
         } 
+          
      }
+     static void getRoom(Room r){
+         try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            String nameroom=r.getName();
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "Select Nom, Descriptif from room where Nom='"+nameroom+"'";
+
+            System.err.println(sql);
+
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
+            ArrayList<String> aroom = new ArrayList<>();
+            while (result.next()) {
+                for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
+                    aroom.add((String)result.getString(i));
+                    //System.out.print(result.getString(i)+"\n");
+                }
+            }
+            r.setNom(aroom.get(0));
+            r.setDesc(aroom.get(1));
+            r.Hello();
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+ 
+    }
+     
 
     
 }
