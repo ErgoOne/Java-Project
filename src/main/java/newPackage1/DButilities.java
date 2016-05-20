@@ -50,7 +50,7 @@ public class DButilities {
             ArrayList<String> a= new ArrayList<>();
             while (result.next()) {
                 for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
-                    a.add((String)result.getObject(i));
+                    a.add((String)result.getString(i));
                 }
             }
             u.setNom(a.get(0));
@@ -58,9 +58,9 @@ public class DButilities {
             u.setTel(a.get(2));
             u.setStatus(a.get(3));
             u.hello();
+            con.close();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
-         
         }
  
     }
@@ -161,7 +161,7 @@ public class DButilities {
          
             while (result.next()) {
                 for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
-            System.out.print(result.getObject(i).toString()+"\n");
+            System.out.print(result.getString(i)+"\n");
                 }
             }
 

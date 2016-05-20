@@ -38,7 +38,7 @@ public class NewClass {
       //Requete sql pour afficher les rooms enregistrée dans la bdd
        /* CreerRoom(r1,texte,u1);*/
         //CreerRoom(r1, u1);
-        //AfficherRoom();
+        AfficherRoom();
      
         /*Map<Room, TypeDroit> du1 = new HashMap<>();
         du1.put(r2, TypeDroit.NONE);
