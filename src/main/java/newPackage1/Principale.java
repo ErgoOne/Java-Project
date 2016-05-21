@@ -1,5 +1,6 @@
 package newPackage1;
 
+import java.awt.CardLayout;
 import java.awt.Panel;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,24 +48,14 @@ public class Principale extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jScrollBar1 = new javax.swing.JScrollBar();
-        jButtonDeconnexion = new javax.swing.JButton();
-        toggleProfil = new javax.swing.JToggleButton();
-        jToggleCreerSalon = new javax.swing.JToggleButton();
-        jToggleMesSalons = new javax.swing.JToggleButton();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jComboBoxStatus = new javax.swing.JComboBox<>();
+        buttonPanel = new javax.swing.JPanel();
+        profilButton = new javax.swing.JButton();
+        salonButton = new javax.swing.JButton();
+        creerSalonButton = new javax.swing.JButton();
+        displayPanel = new javax.swing.JPanel();
+        profilPanel = new newPackage1.ProfilPanel();
+        salonPanel = new newPackage1.SalonPanel();
+        creerSalonPanel = new newPackage1.CreerSalonPanel();
 
         jLabel1.setText("Bienvenue sur le chat  STRI, veuillez rentrer votre identifiant.");
 
@@ -103,196 +94,56 @@ public class Principale extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButtonDeconnexion.setText("Déconnexion");
-        jButtonDeconnexion.addActionListener(new java.awt.event.ActionListener() {
+        profilButton.setText("Profil");
+        profilButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonDeconnexionActionPerformed(evt);
+                profilButtonClicked(evt);
             }
         });
+        buttonPanel.add(profilButton);
 
-        toggleProfil.setText("Profil");
-        toggleProfil.addActionListener(new java.awt.event.ActionListener() {
+        salonButton.setText("Salon");
+        salonButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toggleProfilActionPerformed(evt);
+                salonButtonClicked(evt);
             }
         });
+        buttonPanel.add(salonButton);
 
-        buttonGroup1.add(jToggleCreerSalon);
-        jToggleCreerSalon.setText("Créer Salon");
-        jToggleCreerSalon.addActionListener(new java.awt.event.ActionListener() {
+        creerSalonButton.setText("Creer Salon");
+        creerSalonButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleCreerSalonActionPerformed(evt);
+                creerSalonButtonClicked(evt);
             }
         });
+        buttonPanel.add(creerSalonButton);
 
-        buttonGroup1.add(jToggleMesSalons);
-        jToggleMesSalons.setText("Mes salons");
-        jToggleMesSalons.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleMesSalonsActionPerformed(evt);
-            }
-        });
+        getContentPane().add(buttonPanel, java.awt.BorderLayout.NORTH);
 
-        jLabel3.setText("Nom :");
+        displayPanel.setLayout(new java.awt.CardLayout());
+        displayPanel.add(profilPanel, "first");
+        displayPanel.add(salonPanel, "second");
+        displayPanel.add(creerSalonPanel, "third");
 
-        jLabel5.setText("Mail :");
-
-        jLabel7.setText("Num. Port :");
-
-        jLabel8.setText("Statut :");
-
-        jLabel9.setText("Pseudo :");
-
-        jLabel10.setText(".");
-
-        jLabel11.setText(".");
-
-        jLabel12.setText(".");
-
-        jLabel13.setText(".");
-
-        jLabel14.setText(".");
-
-        jComboBoxStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En ligne", "Occupé" }));
-        jComboBoxStatus.setName("Statut"); // NOI18N
-        jComboBoxStatus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxStatusActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(toggleProfil, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addGap(43, 43, 43)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleCreerSalon)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleMesSalons)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
-                        .addComponent(jButtonDeconnexion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(30, 30, 30)
-                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                    .addComponent(jLabel9)
-                                                    .addComponent(jLabel5)
-                                                    .addComponent(jLabel3)))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addGap(18, 18, 18)
-                                                .addComponent(jLabel7)))))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel10)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel14)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(36, 36, 36)
-                                .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(toggleProfil)
-                    .addComponent(jToggleCreerSalon)
-                    .addComponent(jToggleMesSalons)
-                    .addComponent(jButtonDeconnexion))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel11))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel12))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel13))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel14))
-                        .addGap(31, 31, 31)
-                        .addComponent(jComboBoxStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(100, 100, 100)
-                        .addComponent(jLabel6)
-                        .addContainerGap(29, Short.MAX_VALUE))))
-        );
+        getContentPane().add(displayPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleMesSalonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleMesSalonsActionPerformed
-       
-    }//GEN-LAST:event_jToggleMesSalonsActionPerformed
+    private void profilButtonClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilButtonClicked
+         CardLayout card = (CardLayout) displayPanel.getLayout();
+         card.show(displayPanel,"first");
+    }//GEN-LAST:event_profilButtonClicked
 
-    private void jButtonDeconnexionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeconnexionActionPerformed
-        chgStatUser(u,"off");// Update la bd pour dire que le user est offline
-        u=null;
-        st=null;
-        System.exit(0);
-    }//GEN-LAST:event_jButtonDeconnexionActionPerformed
+    private void salonButtonClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salonButtonClicked
+        CardLayout card = (CardLayout) displayPanel.getLayout();
+         card.show(displayPanel,"second");
+    }//GEN-LAST:event_salonButtonClicked
 
-    private void toggleProfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleProfilActionPerformed
-                u.setPseudo(s);
-                getUser(u);
-         
-        jLabel10.setText(u.getNom());
-       jLabel11.setText(u.getEmail());
-       jLabel12.setText(u.getPseudo());
-       jLabel13.setText(u.getTel());
-       jLabel14.setText(st.getstat(u.getStatus())); // On change les valeurs de la bd par des trucs lisibles
-       
-    }//GEN-LAST:event_toggleProfilActionPerformed
-
-    private void jToggleCreerSalonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleCreerSalonActionPerformed
-        // TODO add your handling code here:
-       // jLabel8.setIcon(null);
-        //toggleProfilActionPerformed(evt);
-    }//GEN-LAST:event_jToggleCreerSalonActionPerformed
-
-    private void jComboBoxStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxStatusActionPerformed
-        String g=jComboBoxStatus.getSelectedItem().toString();
-        jLabel14.setText(g);
-        chgStatUser(u, st.getstat(g)); // Changement du statut sur la base.
-    }//GEN-LAST:event_jComboBoxStatusActionPerformed
+    private void creerSalonButtonClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerSalonButtonClicked
+        CardLayout card = (CardLayout) displayPanel.getLayout();
+         card.show(displayPanel,"third");
+    }//GEN-LAST:event_creerSalonButtonClicked
   
  
     /**
@@ -354,28 +205,18 @@ public class Principale extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JPanel buttonPanel;
+    private javax.swing.JButton creerSalonButton;
+    private newPackage1.CreerSalonPanel creerSalonPanel;
+    private javax.swing.JPanel displayPanel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButtonDeconnexion;
-    private javax.swing.JComboBox<String> jComboBoxStatus;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollBar jScrollBar1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JToggleButton jToggleCreerSalon;
-    private javax.swing.JToggleButton jToggleMesSalons;
-    private javax.swing.JToggleButton toggleProfil;
+    private javax.swing.JButton profilButton;
+    private newPackage1.ProfilPanel profilPanel;
+    private javax.swing.JButton salonButton;
+    private newPackage1.SalonPanel salonPanel;
     // End of variables declaration//GEN-END:variables
 }
