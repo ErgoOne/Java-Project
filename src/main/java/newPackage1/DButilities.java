@@ -298,5 +298,90 @@ public class DButilities {
         Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
         } 
      }
+     static String getDateMsg(Mesg nm){
+         String date=null;
+         try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            String namemsg=nm.getMsg();
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "Select date_cre from ecrit where msg='"+namemsg+"'";
+
+            System.err.println(sql);
+
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
+            ArrayList<String> dmsg= new ArrayList<>();
+            while (result.next()) {
+                for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
+                    dmsg.add((String)result.getString(i));
+                    //System.out.print(result.getString(i)+"\n");
+                }
+            }
+            date=dmsg.get(0);
+            System.err.println(date);
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         System.err.println("date apres catch"+date);
+         return date;
+     }
+      static void AfficherNvMess(String date){
+     
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "Select msg, date_cre, Pseudo, Nom from ecrit where date_cre>'"+date+"'";
+
+            System.err.println(sql);
+
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
+            
+            while (result.next()) {
+                for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
+            System.out.print(result.getString(i)+"\n");
+            i++;
+                }
+            }
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      }
+      static String getDerMsgDate(User u){
+       String maxdate=null;
+         try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "Select MAX(date_cre) from ecrit where Pseudo='"+u.getPseudo()+"'";
+
+            System.err.println(sql);
+
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
+            ArrayList<String> maxd= new ArrayList<>();
+            while (result.next()) {
+                for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
+                    maxd.add((String)result.getString(i));
+                    //System.out.print(result.getString(i)+"\n");
+                }
+            }
+            maxdate=maxd.get(0);
+            System.err.println(maxdate);
+            
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         System.err.println("date apres catch"+maxdate);
+         return maxdate;
+     }
+    
      
 }
