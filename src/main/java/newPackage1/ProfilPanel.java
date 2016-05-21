@@ -5,6 +5,10 @@
  */
 package newPackage1;
 
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import newPackage1.Principale;
+
 /**
  *
  * @author Jonathan
@@ -16,8 +20,9 @@ public class ProfilPanel extends javax.swing.JPanel {
      */
     public ProfilPanel() {
         initComponents();
+        //afficherElement("TOT");
+       
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,24 +32,34 @@ public class ProfilPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        nomLabel = new javax.swing.JLabel();
+        mailLabel = new javax.swing.JLabel();
+        pseudoLabel = new javax.swing.JLabel();
+        telLabel = new javax.swing.JLabel();
+        statutLabel = new javax.swing.JLabel();
+        statutComboBox = new javax.swing.JComboBox<>();
+        nomLabel2 = new javax.swing.JLabel();
+        mailLabel2 = new javax.swing.JLabel();
+        pseudoLabel2 = new javax.swing.JLabel();
+        telLabel2 = new javax.swing.JLabel();
+        statutLabel2 = new javax.swing.JLabel();
 
-        jLabel1.setText("Nom : ");
+        nomLabel.setText("Nom : ");
 
-        jLabel2.setText("Mail :");
+        mailLabel.setText("Mail :");
 
-        jLabel3.setText("Pseudo :");
+        pseudoLabel.setText("Pseudo :");
 
-        jLabel4.setText("Tel : ");
+        telLabel.setText("Tel : ");
 
-        jLabel5.setText("Statut :");
+        statutLabel.setText("Statut :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En ligne", "Absent", "Hors ligne" }));
+        statutComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En ligne", "Absent", "Hors ligne" }));
+        statutComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                statutComboBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -53,40 +68,107 @@ public class ProfilPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(statutComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(statutLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(statutLabel2))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(telLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(telLabel2))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(pseudoLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pseudoLabel2))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(nomLabel)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nomLabel2))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(mailLabel)
+                            .addGap(44, 44, 44)
+                            .addComponent(mailLabel2))))
                 .addContainerGap(318, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(76, 76, 76)
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nomLabel)
+                    .addComponent(nomLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mailLabel)
+                    .addComponent(mailLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pseudoLabel)
+                    .addComponent(pseudoLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(telLabel)
+                    .addComponent(telLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(jLabel5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(statutLabel)
+                    .addComponent(statutLabel2))
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(statutComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void statutComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statutComboBoxActionPerformed
+       
+        String g=statutComboBox.getSelectedItem().toString();
+        statutLabel2.setText(g);
+       // chgStatUser(u, st.getstat(g)); // Changement du statut sur la base.;
+    }//GEN-LAST:event_statutComboBoxActionPerformed
+
+    public void setMailLabel(JLabel mailLabel) {
+        this.mailLabel = mailLabel;
+    }
+
+    public void setNomLabel(JLabel nomLabel) {
+        this.nomLabel = nomLabel;
+    }
+
+    public void setPseudoLabel(JLabel pseudoLabel) {
+        this.pseudoLabel = pseudoLabel;
+    }
+
+    public void setStatutComboBox(JComboBox<String> statutComboBox) {
+        this.statutComboBox = statutComboBox;
+    }
+
+    public void setStatutLabel(JLabel statutLabel) {
+        this.statutLabel = statutLabel;
+    }
+
+    public void setTelLabel(JLabel telLabel) {
+        this.telLabel = telLabel;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel mailLabel;
+    private javax.swing.JLabel mailLabel2;
+    private javax.swing.JLabel nomLabel;
+    private javax.swing.JLabel nomLabel2;
+    private javax.swing.JLabel pseudoLabel;
+    private javax.swing.JLabel pseudoLabel2;
+    private javax.swing.JComboBox<String> statutComboBox;
+    private javax.swing.JLabel statutLabel;
+    private javax.swing.JLabel statutLabel2;
+    private javax.swing.JLabel telLabel;
+    private javax.swing.JLabel telLabel2;
     // End of variables declaration//GEN-END:variables
+public void afficherElement(String m)
+{
+    
+    mailLabel2.setText("toto");
+}
+
 }
