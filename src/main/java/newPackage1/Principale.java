@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 import javax.swing.ButtonGroup;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -14,6 +15,8 @@ import javax.xml.bind.annotation.XmlElementDecl;
 import static newPackage1.DButilities.auth;
 import static newPackage1.DButilities.chgStatUser;
 import static newPackage1.DButilities.getUser;
+
+
 
 public class Principale extends javax.swing.JFrame {
 
@@ -30,7 +33,14 @@ public class Principale extends javax.swing.JFrame {
  
         initComponents();
         
-         
+          u.setPseudo(s);
+                getUser(u);
+        
+       nomLabel2.setText(u.getNom());
+        mailLabel2.setText(u.getEmail());
+     pseudoLabel2.setText(u.getPseudo());
+       telLabel2.setText(u.getTel());
+      statutLabel2.setText(st.getstat(u.getStatus())); // On change les valeurs de la bd par des trucs lisibles
         
        
         
@@ -46,81 +56,215 @@ public class Principale extends javax.swing.JFrame {
         jDialog1 = new javax.swing.JDialog();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        loginButton = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        buttonGroup1 = new javax.swing.ButtonGroup();
-        buttonPanel = new javax.swing.JPanel();
+        cancelButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        nomLabel = new javax.swing.JLabel();
+        mailLabel = new javax.swing.JLabel();
+        pseudoLabel = new javax.swing.JLabel();
+        telLabel = new javax.swing.JLabel();
+        statutLabel = new javax.swing.JLabel();
+        statutComboBox = new javax.swing.JComboBox<>();
         creerSalonButton = new javax.swing.JButton();
         deconnexionButton = new javax.swing.JButton();
+        nomLabel2 = new javax.swing.JLabel();
+        mailLabel2 = new javax.swing.JLabel();
+        pseudoLabel2 = new javax.swing.JLabel();
+        telLabel2 = new javax.swing.JLabel();
+        statutLabel2 = new javax.swing.JLabel();
 
         jLabel1.setText("Bienvenue sur le chat  STRI, veuillez rentrer votre identifiant.");
 
         jLabel2.setText("Identifiant :");
 
-        jButton1.setText("Envoyer");
+        loginButton.setText("Envoyer");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
+
+        cancelButton.setText("Annuler");
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonClicked(evt);
+            }
+        });
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Button-Turn-On-icon.png"))); // NOI18N
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(jDialog1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(34, 34, 34))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)))
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(loginButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(36, 36, 36))
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(jLabel1)
-                .addGap(26, 26, 26)
-                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(24, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jDialog1Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jDialog1Layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addGap(18, 18, 18)
+                                .addGroup(jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextField1)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(6, 6, 6))
+                            .addGroup(jDialog1Layout.createSequentialGroup()
+                                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(jDialog1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        creerSalonButton.setText("Creer Salon");
-        creerSalonButton.addActionListener(new java.awt.event.ActionListener() {
+        nomLabel.setText("Nom :");
+
+        mailLabel.setText("Mail :");
+
+        pseudoLabel.setText("Pseudo :");
+
+        telLabel.setText("Tel :");
+
+        statutLabel.setText("Statut :");
+
+        statutComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En ligne", "Occupé" }));
+        statutComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                creerSalonButtonClicked(evt);
+                statutComboBoxClicked(evt);
             }
         });
-        buttonPanel.add(creerSalonButton);
+
+        creerSalonButton.setText("Créer un salon");
 
         deconnexionButton.setText("Déconnexion");
         deconnexionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deconnexionButtonClicked(evt);
+                deconnexionButtonActionPerformed(evt);
             }
         });
-        buttonPanel.add(deconnexionButton);
 
-        getContentPane().add(buttonPanel, java.awt.BorderLayout.NORTH);
+        nomLabel2.setText("jLabel4");
+
+        mailLabel2.setText("jLabel5");
+
+        pseudoLabel2.setText("jLabel6");
+
+        telLabel2.setText("jLabel7");
+
+        statutLabel2.setText("jLabel8");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(statutComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nomLabel)
+                                    .addComponent(pseudoLabel)
+                                    .addComponent(mailLabel)
+                                    .addComponent(telLabel)
+                                    .addComponent(statutLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomLabel2)
+                                    .addComponent(mailLabel2)
+                                    .addComponent(pseudoLabel2)
+                                    .addComponent(telLabel2)
+                                    .addComponent(statutLabel2)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addComponent(creerSalonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(deconnexionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(287, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(deconnexionButton, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addComponent(creerSalonButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(117, 117, 117)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nomLabel)
+                    .addComponent(nomLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(mailLabel)
+                    .addComponent(mailLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(pseudoLabel)
+                    .addComponent(pseudoLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(telLabel)
+                    .addComponent(telLabel2))
+                .addGap(25, 25, 25)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(statutLabel)
+                    .addComponent(statutLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(statutComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void creerSalonButtonClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerSalonButtonClicked
+    private void statutComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statutComboBoxActionPerformed
+    
+    }//GEN-LAST:event_statutComboBoxActionPerformed
 
-    }//GEN-LAST:event_creerSalonButtonClicked
+    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_loginButtonActionPerformed
 
-    private void deconnexionButtonClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deconnexionButtonClicked
-      chgStatUser(u,"off");// Update la bd pour dire que le user est offline
-        u=null;
-        st=null;
+    private void cancelButtonClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonClicked
         System.exit(0);
-    }//GEN-LAST:event_deconnexionButtonClicked
+    }//GEN-LAST:event_cancelButtonClicked
+
+    private void deconnexionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deconnexionButtonActionPerformed
+        System.exit(0); // Pour commencer
+    }//GEN-LAST:event_deconnexionButtonActionPerformed
+
+    private void statutComboBoxClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statutComboBoxClicked
+        String g=statutComboBox.getSelectedItem().toString();
+        statutLabel2.setText(g);
+        chgStatUser(u, st.getstat(g)); // Changement du statut sur la base.
+    }//GEN-LAST:event_statutComboBoxClicked
   
  
     /**
@@ -131,6 +275,7 @@ public class Principale extends javax.swing.JFrame {
          
       do
         {   
+            
            
             JOptionPane jco = new JOptionPane();  
    String reponse = jco.showInputDialog(null, "Veuillez rentrer votre identifiant.","Connexion", JOptionPane.YES_NO_CANCEL_OPTION);
@@ -181,14 +326,25 @@ public class Principale extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JPanel buttonPanel;
+    private javax.swing.JButton cancelButton;
     private javax.swing.JButton creerSalonButton;
     private javax.swing.JButton deconnexionButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton loginButton;
+    private javax.swing.JLabel mailLabel;
+    private javax.swing.JLabel mailLabel2;
+    private javax.swing.JLabel nomLabel;
+    private javax.swing.JLabel nomLabel2;
+    private javax.swing.JLabel pseudoLabel;
+    private javax.swing.JLabel pseudoLabel2;
+    private javax.swing.JComboBox<String> statutComboBox;
+    private javax.swing.JLabel statutLabel;
+    private javax.swing.JLabel statutLabel2;
+    private javax.swing.JLabel telLabel;
+    private javax.swing.JLabel telLabel2;
     // End of variables declaration//GEN-END:variables
 }
