@@ -192,7 +192,7 @@ public class DButilities {
             while (result.next()) {
                 for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
             //System.out.print(result.getString(i)+"\n");
-            s.addRoom(result.getString(i),result.getString(i+1) );//Ajouter les room de la BD dans la salon
+           // s.addRoom(result.getString(i),result.getString(i+1) );//Ajouter les room de la BD dans la salon
             i++;
                 }
             }
@@ -277,6 +277,27 @@ public class DButilities {
         }
  
     }
+     static void CreerMsg(Mesg m, User u, Room r){
+            try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "INSERT INTO ecrit VALUES ('"+m.getMsg()+"', NOW(), '"+u.getPseudo()+"', '"+r.getName()+"')";
+            Statement stmt = null;
+            stmt = con.createStatement();
+            int statut=stmt.executeUpdate(sql);
+            
+                if(statut==1){
+            System.err.println("la requete a fonctionner");
+                    }else{
+                    System.err.println("erreur insert");
+                }
+            con.close();
+    
+         } catch (ClassNotFoundException | SQLException ex) {
+        Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+     }
      
 
     

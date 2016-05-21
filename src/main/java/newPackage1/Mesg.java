@@ -13,9 +13,9 @@ public class Mesg {
     private String msg;
     private String date;
 
-    public Mesg(String msg, String date) {
+    public Mesg(String msg) {
         this.msg = msg;
-        this.date = date;
+  
     }
 
     public String getMsg() {

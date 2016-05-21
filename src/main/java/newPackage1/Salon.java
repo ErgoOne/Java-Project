@@ -5,6 +5,7 @@
  */
 package newPackage1;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -36,14 +37,14 @@ public class Salon {
     
     public Salon() {
     }
-   HashMap<String , String> rooms= new HashMap<>();
+   ArrayList<Room> rooms= new ArrayList<>();
    
-   public void addRoom(String r, String d)
+   public void addRoom(Room r)
    {
-       rooms.put(r, d);
+       rooms.add(r);
    }
    
-   public void getSalon()
+  /* public void getSalon()
    {
        Set cles = rooms.keySet();
         Iterator it = cles.iterator();
@@ -53,6 +54,6 @@ public class Salon {
            System.out.println(cle+ " "+valeur);
            // TO DO customiser ici ou dans principale pour recuperer mieux les attributs pour les afficher.
         }
-   }
+   }*/
     
 }
