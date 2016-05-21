@@ -93,22 +93,6 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="profilButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Profil"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="profilButtonClicked"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="salonButton">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Salon"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salonButtonClicked"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="creerSalonButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Creer Salon"/>
@@ -117,37 +101,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creerSalonButtonClicked"/>
           </Events>
         </Component>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPanel" name="displayPanel">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
-          <BorderConstraints direction="Center"/>
-        </Constraint>
-      </Constraints>
-
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignCardLayout"/>
-      <SubComponents>
-        <Component class="newPackage1.ProfilPanel" name="profilPanel">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="first"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="newPackage1.SalonPanel" name="salonPanel">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="second"/>
-            </Constraint>
-          </Constraints>
-        </Component>
-        <Component class="newPackage1.CreerSalonPanel" name="creerSalonPanel">
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignCardLayout" value="org.netbeans.modules.form.compat2.layouts.DesignCardLayout$CardConstraintsDescription">
-              <CardConstraints cardName="third"/>
-            </Constraint>
-          </Constraints>
+        <Component class="javax.swing.JButton" name="deconnexionButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="D&#xe9;connexion"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deconnexionButtonClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
