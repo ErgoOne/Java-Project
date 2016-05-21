@@ -1,5 +1,6 @@
 package newPackage1;
 
+import java.awt.CardLayout;
 import java.awt.Panel;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -52,6 +53,9 @@ public class Principale extends javax.swing.JFrame {
         salonButton = new javax.swing.JButton();
         creerSalonButton = new javax.swing.JButton();
         displayPanel = new javax.swing.JPanel();
+        profilPanel = new newPackage1.ProfilPanel();
+        salonPanel = new newPackage1.SalonPanel();
+        creerSalonPanel = new newPackage1.CreerSalonPanel();
 
         jLabel1.setText("Bienvenue sur le chat  STRI, veuillez rentrer votre identifiant.");
 
@@ -91,31 +95,55 @@ public class Principale extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         profilButton.setText("Profil");
+        profilButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                profilButtonClicked(evt);
+            }
+        });
         buttonPanel.add(profilButton);
 
         salonButton.setText("Salon");
+        salonButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salonButtonClicked(evt);
+            }
+        });
         buttonPanel.add(salonButton);
 
         creerSalonButton.setText("Creer Salon");
+        creerSalonButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creerSalonButtonClicked(evt);
+            }
+        });
         buttonPanel.add(creerSalonButton);
 
         getContentPane().add(buttonPanel, java.awt.BorderLayout.NORTH);
 
-        javax.swing.GroupLayout displayPanelLayout = new javax.swing.GroupLayout(displayPanel);
-        displayPanel.setLayout(displayPanelLayout);
-        displayPanelLayout.setHorizontalGroup(
-            displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 653, Short.MAX_VALUE)
-        );
-        displayPanelLayout.setVerticalGroup(
-            displayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
+        displayPanel.setLayout(new java.awt.CardLayout());
+        displayPanel.add(profilPanel, "first");
+        displayPanel.add(salonPanel, "second");
+        displayPanel.add(creerSalonPanel, "third");
 
         getContentPane().add(displayPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void profilButtonClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_profilButtonClicked
+         CardLayout card = (CardLayout) displayPanel.getLayout();
+         card.show(displayPanel,"first");
+    }//GEN-LAST:event_profilButtonClicked
+
+    private void salonButtonClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salonButtonClicked
+        CardLayout card = (CardLayout) displayPanel.getLayout();
+         card.show(displayPanel,"second");
+    }//GEN-LAST:event_salonButtonClicked
+
+    private void creerSalonButtonClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerSalonButtonClicked
+        CardLayout card = (CardLayout) displayPanel.getLayout();
+         card.show(displayPanel,"third");
+    }//GEN-LAST:event_creerSalonButtonClicked
   
  
     /**
@@ -179,6 +207,7 @@ public class Principale extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton creerSalonButton;
+    private newPackage1.CreerSalonPanel creerSalonPanel;
     private javax.swing.JPanel displayPanel;
     private javax.swing.JButton jButton1;
     private javax.swing.JDialog jDialog1;
@@ -186,6 +215,8 @@ public class Principale extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton profilButton;
+    private newPackage1.ProfilPanel profilPanel;
     private javax.swing.JButton salonButton;
+    private newPackage1.SalonPanel salonPanel;
     // End of variables declaration//GEN-END:variables
 }
