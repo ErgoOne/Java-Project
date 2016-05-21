@@ -7,6 +7,7 @@ package newPackage1;
 
 import java.util.HashMap;
 import java.util.Map;
+import static newPackage1.DButilities.CreerMsg;
 import static newPackage1.DButilities.auth;
 import static newPackage1.DButilities.CreerRoom;
 import static newPackage1.DButilities.getDroitUR;
@@ -24,12 +25,33 @@ public class NewClass {
         //--
        // TypeDroit test;
         //int tmp;
-        //User u1 = new User("atila");
+        User u1 = new User("atila");
+        Salon s= new Salon();
+        Room r1 = new Room("R8","bob marley");
         //getUser(u1);
-
+        
+       //Creation de room
+        /*
+        int count=s.rooms.size();
+        //int i=0;
+        Room[] myArray = new Room[count+1]; 
+        //for(i=0;i<count;i++){
+            myArray[count] = new Room(String.valueOf(count),"a");
+            CreerRoom(myArray[count],u1);
+        //}
+        */
+        //Creation de message
+        
+	int numero=r1.chat.size();
+        Mesg[] Arraymsg =new Mesg[numero+1];
+        
+        Arraymsg[numero] = new Mesg(String.valueOf(numero));
+        CreerMsg(Arraymsg[numero],u1,r1);
+        r1.addMesg(u1,Arraymsg[numero]);
+        
         
         //Room r1 = new Room("R8","bob marley");
-        Salon s= new Salon();
+       
         
         //getRoom(r1);
         //Room r2 = new Room();
@@ -41,8 +63,8 @@ public class NewClass {
       //Requete sql pour afficher les rooms enregistrée dans la bdd
        /* CreerRoom(r1,texte,u1);*/
         //CreerRoom(r1, u1);
-        putRoomtoSalon(s);
-        s.getSalon();
+        //putRoomtoSalon(s);
+        //s.getSalon();
      
         /*Map<Room, TypeDroit> du1 = new HashMap<>();
         du1.put(r2, TypeDroit.NONE);
