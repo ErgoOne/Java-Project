@@ -6,6 +6,7 @@
 package newPackage1;
 
 import java.util.HashMap;
+import static newPackage1.DButilities.getDateMsg;
 
 /**
  *
@@ -17,7 +18,20 @@ public class Room {
     
     public void addMesg(User u, Mesg m)
     {
+        String date;
         chat.put(u, m);
+        date=getDateMsg(m);
+        int cmp;
+        if(lastmsgDate!=null){
+                    cmp=date.compareTo(lastmsgDate);
+                    if(cmp<0){
+                        lastmsgDate=date;
+                    }
+        }
+        else if(lastmsgDate==null){
+                lastmsgDate=date;
+            }
+        
         //TO DO function on dbutilities to add the msg to the DB
     }
 
@@ -47,7 +61,9 @@ public class Room {
     String getDesc() {
         return desc;
     }
-    
+    String getLastDate(){
+        return lastmsgDate;
+    }
 
    public void Hello()
     {
