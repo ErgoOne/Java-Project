@@ -161,6 +161,11 @@ public class Principale extends javax.swing.JFrame {
         });
 
         creerSalonButton.setText("Créer un salon");
+        creerSalonButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creerSalonButtonActionPerformed(evt);
+            }
+        });
 
         deconnexionButton.setText("Déconnexion");
         deconnexionButton.addActionListener(new java.awt.event.ActionListener() {
@@ -275,6 +280,11 @@ public class Principale extends javax.swing.JFrame {
         statutLabel2.setText(g);
         chgStatUser(u, st.getstat(g)); // Changement du statut sur la base.
     }//GEN-LAST:event_statutComboBoxClicked
+
+    private void creerSalonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerSalonButtonActionPerformed
+       new CreerSalon().setVisible(true);
+       
+    }//GEN-LAST:event_creerSalonButtonActionPerformed
   
  
     /**
