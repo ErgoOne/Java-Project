@@ -257,6 +257,7 @@ public class Principale extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonClicked
 
     private void deconnexionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deconnexionButtonActionPerformed
+        chgStatUser(u,"off");
         System.exit(0); // Pour commencer
     }//GEN-LAST:event_deconnexionButtonActionPerformed
 
@@ -275,7 +276,7 @@ public class Principale extends javax.swing.JFrame {
          
       do
         {   
-            
+          
            
             JOptionPane jco = new JOptionPane();  
    String reponse = jco.showInputDialog(null, "Veuillez rentrer votre identifiant.","Connexion", JOptionPane.YES_NO_CANCEL_OPTION);
