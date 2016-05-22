@@ -44,16 +44,14 @@ public class Salon {
        rooms.add(r);
    }
    
-  /* public void getSalon()
+   public HashMap<String, String> getSalon()
    {
-       Set cles = rooms.keySet();
-        Iterator it = cles.iterator();
-        while (it.hasNext()){
-           Object cle = it.next(); 
-           String valeur = rooms.get(cle); 
-           System.out.println(cle+ " "+valeur);
-           // TO DO customiser ici ou dans principale pour recuperer mieux les attributs pour les afficher.
-        }
-   }*/
-    
+    HashMap<String, String> h = new HashMap<>();
+    for(Room R : rooms){
+	h.put(R.getName(), R.getDesc());
+	}       
+    return h;
+   } 
+   
+   
 }
