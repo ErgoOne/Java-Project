@@ -76,15 +76,15 @@ CREATE TABLE supprimer(
 
 
 #------------------------------------------------------------
-# Table: ecrit
+# Table: ecrire
 #------------------------------------------------------------
 
-CREATE TABLE ecrit(
+CREATE TABLE ecrir(
         msg         Varchar (25) NOT NULL ,
-        date_cre Date NOT NULL ,
+        date_cre DATETIME NOT NULL ,
         Pseudo      Varchar (25) NOT NULL ,
         Nom         Varchar (25) NOT NULL ,
-        PRIMARY KEY (Pseudo ,Nom )
+        PRIMARY KEY (Pseudo ,Nom,date_cre )
 );
 
 
@@ -106,7 +106,7 @@ ALTER TABLE ajouter ADD CONSTRAINT FK_ajouter_Pseudo FOREIGN KEY (Pseudo) REFERE
 ALTER TABLE ajouter ADD CONSTRAINT FK_ajouter_Nom FOREIGN KEY (Nom) REFERENCES Room(Nom);
 ALTER TABLE supprimer ADD CONSTRAINT FK_supprimer_Pseudo FOREIGN KEY (Pseudo) REFERENCES Users(Pseudo);
 ALTER TABLE supprimer ADD CONSTRAINT FK_supprimer_Nom FOREIGN KEY (Nom) REFERENCES Room(Nom);
-ALTER TABLE ecrit ADD CONSTRAINT FK_ecrit_Pseudo FOREIGN KEY (Pseudo) REFERENCES Users(Pseudo);
-ALTER TABLE ecrit ADD CONSTRAINT FK_ecrit_Nom FOREIGN KEY (Nom) REFERENCES Room(Nom);
+ALTER TABLE ecrir ADD CONSTRAINT FK_ecrir_Pseudo FOREIGN KEY (Pseudo) REFERENCES Users(Pseudo);
+ALTER TABLE ecrir ADD CONSTRAINT FK_ecrir_Nom FOREIGN KEY (Nom) REFERENCES Room(Nom);
 ALTER TABLE CreerRoom ADD CONSTRAINT FK_CreerRoom_Pseudo FOREIGN KEY (Pseudo) REFERENCES Users(Pseudo);
 ALTER TABLE CreerRoom ADD CONSTRAINT FK_CreerRoom_Nom FOREIGN KEY (Nom) REFERENCES Room(Nom);
