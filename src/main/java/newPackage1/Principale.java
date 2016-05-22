@@ -22,8 +22,9 @@ public class Principale extends javax.swing.JFrame {
 
    public static int a=1;
    public static String s="papa";
-  public User u=new User("test");
+  public static User u=new User("test");
    public Statut st=new Statut();
+   public static Salon sl=new Salon();
    
          
    

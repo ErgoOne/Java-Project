@@ -383,14 +383,14 @@ public class DButilities {
          System.err.println("date apres catch"+maxdate);
          return maxdate;
      }
-    static void CreationRoom(Salon s, User u){
+    static void CreationRoom(Salon s, User u, String n, String desc){ // creation de java vers la base+salon
         int count=s.rooms.size();
         Room[] myArray = new Room[count+1]; 
-        myArray[count] = new Room(String.valueOf(count),"a");
+        myArray[count] = new Room(n,desc);
         CreerRoom(myArray[count],u);
         s.addRoom(myArray[count]);
     }
-    static void CreationRoomS(Salon s,String nom, String desc){
+    static void CreationRoomS(Salon s,String nom, String desc){ // creation dans le salon ) partir de la base
         int count=s.rooms.size();
         Room[] myArray = new Room[count+1]; 
         myArray[count] = new Room(nom,desc);
