@@ -76,15 +76,15 @@ CREATE TABLE supprimer(
 
 
 #------------------------------------------------------------
-# Table: ecrit
+# Table: ecrire
 #------------------------------------------------------------
 
-CREATE TABLE ecrit(
+CREATE TABLE ecrir(
         msg         Varchar (25) NOT NULL ,
-        date_cre Date NOT NULL ,
+        date_cre DATETIME NOT NULL ,
         Pseudo      Varchar (25) NOT NULL ,
         Nom         Varchar (25) NOT NULL ,
-        PRIMARY KEY (Pseudo ,Nom )
+        PRIMARY KEY (Pseudo ,Nom,date_cre )
 );
 
 
