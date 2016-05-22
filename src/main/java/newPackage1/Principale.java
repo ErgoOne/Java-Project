@@ -74,6 +74,7 @@ public class Principale extends javax.swing.JFrame {
         telLabel2 = new javax.swing.JLabel();
         statutLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        listeSalonButton = new javax.swing.JButton();
 
         jLabel1.setText("Bienvenue sur le chat  STRI, veuillez rentrer votre identifiant.");
 
@@ -187,73 +188,90 @@ public class Principale extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jonathan\\Desktop\\strilogo1.png")); // NOI18N
         jLabel4.setText("jLabel4");
 
+        listeSalonButton.setText("Liste des salons");
+        listeSalonButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listeSalonButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(statutComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(nomLabel)
-                            .addComponent(pseudoLabel)
-                            .addComponent(mailLabel)
-                            .addComponent(telLabel)
-                            .addComponent(statutLabel))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nomLabel2)
-                            .addComponent(mailLabel2)
-                            .addComponent(pseudoLabel2)
-                            .addComponent(telLabel2)
-                            .addComponent(statutLabel2))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(creerSalonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(deconnexionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(90, 90, 90))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nomLabel)
+                                    .addComponent(mailLabel))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nomLabel2)
+                                    .addComponent(mailLabel2)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(telLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(telLabel2))
+                                    .addComponent(statutComboBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(pseudoLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(pseudoLabel2))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(statutLabel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(statutLabel2)))))
+                        .addGap(140, 140, 140)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(creerSalonButton, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                            .addComponent(listeSalonButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(deconnexionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(deconnexionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(creerSalonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(73, 73, 73))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nomLabel)
-                    .addComponent(nomLabel2))
-                .addGap(18, 18, 18)
+                    .addComponent(nomLabel2)
+                    .addComponent(creerSalonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(mailLabel)
                     .addComponent(mailLabel2))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(pseudoLabel)
-                    .addComponent(pseudoLabel2))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(pseudoLabel)
+                            .addComponent(pseudoLabel2))
+                        .addGap(29, 29, 29))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(listeSalonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(3, 3, 3)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(telLabel)
                     .addComponent(telLabel2))
-                .addGap(25, 25, 25)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(statutLabel)
-                    .addComponent(statutLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(statutLabel2)
+                    .addComponent(deconnexionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(statutComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35))
+                .addGap(34, 34, 34))
         );
 
         pack();
@@ -285,6 +303,10 @@ public class Principale extends javax.swing.JFrame {
        new CreerSalon().setVisible(true);
        
     }//GEN-LAST:event_creerSalonButtonActionPerformed
+
+    private void listeSalonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listeSalonButtonActionPerformed
+        new ListeSalon().setVisible(true);
+    }//GEN-LAST:event_listeSalonButtonActionPerformed
   
  
     /**
@@ -356,6 +378,7 @@ public class Principale extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton listeSalonButton;
     private javax.swing.JButton loginButton;
     private javax.swing.JLabel mailLabel;
     private javax.swing.JLabel mailLabel2;
