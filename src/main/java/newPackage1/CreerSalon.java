@@ -7,6 +7,7 @@ package newPackage1;
 
 import java.awt.Toolkit;
 import java.awt.event.*;
+import javax.swing.JOptionPane;
 import static newPackage1.DButilities.CreationRoom;
 
 
@@ -116,7 +117,18 @@ public class CreerSalon extends javax.swing.JFrame {
 
     private void creerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButtonActionPerformed
         // TODO add your handling code here:
-       CreationRoom(Principale.sl,Principale.u ,nomTF.getText(),descTF.getText());
+       int r=1;
+        CreationRoom(Principale.sl,Principale.u ,nomTF.getText(),descTF.getText());
+        if(r==0){
+        JOptionPane.showMessageDialog(null, "<your message here...>", "Alert", JOptionPane.ERROR_MESSAGE);
+        super.dispose();
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "<OK>", "Info", JOptionPane.INFORMATION_MESSAGE);
+        super.dispose();
+        }
+       
+       
     }//GEN-LAST:event_creerButtonActionPerformed
 
     /**

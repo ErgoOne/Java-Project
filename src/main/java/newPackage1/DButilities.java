@@ -204,10 +204,21 @@ public class DButilities {
  
     }
      static void CreerRoom(Room r2, User u){
-          try {
+         //int retun; 
+         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
+            
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            /*String verif= "SELECT COUNT(*) AS count FROM room WHERE nom='"+r2.getName()+"'";
+            Statement s=con.createStatement();
+            ResultSet result = s.executeQuery(verif);
+            ResultSetMetaData resultMeta = result.getMetaData();
+            retun = result.getInt("count");
+            //retun= result.getInt(1);*/
+            // System.out.println("RETURN"+retun);
+           // if(retun!=0){
+            //    retun=1;
             String sql = "INSERT INTO room VALUES ('"+r2.getName()+"', '"+r2.getDesc()+"')";
             String sql2= "INSERT INTO creerroom VALUES('"+u.getPseudo()+"', '"+r2.getName()+"')";
             Statement stmt = null;
@@ -228,7 +239,12 @@ public class DButilities {
                     }else{
                     System.err.println("erreur insert");
                 }
+             //return retun;
+            /*}
+            else {
             con.close();
+            return retun;
+            }*/
             //PreparedStatement statement = con.prepareStatement(sql);
             //statement.setString(1, r2.getName());
            // statement.setString(2, d);
@@ -246,8 +262,9 @@ public class DButilities {
         */
          } catch (ClassNotFoundException | SQLException ex) {
         Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-          
+        
+         //return 0;
+         } 
      }
      static void getRoom(Room r){
          try {
@@ -385,10 +402,12 @@ public class DButilities {
      }
     static void CreationRoom(Salon s, User u, String n, String desc){ // creation de java vers la base+salon
         int count=s.rooms.size();
+        //int r=0;
         Room[] myArray = new Room[count+1]; 
         myArray[count] = new Room(n,desc);
         CreerRoom(myArray[count],u);
         s.addRoom(myArray[count]);
+        //return r;
     }
     static void CreationRoomS(Salon s,String nom, String desc){ // creation dans le salon ) partir de la base
         int count=s.rooms.size();
