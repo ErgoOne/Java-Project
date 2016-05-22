@@ -282,7 +282,7 @@ public class DButilities {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "INSERT INTO ecrit VALUES ('"+m.getMsg()+"', NOW(), '"+u.getPseudo()+"', '"+r.getName()+"')";
+            String sql = "INSERT INTO ecrir VALUES ('"+m.getMsg()+"', NOW(), '"+u.getPseudo()+"', '"+r.getName()+"')";
             Statement stmt = null;
             stmt = con.createStatement();
             int statut=stmt.executeUpdate(sql);
@@ -305,7 +305,7 @@ public class DButilities {
             /*make connection with the database*/
             String namemsg=nm.getMsg();
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select date_cre from ecrit where msg='"+namemsg+"'";
+            String sql = "Select date_cre from ecrir where msg='"+namemsg+"'";
 
             System.err.println(sql);
 
@@ -334,7 +334,7 @@ public class DButilities {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select msg, date_cre, Pseudo, Nom from ecrit where date_cre>'"+date+"'";
+            String sql = "Select msg, date_cre, Pseudo, Nom from ecrir where date_cre>'"+date+"'";
 
             System.err.println(sql);
 
@@ -359,7 +359,7 @@ public class DButilities {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select MAX(date_cre) from ecrit where Pseudo='"+u.getPseudo()+"'";
+            String sql = "Select MAX(date_cre) from ecrir where Pseudo='"+u.getPseudo()+"'";
 
             System.err.println(sql);
 
@@ -382,6 +382,20 @@ public class DButilities {
          System.err.println("date apres catch"+maxdate);
          return maxdate;
      }
-    
-     
+    static void CreationRoom(Salon s, User u){
+        int count=s.rooms.size();
+        Room[] myArray = new Room[count+1]; 
+        myArray[count] = new Room(String.valueOf(count),"a");
+        CreerRoom(myArray[count],u);
+    }
+    static void CreationMessage(Room r, User u){
+        int numero=r.chat.size();
+        
+        //int numero=3;
+        Mesg[] Arraymsg =new Mesg[numero+1];
+        
+        Arraymsg[numero] = new Mesg(String.valueOf(numero));
+        CreerMsg(Arraymsg[numero],u,r);
+        r.addMesg(u,Arraymsg[numero]);
+    }
 }
