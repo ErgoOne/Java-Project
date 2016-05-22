@@ -85,7 +85,7 @@ public class DButilities {
             stmt.executeUpdate(sql2);
             stmt.close();
             }
-            u.setStatus(a.get(4));
+            u.setStatus("on");
             u.hello();
             con.close();
         } catch (ClassNotFoundException | SQLException ex) {
@@ -193,6 +193,7 @@ public class DButilities {
                 for(int i = 1; i <=  resultMeta.getColumnCount(); i++){
             //System.out.print(result.getString(i)+"\n");
            // s.addRoom(result.getString(i),result.getString(i+1) );//Ajouter les room de la BD dans la salon
+                    CreationRoomS(s, result.getString(i), result.getString(i+1));
             i++;
                 }
             }
@@ -387,6 +388,13 @@ public class DButilities {
         Room[] myArray = new Room[count+1]; 
         myArray[count] = new Room(String.valueOf(count),"a");
         CreerRoom(myArray[count],u);
+        s.addRoom(myArray[count]);
+    }
+    static void CreationRoomS(Salon s,String nom, String desc){
+        int count=s.rooms.size();
+        Room[] myArray = new Room[count+1]; 
+        myArray[count] = new Room(nom,desc);
+        s.addRoom(myArray[count]);
     }
     static void CreationMessage(Room r, User u){
         int numero=r.chat.size();
