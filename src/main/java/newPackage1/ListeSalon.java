@@ -78,6 +78,7 @@ public class ListeSalon extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableSalon = new javax.swing.JTable();
         refreshButton = new javax.swing.JButton();
+        connexionButton = new javax.swing.JButton();
 
         popupMenu1.setLabel("popupMenu1");
 
@@ -111,6 +112,13 @@ public class ListeSalon extends javax.swing.JFrame {
             }
         });
 
+        connexionButton.setText("Connexion");
+        connexionButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connexionButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,9 +131,11 @@ public class ListeSalon extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(refreshButton)
+                        .addComponent(connexionButton)
+                        .addGap(67, 67, 67)
+                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 8, Short.MAX_VALUE))
         );
@@ -139,7 +149,8 @@ public class ListeSalon extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jToggleButton1)
-                    .addComponent(refreshButton))
+                    .addComponent(refreshButton)
+                    .addComponent(connexionButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -152,9 +163,12 @@ public class ListeSalon extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-     //erasetab();
-        //getinfos(model);
+  
     }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void connexionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connexionButtonActionPerformed
+        
+    }//GEN-LAST:event_connexionButtonActionPerformed
 
     
     
@@ -204,6 +218,7 @@ public class ListeSalon extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton connexionButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableSalon;
