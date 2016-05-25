@@ -332,7 +332,7 @@ public class Principale extends javax.swing.JFrame {
         }
         else
             {
-            JOptionPane.showMessageDialog(null, "Erreur !", "Erreur", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Pseudo introuvable", "Erreur", JOptionPane.ERROR_MESSAGE );
             System.exit(0);
                 
        }     
