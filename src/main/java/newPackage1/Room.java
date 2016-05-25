@@ -35,6 +35,10 @@ public class Room {
         //TO DO function on dbutilities to add the msg to the DB
     }
 
+    public void setLastmsgDate(String lastmsgDate) {
+        this.lastmsgDate = lastmsgDate;
+    }
+
     public void setNom(String nom) {
         this.nom = nom;
     }

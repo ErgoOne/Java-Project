@@ -371,7 +371,7 @@ public class DButilities {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
         }
       }
-      static String getDerMsgDate(User u){
+      static String getDerMsgDate(User u,Room r){
        String maxdate=null;
          try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -393,6 +393,7 @@ public class DButilities {
             }
             maxdate=maxd.get(0);
             System.err.println(maxdate);
+            r.setLastmsgDate(maxdate);
             
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
