@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.UIManager.getInt;
 
 /**
  *
@@ -205,15 +206,16 @@ public class DButilities {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
-
+            System.out.println("RETURN"+isroomalreadypresent);
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
- String verif= "SELECT COUNT(*) AS count FROM room WHERE nom='"+r2.getName()+"'";
+            String verif= "SELECT COUNT(*) AS count FROM room WHERE nom='"+r2.getName()+"'";
             Statement s=con.createStatement();
             ResultSet result = s.executeQuery(verif);
             ResultSetMetaData resultMeta = result.getMetaData();
             isroomalreadypresent = result.getInt("count")!=0;
+            System.out.println("COUUUUNT"+getInt("count"));
             //retun= result.getInt(1);*/
-            // System.out.println("RETURN"+retun);
+            System.out.println("RETURN"+isroomalreadypresent);
             if(!isroomalreadypresent){
                /* retun=1;*/
             String sql = "INSERT INTO room VALUES ('" + r2.getName() + "', '" + r2.getDesc() + "')";
