@@ -6,10 +6,13 @@
 package newPackage1;
 
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import static newPackage1.DButilities.putRoomtoSalon;
@@ -19,47 +22,58 @@ import static newPackage1.DButilities.putRoomtoSalon;
  * @author Jonathan
  */
 public class ListeSalon extends javax.swing.JFrame {
-DefaultTableModel model;
+
+    DefaultTableModel model;
+
     /**
      * Creates new form ListeSalon
      */
-    
     public ListeSalon() {
         initComponents();
-        model =(DefaultTableModel) jTableSalon.getModel();
+        model = (DefaultTableModel) jTableSalon.getModel();
         getinfos(model);
-   
-  
-        
+        Timer timer = new Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                refreshUImessage();
+            }
+        });
+
+        timer.start();
     }
-    public void getinfos(DefaultTableModel m)
-    {
-             HashMap<String,String> h=new HashMap<>();
-           putRoomtoSalon(Principale.sl);
-        h=Principale.sl.getSalon();
-      
-	        Set cles = h.keySet();
+
+    private void refreshUImessage() {
+        erasetab(model);
+        getinfos(model);
+    }
+
+    public void getinfos(DefaultTableModel m) {
+        HashMap<String, String> h = new HashMap<>();
+        putRoomtoSalon(Principale.sl);
+        h = Principale.sl.getSalon();
+
+        Set cles = h.keySet();
         Iterator it = cles.iterator();
-        while (it.hasNext()){
-           Object cle = it.next(); // tu peux typer plus finement ici
-           Object valeur = h.get(cle); // tu peux typer plus finement ici
-               
-           m.addRow(new Object[]{cle,valeur});
-          
+        while (it.hasNext()) {
+            Object cle = it.next(); // tu peux typer plus finement ici
+            Object valeur = h.get(cle); // tu peux typer plus finement ici
+
+            m.addRow(new Object[]{cle, valeur});
+
         }
     }
 
 //Remove rows one by one from the end of the table
-
-    public void erasetab(DefaultTableModel m){
+    public void erasetab(DefaultTableModel m) {
         int rowCount = m.getRowCount();
         for (int i = rowCount - 1; i >= 0; i--) {
-    m.removeRow(i);
-}  
+            m.removeRow(i);
+        }
     }
-      public void close(){
-        
-        WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
+
+    public void close() {
+
+        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
         Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
 
@@ -120,14 +134,16 @@ DefaultTableModel model;
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(refreshButton)
+                        .addGap(160, 160, 160)
+                        .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 8, Short.MAX_VALUE))
+                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -152,17 +168,10 @@ DefaultTableModel model;
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-     erasetab(model);
-        getinfos(model);
+        refreshUImessage();
     }//GEN-LAST:event_refreshButtonActionPerformed
+   
 
-    
-    
-    
-    
-    
-    
-    
     /**
      * @param args the command line arguments
      */
@@ -189,18 +198,17 @@ DefaultTableModel model;
             java.util.logging.Logger.getLogger(ListeSalon.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-   
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListeSalon().setVisible(true); 
-               
+                new ListeSalon().setVisible(true);
                 
+
             }
         });
-       
+
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

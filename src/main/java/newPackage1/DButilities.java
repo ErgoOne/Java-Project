@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static javax.swing.UIManager.getInt;
 
 /**
  *
@@ -205,9 +206,9 @@ public class DButilities {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
-
+            System.out.println("RETURN"+isroomalreadypresent);
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
- String verif= "SELECT COUNT(*) AS count FROM room WHERE nom='"+r2.getName()+"'";
+            String verif= "SELECT COUNT(*) AS count FROM room WHERE nom='"+r2.getName()+"'";
             Statement s=con.createStatement();
             ResultSet result = s.executeQuery(verif);
             //ResultSetMetaData resultMeta = result.getMetaData();
