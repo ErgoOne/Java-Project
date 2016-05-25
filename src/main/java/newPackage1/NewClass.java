@@ -58,7 +58,7 @@ public class NewClass {
         //Afficher les derniers messages
         
         //System.out.println(r2.getLastDate());
-        AfficherNvMess(getDerMsgDate(u1));
+        //AfficherNvMess(getDerMsgDate(u1));
         
         //Room r1 = new Room("R8","bob marley");
        

@@ -25,6 +25,7 @@ public class Principale extends javax.swing.JFrame {
   public static User u=new User("test");
    public Statut st=new Statut();
    public static Salon sl=new Salon();
+   public String date = null;
    
          
    
@@ -187,7 +188,6 @@ public class Principale extends javax.swing.JFrame {
 
         statutLabel2.setText("jLabel8");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\Jonathan\\Desktop\\strilogo1.png")); // NOI18N
         jLabel4.setText("jLabel4");
 
         listeSalonButton.setText("Liste des salons");

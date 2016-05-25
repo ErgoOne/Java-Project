@@ -19,14 +19,14 @@ import static newPackage1.DButilities.putRoomtoSalon;
  * @author Jonathan
  */
 public class ListeSalon extends javax.swing.JFrame {
-
+DefaultTableModel model;
     /**
      * Creates new form ListeSalon
      */
     
     public ListeSalon() {
         initComponents();
-        DefaultTableModel model =(DefaultTableModel) jTableSalon.getModel();
+        model =(DefaultTableModel) jTableSalon.getModel();
         getinfos(model);
    
   
@@ -82,7 +82,7 @@ public class ListeSalon extends javax.swing.JFrame {
 
         popupMenu1.setLabel("popupMenu1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 22)); // NOI18N
         jLabel1.setText("Liste des salons");
@@ -163,7 +163,8 @@ public class ListeSalon extends javax.swing.JFrame {
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-  
+     erasetab(model);
+        getinfos(model);
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void connexionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connexionButtonActionPerformed
@@ -216,7 +217,6 @@ public class ListeSalon extends javax.swing.JFrame {
         });
        
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton connexionButton;
     private javax.swing.JLabel jLabel1;
