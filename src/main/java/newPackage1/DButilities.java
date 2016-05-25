@@ -210,11 +210,13 @@ public class DButilities {
  String verif= "SELECT COUNT(*) AS count FROM room WHERE nom='"+r2.getName()+"'";
             Statement s=con.createStatement();
             ResultSet result = s.executeQuery(verif);
-            ResultSetMetaData resultMeta = result.getMetaData();
-            isroomalreadypresent = result.getInt("count")!=0;
+            //ResultSetMetaData resultMeta = result.getMetaData();
+            int i=1;
+            while (result.next()){ // A RAJOUTER A CHAQUE FOIS AVEC LES CONT
+           i = result.getInt(1);}
             //retun= result.getInt(1);*/
-            // System.out.println("RETURN"+retun);
-            if(!isroomalreadypresent){
+            System.out.println("RETURN i "+i);
+            if(i!=0){
                /* retun=1;*/
             String sql = "INSERT INTO room VALUES ('" + r2.getName() + "', '" + r2.getDesc() + "')";
             String sql2 = "INSERT INTO creerroom VALUES('" + u.getPseudo() + "', '" + r2.getName() + "')";
@@ -240,6 +242,7 @@ public class DButilities {
             }
             else {
             con.close();
+            isroomalreadypresent=true;
             return isroomalreadypresent;
             }
             //PreparedStatement statement = con.prepareStatement(sql);
