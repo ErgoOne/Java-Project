@@ -8,7 +8,7 @@ package newPackage1;
 import java.awt.Toolkit;
 import java.awt.event.*;
 import javax.swing.JOptionPane;
-import static newPackage1.DButilities.CreationRoom;
+
 
 
 /**
@@ -117,16 +117,19 @@ public class CreerSalon extends javax.swing.JFrame {
 
     private void creerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButtonActionPerformed
         // TODO add your handling code here:
-       int r=1;
-        CreationRoom(Principale.sl,Principale.u ,nomTF.getText(),descTF.getText());
-        if(r==0){
-        JOptionPane.showMessageDialog(null, "<your message here...>", "Alert", JOptionPane.ERROR_MESSAGE);
+       boolean ispresent=false;
+       if (nomTF.getText().isEmpty()) {JOptionPane.showMessageDialog(null, "Le champ room ne doit pas être vide !", "Alert", JOptionPane.ERROR_MESSAGE);
+        super.dispose();}
+       else {
+        ispresent = DButilities.creationRoom(Principale.sl,Principale.u ,nomTF.getText(),descTF.getText());
+        if(!ispresent){
+        JOptionPane.showMessageDialog(null, "Le nom de la room existe dejà !", "Alert", JOptionPane.ERROR_MESSAGE);
         super.dispose();
         }
-        else {
-            JOptionPane.showMessageDialog(null, "<OK>", "Info", JOptionPane.INFORMATION_MESSAGE);
+        else  {
+            JOptionPane.showMessageDialog(null, "Room Ajoutée", "Info", JOptionPane.INFORMATION_MESSAGE);
         super.dispose();
-        }
+        }}
        
        
     }//GEN-LAST:event_creerButtonActionPerformed
