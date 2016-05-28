@@ -5,7 +5,9 @@
  */
 package newPackage1;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import static newPackage1.DButilities.AfficherNvMess;
 import static newPackage1.DButilities.CreerMsg;
@@ -62,7 +64,11 @@ public class NewClass {
         
         //Room r1 = new Room("R8","bob marley");
        
+        //Room r = Room.getInstance("R2", "Salon de World Of Warcraft");
+        Room r = Room.getInstance("R8", "bob marley");
+        System.out.println(r.getNom());
         
+        AfficherNvMess(getDerMsgDate(u1,r),r);
         //getRoom(r1);
         //Room r2 = new Room();
         //--
