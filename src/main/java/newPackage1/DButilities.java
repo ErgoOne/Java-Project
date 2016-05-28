@@ -362,7 +362,8 @@ public class DButilities {
 
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
-            if (result.next()){
+            if (!result.next()){
+                System.err.println("je suis ici dans le if ");
                 AfficherttMess(r);
             }else{
             ResultSetMetaData resultMeta = result.getMetaData();
@@ -413,7 +414,7 @@ public class DButilities {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select MAX(date_cre) from ecrir where Pseudo='" + u.getPseudo() + "'";
+            String sql = "Select MAX(date_cre) from ecrir where Pseudo='" + u.getPseudo() + "' AND nom='"+r.getName()+"'";
 
             System.err.println(sql);
 

@@ -64,9 +64,11 @@ public class NewClass {
         
         //Room r1 = new Room("R8","bob marley");
        
+        //Room r = Room.getInstance("R2", "Salon de World Of Warcraft");
         Room r = Room.getInstance("R8", "bob marley");
         System.out.println(r.getNom());
         
+        AfficherNvMess(getDerMsgDate(u1,r),r);
         //getRoom(r1);
         //Room r2 = new Room();
         //--
