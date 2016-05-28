@@ -385,10 +385,15 @@ public class DButilities {
             ResultSetMetaData resultMeta = result.getMetaData();
 
             while (result.next()) {
-                for (int i = 1; i <= resultMeta.getColumnCount(); i++) {
-                    System.out.print(result.getString(i) + "\n");
-                    i++;
-                }
+                 String msg = result.getString( "msg" );
+
+                 String date_cre = result.getString( "date_cre" );
+
+                 String Pseudo = result.getString( "Pseudo" );
+
+                String Nom = result.getString( "Nom" );
+                System.out.println(msg+" "+date_cre+" "+Pseudo+" "+Nom);
+          
                 }
             }
         } catch (ClassNotFoundException | SQLException ex) {
@@ -411,11 +416,17 @@ public class DButilities {
             ResultSetMetaData resultMeta = result.getMetaData();
 
             while (result.next()) {
-                for (int i = 1; i <= resultMeta.getColumnCount(); i++) {
-                    System.out.print(result.getString(i) + "\n");
-                    i++;
+                 String msg = result.getString( "msg" );
+
+                 String date_cre = result.getString( "date_cre" );
+
+                 String Pseudo = result.getString( "Pseudo" );
+
+                String Nom = result.getString( "Nom" );
+                System.out.println(msg+" "+date_cre+" "+Pseudo+" "+Nom);
+          
                 }
-            }
+            
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
@@ -482,4 +493,102 @@ public class DButilities {
         CreerMsg(Arraymsg[numero], u, r);
         r.addMesg(u, Arraymsg[numero]);
     }
+     static void AjouterUtilisateur(User u, Room r, TypeDroit t) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sqlnum= "SELECT MAX(pseudoadd) FROM ajouter";
+            PreparedStatement statement = con.prepareStatement(sqlnum);
+            ResultSet result = statement.executeQuery();
+            int num = result.getInt( "pseudoadd" )+1;
+            String sql = "INSERT INTO ajouter VALUES ('" + num + "','" + u.getPseudo() + "','" + r.getName()+ "')";
+            
+            Statement stmt = null;
+            stmt = con.createStatement();
+            int statut = stmt.executeUpdate(sql);
+
+            if (statut == 1) {
+                System.err.println("la requete a fonctionner");
+            } else {
+                System.err.println("erreur insert");
+            }
+            String sql2 = "INSERT INTO acceder VALUES ('" + t.name() + "','" + u.getPseudo() + "','" + r.getName()+ "')";
+            Statement stmt2 = null;
+            stmt2 = con.createStatement();
+            int statut2 = stmt2.executeUpdate(sql2);
+            if (statut2 == 1) {
+                System.err.println("la requete 2 a fonctionner");
+            } else {
+                System.err.println("erreur insert 2");
+            }
+            con.close();
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    static void SupprimerUtilisateur(User u, Room r, TypeDroit t) {
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sqlnum= "SELECT MAX(pseudodel) FROM supprimer";
+            PreparedStatement statement = con.prepareStatement(sqlnum);
+            ResultSet result = statement.executeQuery();
+            int num = result.getInt( "pseudodel" )+1;
+            String sql = "INSERT INTO ajouter VALUES ('" + num + "','" + u.getPseudo() + "','" + r.getName()+ "')";
+            
+            Statement stmt = null;
+            stmt = con.createStatement();
+            int statut = stmt.executeUpdate(sql);
+
+            if (statut == 1) {
+                System.err.println("la requete a fonctionner");
+            } else {
+                System.err.println("erreur insert");
+            }
+            String sql2 = "DELETE FROM acceder WHERE type_droit='" + t.name() + "' AND pseudo='" + u.getPseudo() + "' AND nom='" + r.getName()+ "'";
+            Statement stmt2 = null;
+            stmt2 = con.createStatement();
+            int statut2 = stmt2.executeUpdate(sql2);
+            if (statut2 == 1) {
+                System.err.println("la requete 2 a fonctionner");
+            } else {
+                System.err.println("erreur insert 2");
+            }
+            con.close();
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    static void ChangerDroit(User u, Room r, String droit){
+	if(droit!="r" || droit!="none" || droit!="rw" || droit!="admin"){
+		System.out.println("Invalide type de droit");
+	}else{
+		        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql= "UPDATE acceder SET type_droit = '" + droit + "' WHERE pseudo='" + u.getPseudo() + "' AND nom='" + r.getName()+ "'";
+            Statement stmt = null;
+            stmt = con.createStatement();
+            int statut = stmt.executeUpdate(sql);
+            if (statut == 1) {
+                System.err.println("la requete a fonctionner");
+            } else {
+                System.err.println("erreur insert ");
+            }
+            con.close();
+			
+				
+			} catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+			}  
+	}
+	
+    }
+    
+    
 }
