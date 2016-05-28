@@ -190,6 +190,7 @@ public class ListeSalon extends javax.swing.JFrame {
         room.pack();
         room.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
+        //a changer
         room.numRoomLabel.setText(numroom);
      
         

@@ -130,7 +130,7 @@ public class Chatroom extends javax.swing.JFrame {
 
     private void afftext(String s){
  
-        if(s != null && !s.isEmpty() && (s.trim().length() > 0)) {String temp= ("MSG - "+DButilities.getdate()+" : "+Principale.u.getPseudo()+ " : "+s);
+            if(s != null && !s.isEmpty() && (s.trim().length() > 0)) {String temp= ("MSG - "+DButilities.getdate()+" : "+Principale.u.getPseudo()+ " : "+s);
         //envoyerTF.setText(temp);
         model.addElement(temp);}
     }
