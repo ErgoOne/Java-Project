@@ -12,9 +12,11 @@ import java.awt.event.WindowEvent;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import static newPackage1.DButilities.putRoomtoSalon;
 
 /**
@@ -62,7 +64,8 @@ public class ListeSalon extends javax.swing.JFrame {
 
         }
     }
-
+   Chatroom  room = new Chatroom();
+  
 //Remove rows one by one from the end of the table
     public void erasetab(DefaultTableModel m) {
         int rowCount = m.getRowCount();
@@ -88,7 +91,7 @@ public class ListeSalon extends javax.swing.JFrame {
 
         popupMenu1 = new java.awt.PopupMenu();
         jLabel1 = new javax.swing.JLabel();
-        jToggleButton1 = new javax.swing.JToggleButton();
+        exitButton = new javax.swing.JToggleButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableSalon = new javax.swing.JTable();
         refreshButton = new javax.swing.JButton();
@@ -100,11 +103,11 @@ public class ListeSalon extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 22)); // NOI18N
         jLabel1.setText("Liste des salons");
 
-        jToggleButton1.setText("Exit");
-        jToggleButton1.setToolTipText("");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        exitButton.setText("Quitter");
+        exitButton.setToolTipText("");
+        exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                exitButtonActionPerformed(evt);
             }
         });
 
@@ -116,9 +119,14 @@ public class ListeSalon extends javax.swing.JFrame {
                 "Room", "Description"
             }
         ));
+        jTableSalon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableSalonMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTableSalon);
 
-        refreshButton.setText("Refresh");
+        refreshButton.setText("Rafraichir");
         refreshButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshButtonActionPerformed(evt);
@@ -139,7 +147,7 @@ public class ListeSalon extends javax.swing.JFrame {
                         .addGap(160, 160, 160)
                         .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -154,7 +162,7 @@ public class ListeSalon extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
+                    .addComponent(exitButton)
                     .addComponent(refreshButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -162,14 +170,31 @@ public class ListeSalon extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
+    private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
         // TODO add your handling code here:
         super.dispose();
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    }//GEN-LAST:event_exitButtonActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
         refreshUImessage();
     }//GEN-LAST:event_refreshButtonActionPerformed
+
+    private void jTableSalonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSalonMouseClicked
+        int index = jTableSalon.getSelectedRow();
+        TableModel model= jTableSalon.getModel();
+        
+       
+        String numroom = model.getValueAt(index, 0).toString();
+        String desc = model.getValueAt(index, 1).toString();
+        room.setVisible(true);
+        room.pack();
+        room.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
+        room.numRoomLabel.setText(numroom);
+     
+        
+        
+    }//GEN-LAST:event_jTableSalonMouseClicked
    
 
     /**
@@ -211,10 +236,10 @@ public class ListeSalon extends javax.swing.JFrame {
 
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JToggleButton exitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableSalon;
-    private javax.swing.JToggleButton jToggleButton1;
     private java.awt.PopupMenu popupMenu1;
     private javax.swing.JButton refreshButton;
     // End of variables declaration//GEN-END:variables

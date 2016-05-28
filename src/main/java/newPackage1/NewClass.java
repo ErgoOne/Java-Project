@@ -80,7 +80,7 @@ public class NewClass {
         du1.put(r2, TypeDroit.NONE);
         du1.put(r1, TypeDroit.RW);
         Droit droit = new Droit(u1,du1);*/
-        
+        DButilities.getdate();
         
     }
 

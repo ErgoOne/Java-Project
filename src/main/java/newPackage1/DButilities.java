@@ -349,7 +349,23 @@ public class DButilities {
         System.err.println("date apres catch" + date);
         return date;
     }
-
+    static String getdate() {
+        try { Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");
+    String sql ="SELECT DATE_FORMAT(NOW(), '%H:%i')";
+    PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            result.next();
+            System.out.println("DATE :" +result.getString(1));
+            return result.getString(1);
+    }
+        catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+            return "tto";
+        }
+    
+    }
     static void AfficherNvMess(String date) {
 
         try {
