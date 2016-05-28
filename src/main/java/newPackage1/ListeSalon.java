@@ -64,7 +64,7 @@ public class ListeSalon extends javax.swing.JFrame {
 
         }
     }
-   //Chatroom  room = new Chatroom();
+   Chatroom  room = new Chatroom();
   
 //Remove rows one by one from the end of the table
     public void erasetab(DefaultTableModel m) {
@@ -186,11 +186,11 @@ public class ListeSalon extends javax.swing.JFrame {
        
         String numroom = model.getValueAt(index, 0).toString();
         String desc = model.getValueAt(index, 1).toString();
-/*        room.setVisible(true);
+        room.setVisible(true);
         room.pack();
         room.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        room.numRoomLabel.setText(numroom);*/
+        room.numRoomLabel.setText(numroom);
      
         
         
