@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static javax.swing.UIManager.getInt;
@@ -589,6 +590,36 @@ public class DButilities {
 	}
 	
     }
-    
+static HashMap<String, String> AfficherUtilisateur() {
+         HashMap<String, String> map = new HashMap<>();
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "Select Pseudo, statut from users";
+
+            System.err.println(sql);
+
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
+
+            while (result.next()) {
+                 String pseudo = result.getString( "Pseudo" );
+
+                 String Statut = result.getString( "statut" );
+
+                System.out.println(pseudo+" "+Statut);
+           
+            map.put(pseudo, Statut);
+                }
+            return map;
+            
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+            return map;
+        }
+    }    
     
 }
