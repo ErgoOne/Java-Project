@@ -20,14 +20,16 @@ import static newPackage1.DButilities.AfficherUtilisateur;
  * @author Badr
  */
 public class Chatroom extends javax.swing.JFrame {
+    /*ADD MARGX*/
     DefaultTableModel model1;
-
+    /*FIN ADD MARGX */
      DefaultListModel model= new DefaultListModel();
     /**
      * Creates new form chatroom
      */
     public Chatroom() {
         initComponents();
+        /*ADD MARGX*/
         model1 = (DefaultTableModel) jTable1.getModel();
         getinfos(model1);
         Timer timer = new Timer(1000, new ActionListener() {
@@ -64,6 +66,8 @@ public class Chatroom extends javax.swing.JFrame {
             m.removeRow(i);
         }
     }
+        /*FIN ADD MARGX */
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

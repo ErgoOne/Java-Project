@@ -97,7 +97,7 @@ public class DButilities {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
             String sql = "Select pseudo from users where pseudo='" + user + "'";
 
             /*          + utilisateur.getPseudo()
@@ -494,6 +494,7 @@ public class DButilities {
         CreerMsg(Arraymsg[numero], u, r);
         r.addMesg(u, Arraymsg[numero]);
     }
+    /*ADD MARGX*/
      static void AjouterUtilisateur(User u, Room r, TypeDroit t) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -623,3 +624,4 @@ static HashMap<String, String> AfficherUtilisateur() {
     }    
     
 }
+/* FIN ADD MARGX */
