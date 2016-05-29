@@ -68,7 +68,7 @@ public class NewClass {
         Room r = Room.getInstance("R8", "bob marley");
         System.out.println(r.getNom());
         
-        AfficherNvMess(getDerMsgDate(u1,r),r);
+        //AfficherNvMess(getDerMsgDate(u1,r),r);
         //getRoom(r1);
         //Room r2 = new Room();
         //--
