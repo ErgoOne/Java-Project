@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import static newPackage1.DButilities.AfficherNvMess;
+import static newPackage1.DButilities.AfficherUtilisateur;
 import static newPackage1.DButilities.CreerMsg;
 import static newPackage1.DButilities.auth;
 import static newPackage1.DButilities.CreerRoom;
@@ -65,8 +66,8 @@ public class NewClass {
         //Room r1 = new Room("R8","bob marley");
        
         //Room r = Room.getInstance("R2", "Salon de World Of Warcraft");
-        Room r = Room.getInstance("R8", "bob marley");
-        System.out.println(r.getNom());
+        //Room r = Room.getInstance("R8", "bob marley");
+        //System.out.println(r.getNom());
         
         //AfficherNvMess(getDerMsgDate(u1,r),r);
         //getRoom(r1);
