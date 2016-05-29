@@ -70,8 +70,6 @@ public class NewClass {
         //System.out.println(r.getNom());
         
         //AfficherNvMess(getDerMsgDate(u1,r),r);
-        
-        AfficherUtilisateur();
         //getRoom(r1);
         //Room r2 = new Room();
         //--

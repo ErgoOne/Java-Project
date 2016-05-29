@@ -2,9 +2,14 @@ package newPackage1;
 
 import java.awt.CardLayout;
 import java.awt.Panel;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ButtonGroup;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -26,7 +31,9 @@ public class Principale extends javax.swing.JFrame {
    public Statut st=new Statut();
    public static Salon sl=new Salon();
    public String date = null;
+   public Connection con=null;
    
+  
          
    
 
@@ -35,6 +42,7 @@ public class Principale extends javax.swing.JFrame {
  
         initComponents();
         
+        con();
           u.setPseudo(s);
                 getUser(u);
         
@@ -311,9 +319,17 @@ public class Principale extends javax.swing.JFrame {
     }//GEN-LAST:event_creerSalonButtonActionPerformed
 
     private void listeSalonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listeSalonButtonActionPerformed
-        new ListeSalon().setVisible(true);
-    }//GEN-LAST:event_listeSalonButtonActionPerformed
+              new ListeSalon().setVisible(true);
   
+    }//GEN-LAST:event_listeSalonButtonActionPerformed
+public  void con(){   
+try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");
+} catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+        
+}}
  
     /**
      * @param args the command line arguments
@@ -365,6 +381,7 @@ public class Principale extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
+                
                 new Principale().setVisible(true);
                 new Principale().setResizable(false);
                 
