@@ -8,12 +8,14 @@ package newPackage1;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import static newPackage1.DButilities.AfficherNvMess;
@@ -83,6 +85,7 @@ public class Chatroom extends javax.swing.JFrame {
         //a= new ArrayList<>();
         
         model = new DefaultListModel();
+        affichageJL.setModel(model);
         //descri.getCon
         model1 = (DefaultTableModel) jTable1.getModel();
         getinfos(model1);
@@ -249,7 +252,7 @@ public class Chatroom extends javax.swing.JFrame {
     
     
     private void add(String s){
-        affichageJL.setModel(model);
+        //affichageJL.setModel(model);
         //model.addElement("TOTO");
         afftext(s);
         
@@ -276,6 +279,7 @@ public class Chatroom extends javax.swing.JFrame {
      for (String str : a) {
 			  model.addElement(str);
 		}
+     affichageJL.ensureIndexIsVisible(model.size()-1);
     }
     
     private void afftext(String s){
@@ -295,10 +299,10 @@ public class Chatroom extends javax.swing.JFrame {
        a=AfficherNvMess(DButilities.getDerMsgDate(Principale.u,r),r);
        this.model.clear();
        
-       
        for (String str : a) {
 			  model.addElement(str);
 		}
+        affichageJL.ensureIndexIsVisible(model.size()-1);
    }
     /**
      * @param args the command line arguments
