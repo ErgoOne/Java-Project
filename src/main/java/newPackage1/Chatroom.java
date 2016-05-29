@@ -74,12 +74,14 @@ public class Chatroom extends javax.swing.JFrame {
         initComponents();
         this.roomname=ro;
         this.roomdesc=d;
+        
         //a= new ArrayList<>();
         
   
         //descri.getCon
         System.out.println(" DESC : "+d+" ROOOMNAME : "+ro);
         this.r=Room.getInstance(ro, d);
+        DButilities.AfficherttMess(r);
        Timer timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,8 +94,9 @@ public class Chatroom extends javax.swing.JFrame {
     }
    public Chatroom() {
        
-        this.r=Room.getInstance("R2", "Je suis R2");
+        this.r=Room.getInstance(getRoomname(), getRoomdesc());
         initComponents();
+       //firtaff(DButilities.AfficherttMess(r));
        Timer timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -221,14 +224,21 @@ public class Chatroom extends javax.swing.JFrame {
    add(envoyerTF.getText());
    
     envoyerTF.setText("");
+   
     }//GEN-LAST:event_envoyerButtonActionPerformed
 
     private void affichageJLValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_affichageJLValueChanged
-    //String selected= affichageJL.getSelectedValue().toString();
-    //envoyerTF.setText(selected);
-      //  afftext(selected);
+    String selected= affichageJL.getSelectedValue().toString();
+    envoyerTF.setText(selected);
+       afftext(selected);
     }//GEN-LAST:event_affichageJLValueChanged
 
+    private void firtaff(ArrayList<String> a){
+     for (String str : a) {
+			  model.addElement(str);
+		}
+    }
+    
     private void afftext(String s){
  
         if(s != null && !s.isEmpty() && (s.trim().length() > 0)) 

@@ -29,33 +29,19 @@ public class DButilities {
     public static Connection con;
     public static ArrayList<String> maxd;
     
-    private static Connection conn(){
- try {
-            Class.forName("com.mysql.jdbc.Driver");
-            /*make connection with the database*/
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");
-             return con;
-}catch(Exception e)
-        {
-            e.printStackTrace();
-            Connection con=null;
-            return  con;
-        }
-
-}
 
     static void chgStatUser(User u, String stat) // Set le statut sur la bd à off
     {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             String user = u.getPseudo();
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");
+             //con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");
             String sql2 = "UPDATE users SET statut='" + stat + "' WHERE pseudo='" + user + "'";
             Statement stmt = null;
             stmt = con.createStatement();
             stmt.executeUpdate(sql2);
             stmt.close();
-            con.close();
+            //con.close();
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,7 +53,7 @@ public class DButilities {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             String user = u.getPseudo();
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            //con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
 
             // On récupere les infos du users pour la classe user et pour les afficher.
             String sql = "Select pseudo,nom,email,telephone,statut from users where pseudo='" + user + "'";
@@ -105,7 +91,7 @@ public class DButilities {
             }
             u.setStatus("on");
             u.hello();
-            con.close();
+            //con.close();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -151,7 +137,7 @@ public class DButilities {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            //con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
             String sql = "Select type_droit from acceder where pseudo=? and nom=?";
 
             /*          + utilisateur.getPseudo()
@@ -227,7 +213,7 @@ static void putRoomtoSalon(Salon s) {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             System.out.println("RETURN"+isroomalreadypresent);
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
             String verif= "SELECT COUNT(*) AS count FROM room WHERE nom='"+r2.getName()+"'";
             Statement s=con.createStatement();
             ResultSet result = s.executeQuery(verif);
@@ -262,7 +248,7 @@ static void putRoomtoSalon(Salon s) {
             return isroomalreadypresent;
             }
             else {
-            con.close();
+            //con.close();
             isroomalreadypresent=true;
             return isroomalreadypresent;
             }
@@ -292,7 +278,7 @@ static void putRoomtoSalon(Salon s) {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             String nameroom = r.getName();
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
             String sql = "Select Nom, Descriptif from room where Nom='" + nameroom + "'";
 
             System.err.println(sql);
@@ -321,7 +307,7 @@ static void putRoomtoSalon(Salon s) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+           // Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
             String sql = "INSERT INTO ecrit VALUES ('" + m.getMsg() + "', NOW(), '" + u.getPseudo() + "', '" + r.getName() + "')";
             Statement stmt = null;
             stmt = con.createStatement();
@@ -332,7 +318,7 @@ static void putRoomtoSalon(Salon s) {
             } else {
                 System.err.println("erreur insert");
             }
-            con.close();
+            //con.close();
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
@@ -372,7 +358,7 @@ static void putRoomtoSalon(Salon s) {
     static String getdate() {
         try { Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");
+            //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");
     String sql ="SELECT DATE_FORMAT(NOW(), '%H:%i')";
     PreparedStatement statement = con.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
@@ -391,7 +377,7 @@ static ArrayList<String> AfficherNvMess(String date, Room r) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
             String sql = "Select msg, date_cre, Pseudo from ecrit where date_cre>'" + date + "' AND nom='"+r.getName()+"' ORDER BY date_cre";
 
             System.err.println(sql);
@@ -401,6 +387,7 @@ static ArrayList<String> AfficherNvMess(String date, Room r) {
             if (!result.next()){
                 System.err.println("je suis ici dans le if je return l 'array ");
                 return(AfficherttMess(r));
+                //return a;
             }else{
             ResultSetMetaData resultMeta = result.getMetaData();
 
@@ -430,7 +417,7 @@ static ArrayList<String> AfficherNvMess(String date, Room r) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
             String sql = "Select msg, date_cre, Pseudo from ecrit where nom='"+r.getName()+"' ORDER BY date_cre";
 
             System.err.println(sql);
@@ -466,7 +453,7 @@ static ArrayList<String> AfficherNvMess(String date, Room r) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
-            Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
             String sql = "Select MAX(date_cre) from ecrit where Pseudo='" + u.getPseudo() + "' AND nom='"+r.getName()+"'";
 
             System.err.println(sql);
