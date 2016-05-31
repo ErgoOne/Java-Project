@@ -251,7 +251,8 @@ public class Chatroom extends javax.swing.JFrame {
                         .addGap(29, 29, 29))))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1058, 650));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     

@@ -47,6 +47,7 @@ public class Principale extends javax.swing.JFrame {
  
         initComponents();
         
+        
         con();
           u.setPseudo(s);
                 getUser(u);
