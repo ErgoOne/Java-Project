@@ -8,14 +8,9 @@ package newPackage1;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import static java.util.Collections.list;
 import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import static newPackage1.DButilities.AfficherNvMess;
@@ -32,7 +27,7 @@ public class Chatroom extends javax.swing.JFrame {
          //HashMap<String, String> h = new HashMap<>();
         ArrayList<String> a = new ArrayList<>();
         private static Vector classes = new Vector();
-     DefaultTableModel model1;
+    DefaultTableModel model1;
      DefaultListModel model;
 
      public static Chatroom getInstance(String attribut1, String attribut2) {
@@ -89,8 +84,8 @@ public class Chatroom extends javax.swing.JFrame {
         model = new DefaultListModel();
         affichageJL.setModel(model);
         //descri.getCon
-        model1 = (DefaultTableModel) jTable1.getModel();
-        getinfos(model1);
+       model1 = (DefaultTableModel) jTable1.getModel();
+        getinfos(model1, ro);
         System.out.println(" DESC : "+d+" ROOOMNAME : "+ro);
         this.r=Room.getInstance(ro, d);
         System.out.println("DATE : "+r.getLastDate());
@@ -110,22 +105,22 @@ public class Chatroom extends javax.swing.JFrame {
 
     private void refreshUImessage(){
     erasetab(model1);
-    getinfos(model1);
+    getinfos(model1, roomname);
     }
     
-   public void getinfos(DefaultTableModel m) {
-        HashMap<String, String> h = new HashMap<>();
+   public void getinfos(DefaultTableModel m, String ro) {
+        ArrayList<String> aroom = new ArrayList<>();
         //putRoomtoSalon(Principale.sl);
-        h =DButilities.AfficherUtilisateur();
-
-        Set cles = h.keySet();
-        Iterator it = cles.iterator();
-        while (it.hasNext()) {
-            Object cle = it.next(); // tu peux typer plus finement ici
-            Object valeur = h.get(cle); // tu peux typer plus finement ici
-
-            m.addRow(new Object[]{cle, valeur});
-
+        aroom =DButilities.AfficherUtilisateurRoom(ro);
+        System.out.println("nom de la room"+numRoomLabel.getText());
+        int i=0;
+      //for (int i = 0; i < aroom.size(); i++) {
+      while(i<aroom.size()){
+          System.out.println("array list: "+aroom.get(i));
+                      
+	m.addRow(new Object[]{aroom.get(i), aroom.get(i+1), aroom.get(i+2)});
+                        System.out.println("j'en suis a l'index : "+i);
+                        i=i+3;
         }
     }
         public void erasetab(DefaultTableModel m) {
@@ -134,6 +129,7 @@ public class Chatroom extends javax.swing.JFrame {
             m.removeRow(i);
         }
     }
+    
     public void setR(Room r) {
         this.r = r;
     }
@@ -196,7 +192,7 @@ public class Chatroom extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Pseudo", "Statut"
+                "Pseudo", "Statut", "Type droit"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
@@ -222,9 +218,8 @@ public class Chatroom extends javax.swing.JFrame {
                         .addComponent(refreshButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 524, Short.MAX_VALUE)
                         .addComponent(envoyerButton))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
-                        .addComponent(envoyerTF)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
+                    .addComponent(envoyerTF))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

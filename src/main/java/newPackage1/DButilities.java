@@ -185,7 +185,7 @@ static void putRoomtoSalon(Salon s) {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select Nom, Descrptif from room";
+            String sql = "Select nom,descrptif from room";
 
             System.err.println(sql);
 
@@ -665,7 +665,68 @@ static HashMap<String, String> AfficherUtilisateur() {
             return map;
         }
     }
+static void RoomPublic(String nr, int yn){
+	if(yn==1){
+		        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+           // Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql= "UPDATE room SET isRprive = 1 WHERE Nom='" + nr + "'";
+            Statement stmt = null;
+            stmt = con.createStatement();
+            int statut = stmt.executeUpdate(sql);
+            if (statut == 1) {
+                System.err.println("la requete a fonctionner");
+            } else {
+                System.err.println("erreur insert ");
+            }
+            con.close();
+			
+				
+			} catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+			}  
+	}
+	
+    }
+static ArrayList<String> AfficherUtilisateurRoom(String nr) {
+        ArrayList<String> aroom= new ArrayList<>();
+         //String aafficher = null;
+         //String virgule=",";
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "Select a.Pseudo, u.statut, a.type_droit from users as u, acceder as a, room as r where a.Nom=r.Nom AND a.Pseudo=u.Pseudo AND a.Nom=(SELECT nom from room where Nom='"+ nr +"')";
 
+            System.err.println(sql);
+
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
+
+            while (result.next()) {
+                 String pseudo = result.getString( "a.Pseudo" );
+
+                 String Statut = result.getString( "u.statut" );
+				 
+		 String Type_droit =result.getString("a.type_droit");
+
+                System.out.println(pseudo+" "+Statut+ " "+Type_droit);
+                //aafficher=pseudo.concat(virgule).concat(Statut).concat(virgule).concat(Type_droit);
+           aroom.add(pseudo);
+           aroom.add(Statut);
+           aroom.add(Type_droit);
+                }
+            //return aafficher;
+            return aroom;
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+            //return aafficher;
+            return aroom;
+        }
+    }
 
 static ArrayList<String> getDbPseudo()
 {
