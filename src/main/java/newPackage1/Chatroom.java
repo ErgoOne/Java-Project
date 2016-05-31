@@ -92,7 +92,7 @@ public class Chatroom extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                     affotherstext();
-                   /* refreshUImessage();*/
+                    refreshUImessage();
              
            }
         });
