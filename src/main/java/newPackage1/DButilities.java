@@ -750,4 +750,69 @@ static ArrayList<String> getDbPseudo()
         }
             
 }
+
+static ArrayList<String> getmyrooms(){
+ArrayList<String> a = new ArrayList<>();
+     try {Class.forName("com.mysql.jdbc.Driver");
+     String sql = "SELECT c.nom, r.descrptif  FROM creerroom as c, room as r WHERE Pseudo='"+Principale.u.getPseudo()+"' and c.nom=r.nom";
+         System.out.println("newPackage1.DButilities.getmyrooms() : SELECT : "+sql);
+      PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
+            while (result.next()) {
+                 String nom = result.getString("nom");
+                 String desc = result.getString("descrptif");
+                 a.add(nom);
+                 a.add(desc);
+                }
+            System.out.println("newPackage1.DButilities.getmyrooms() JE SUIS DANS LE A = kkchs");
+            return a;
+      } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("newPackage1.DButilities.getmyrooms() JE SUIS DANS LE A = 0");
+            return a;
+}}
+
+static void suppmyroom(ArrayList<String> a)
+{
+    for (String nom : a) {
+		
+         try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+           // Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+           String sql1= "DELETE FROM creerroom where nom='"+nom+"'";
+             System.out.println("newPackage1.DButilities.suppmyroom() SQL : "+sql1);
+             Statement stmt1 = null;
+             stmt1 = con.createStatement();
+             int statut= stmt1.executeUpdate(sql1);
+             
+             if (statut==1){
+           String sql= "DELETE FROM room WHERE nom='"+nom+"'";
+             System.out.println("newPackage1.DButilities.suppmyroom() SQL2 : "+sql);
+            Statement stmt = null;
+            stmt = con.createStatement();
+             int s=stmt.executeUpdate(sql);
+            
+             if(s==1)
+             {
+               String sql3= "DELETE FROM acceder WHERE nom='"+nom+"'";
+             System.out.println("newPackage1.DButilities.suppmyroom() SQL2 : "+sql);
+            Statement stmt3 = null;
+            stmt3 = con.createStatement();
+           s=stmt3.executeUpdate(sql3);
+           
+           if (s==1){
+           String sql4= "DELETE FROM ecrit WHERE nom='"+nom+"'";
+             System.out.println("newPackage1.DButilities.suppmyroom() SQL2 : "+sql);
+            Statement stmt4 = null;
+            stmt4 = con.createStatement();
+           s=stmt4.executeUpdate(sql4);
+           }
+             }
+              }
+            } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);}
+	}
+}
 }

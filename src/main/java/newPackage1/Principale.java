@@ -127,6 +127,7 @@ public class Principale extends javax.swing.JFrame {
         pseudoTable = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
         mesSalonsButton = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         jLabel1.setText("Bienvenue sur le chat  STRI, veuillez rentrer votre identifiant.");
 
@@ -197,16 +198,22 @@ public class Principale extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 204));
 
+        nomLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nomLabel.setText("Nom :");
 
+        mailLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         mailLabel.setText("Mail :");
 
+        pseudoLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         pseudoLabel.setText("Pseudo :");
 
+        telLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         telLabel.setText("Tel :");
 
+        statutLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         statutLabel.setText("Statut :");
 
+        statutComboBox.setFont(new java.awt.Font("Tahoma", 3, 12)); // NOI18N
         statutComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "En ligne", "Occupé" }));
         statutComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -223,7 +230,7 @@ public class Principale extends javax.swing.JFrame {
         });
 
         deconnexionButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        deconnexionButton.setForeground(new java.awt.Color(204, 51, 0));
+        deconnexionButton.setForeground(new java.awt.Color(204, 0, 0));
         deconnexionButton.setText("Déconnexion");
         deconnexionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,14 +238,19 @@ public class Principale extends javax.swing.JFrame {
             }
         });
 
+        nomLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         nomLabel2.setText("jLabel4");
 
+        mailLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         mailLabel2.setText("jLabel5");
 
+        pseudoLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         pseudoLabel2.setText("jLabel6");
 
+        telLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         telLabel2.setText("jLabel7");
 
+        statutLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         statutLabel2.setText("jLabel8");
 
         listeSalonButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -270,6 +282,9 @@ public class Principale extends javax.swing.JFrame {
             }
         });
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setText("Vos informations");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -277,9 +292,6 @@ public class Principale extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -301,7 +313,12 @@ public class Principale extends javax.swing.JFrame {
                                 .addGap(48, 48, 48))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(pseudoLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(30, 30, 30)))))
+                                .addGap(30, 30, 30))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(creerSalonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -327,8 +344,10 @@ public class Principale extends javax.swing.JFrame {
                         .addComponent(listeSalonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(creerSalonButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(mesSalonsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(41, 41, 41)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -355,7 +374,7 @@ public class Principale extends javax.swing.JFrame {
                             .addComponent(statutComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(18, 18, 18)
                 .addComponent(deconnexionButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         pack();
@@ -487,6 +506,7 @@ try {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JButton listeSalonButton;

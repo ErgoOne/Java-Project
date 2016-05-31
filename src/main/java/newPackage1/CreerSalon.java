@@ -48,6 +48,7 @@ public class CreerSalon extends javax.swing.JFrame {
                         m.addRow(new Object[]{p});
                         
 		}
+       
     }
      
      public ArrayList<String> getchoixdroit(DefaultTableModel m) {
@@ -110,15 +111,20 @@ public class CreerSalon extends javax.swing.JFrame {
         titleLabel.setFont(new java.awt.Font("Times New Roman", 1, 22)); // NOI18N
         titleLabel.setText("Créer un salon ");
 
+        nomLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nomLabel.setText("Nom :");
 
+        descLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         descLabel.setText("Descriptif :");
 
+        nomTF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         nomTF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nomTFActionPerformed(evt);
             }
         });
+
+        descTF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
         creerButton.setText("Quitter");
         creerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +134,7 @@ public class CreerSalon extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(publicRB);
+        publicRB.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         publicRB.setText("Public");
         publicRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,6 +143,7 @@ public class CreerSalon extends javax.swing.JFrame {
         });
 
         buttonGroup1.add(privateRB);
+        privateRB.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         privateRB.setText("Privé");
         privateRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,10 +176,13 @@ public class CreerSalon extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(creerSalonTable);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setText("Type salon : ");
 
+        jLabel2.setFont(new java.awt.Font("Yu Gothic UI Light", 2, 12)); // NOI18N
         jLabel2.setText("Astuce => Pour restreindre l'accés à votre salon : ");
 
+        jLabel3.setFont(new java.awt.Font("Yu Gothic UI Light", 3, 12)); // NOI18N
         jLabel3.setText("Cliquez sur Privé !");
 
         creerButton1.setText("Créer");
@@ -185,15 +196,6 @@ public class CreerSalon extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(titleLabel)
-                        .addGap(260, 260, 260))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -218,11 +220,20 @@ public class CreerSalon extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel3)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                .addGap(276, 437, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(creerButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(titleLabel)
+                            .addGap(260, 260, 260))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(creerButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addContainerGap()))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,13 +256,12 @@ public class CreerSalon extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(creerButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
