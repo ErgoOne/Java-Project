@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import static newPackage1.DButilities.AfficherNvMess;
@@ -75,9 +76,19 @@ public class Chatroom extends javax.swing.JFrame {
 
   
     public Chatroom(String ro, String d) { // CONSTRUCTEUR
+       
         initComponents();
         this.roomname=ro;
         this.roomdesc=d;
+        String droit=null;
+        droit=DButilities.getDroitUR();
+        
+        if (droit.equals("r"))
+        {
+                envoyerTF.setVisible(false);
+                envoyerButton.setVisible(false);
+            
+        }
         
         //a= new ArrayList<>();
         
@@ -261,7 +272,8 @@ public class Chatroom extends javax.swing.JFrame {
     }//GEN-LAST:event_envoyerTFActionPerformed
 
     private void envoyerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_envoyerButtonActionPerformed
-   add(envoyerTF.getText());
+  
+        add(envoyerTF.getText());
    
     envoyerTF.setText("");
    
@@ -338,6 +350,7 @@ public class Chatroom extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Chatroom("ti","to").setVisible(true);
+                
             
             }
         });

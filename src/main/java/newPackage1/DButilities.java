@@ -132,14 +132,14 @@ public class DButilities {
         return tmp;
     }
 
-    static TypeDroit getDroitUR(User utilisateur, Room r) {
-        TypeDroit tmp = TypeDroit.none;
+    static String getDroitUR() {
+        //TypeDroit tmp = TypeDroit.none;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             //con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select type_droit from acceder where pseudo=? and nom=?";
+            String sql = "Select type_droit from acceder where pseudo=?";
 
             /*          + utilisateur.getPseudo()
                     + "' AND nom='" + r.getName()
@@ -148,8 +148,7 @@ public class DButilities {
             System.err.println(sql);
 
             PreparedStatement statement = con.prepareStatement(sql);
-            statement.setString(1, utilisateur.getPseudo());
-            statement.setString(2, r.getName());
+            statement.setString(1, Principale.u.getPseudo());
             /*execution of the database query*/
             ResultSet result = statement.executeQuery();
             //map mp
@@ -159,14 +158,11 @@ public class DButilities {
                 String res = result.getString("type_droit");
                 //tmp = TypeDroit.valueOf(res);
 
-                if ("none".equals(res)) {
-                    tmp = TypeDroit.none;
-                } else if ("rw".equals(res)) {
-                    tmp = TypeDroit.rw;
-                } else if ("admin".equals(res)) {
-                    tmp = TypeDroit.admin;
-                } else if ("r".equals(res)) {
-                    tmp = TypeDroit.r;
+                
+                if ("rw".equals(res)) {
+                    return "rw";
+                } else {
+                    return "r";
                 }
                 // u=new User(login,...)
                 // mp.put(pseudo,u)
@@ -174,21 +170,20 @@ public class DButilities {
 
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
-            tmp = TypeDroit.none;
+           return "Error";
         }
-
-        return tmp;
+        return "Error";
+        
     }
 static void putRoomtoSalon(Salon s) {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
+            String user=Principale.u.getPseudo();
             //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select nom,descrptif from room";
-
+            String sql = "Select DISTINCT r.Nom,r.Descrptif from room as r, acceder as a, users as u WheRE r.isRprive=0 OR(r.nom=a.nom AND u.pseudo='"+user+"' AND u.Pseudo=a.Pseudo)" ;
             System.err.println(sql);
-
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
             ResultSetMetaData resultMeta = result.getMetaData();
