@@ -185,7 +185,7 @@ static void putRoomtoSalon(Salon s) {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select * from room";
+            String sql = "Select Nom, Descrptif from room";
 
             System.err.println(sql);
 
@@ -208,29 +208,72 @@ static void putRoomtoSalon(Salon s) {
 
     }
     
-    static boolean CreerRoom(Room r2, User u) {
+    static boolean CreerRoom(Room r2, User u, ArrayList<String> a) {
         boolean isroomalreadypresent=false; 
+        int statut;
         try {
+            String sql;
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             System.out.println("RETURN"+isroomalreadypresent);
             //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
             String verif= "SELECT COUNT(*) AS count FROM room WHERE nom='"+r2.getName()+"'";
+            System.out.println("SELECT : "+verif);
             Statement s=con.createStatement();
             ResultSet result = s.executeQuery(verif);
             //ResultSetMetaData resultMeta = result.getMetaData();
             int i=1;
             while (result.next()){ // A RAJOUTER A CHAQUE FOIS AVEC LES CONT
-           i = result.getInt(1);}
+           i = result.getInt("count");}
+        // i= result.getInt("count");
             //retun= result.getInt(1);*/
             System.out.println("RETURN i "+i);
-            if(i!=0){
+            if(i==0){
                /* retun=1;*/
-            String sql = "INSERT INTO room VALUES ('" + r2.getName() + "', '" + r2.getDesc() + "')";
-            String sql2 = "INSERT INTO creerroom VALUES('" + u.getPseudo() + "', '" + r2.getName() + "')";
+               if(a.isEmpty()){
+            sql = "INSERT INTO room VALUES ('" + r2.getName() + "', '" + r2.getDesc() + "',0)";
             Statement stmt = null;
             stmt = con.createStatement();
-            int statut = stmt.executeUpdate(sql);
+            statut = stmt.executeUpdate(sql);
+            
+               }
+               else {
+                sql = "INSERT INTO room VALUES ('" + r2.getName() + "', '" + r2.getDesc() + "',1)";
+                     Statement stmt = null;
+            stmt = con.createStatement();
+            statut = stmt.executeUpdate(sql);
+            for(int x =0 ; x < a.size(); x++)
+            {   
+                String name=a.get(x);
+                String read=a.get(x+1);
+                String write=a.get(x+2);
+            if (read.equals("1") || write.equals("1"))
+            {
+                if (write.equals("1"))
+                {
+                    String sql3 = "INSERT INTO acceder VALUES('rw', '" + name + "','" + r2.getName() + "') ";
+                    
+                    Statement stmt1 = null;
+                    stmt1 = con.createStatement();
+                    stmt1.executeUpdate(sql3);
+                }
+                else {
+                    String sql3 = "INSERT INTO acceder VALUES('r', '" + name + "','" + r2.getName() + "') ";
+                    
+                    Statement stmt2 = null;
+                    stmt2 = con.createStatement();
+                    stmt2.executeUpdate(sql3);
+                
+                }
+            }
+                
+                x+=2;
+            }
+               }
+            String sql2 = "INSERT INTO creerroom VALUES('" + u.getPseudo() + "', '" + r2.getName() + "')";
+          
+            //String sql3 = "INSERT INTO acceder  ";
+         
 
             if (statut == 1) {
                 System.err.println("la requete a fonctionner");
@@ -253,20 +296,6 @@ static void putRoomtoSalon(Salon s) {
             isroomalreadypresent=true;
             return isroomalreadypresent;
             }
-            //PreparedStatement statement = con.prepareStatement(sql);
-            //statement.setString(1, r2.getName());
-            // statement.setString(2, d);
-
-            //ResultSet result = statement.executeQuery();
-            //ResultSetMetaData resultMeta = result.getMetaData();
-            /* 
-            PreparedStatement statement2 = con.prepareStatement(sql2);
-            statement2.setString(1, u.getPseudo());
-            statement2.setString(2, r.getName());
-     
-            ResultSet result2 = statement2.executeQuery();
-            //ResultSetMetaData resultMeta2 = result2.getMetaData();
-             */
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
 
@@ -379,7 +408,7 @@ static ArrayList<String> AfficherNvMess(String date, Room r) {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select msg, date_cre, Pseudo from ecrit where date_cre>'" + date + "' AND nom='"+r.getName()+"' ORDER BY date_cre";
+            String sql = "Select msg, date_cre, Pseudo from ecrit where date_cre>'" + date + "' AND nom='"+r.getName()+"' ORDER BY date_cre DESC";
 
             System.err.println(sql);
 
@@ -387,8 +416,9 @@ static ArrayList<String> AfficherNvMess(String date, Room r) {
             ResultSet result = statement.executeQuery();
             if (!result.next()){
                 System.err.println("je suis ici dans le if je return l 'array ");
-                return(AfficherttMess(r));
-                //return a;
+                //return(AfficherttMess(r)); JE VIENS DE MODIF
+                return a;
+                
             }else{
             ResultSetMetaData resultMeta = result.getMetaData();
 
@@ -480,12 +510,12 @@ static ArrayList<String> AfficherNvMess(String date, Room r) {
         return maxdate;
     }
 
-    static boolean creationRoom(Salon s, User u, String n, String desc) { // creation de java vers la base+salon
+    static boolean creationRoom(Salon s, User u, String n, String desc, ArrayList<String> a) { // creation de java vers la base+salon
         int count = s.rooms.size();
         boolean r = false;
         Room[] myArray = new Room[count + 1];
         myArray[count] = new Room(n, desc);
-        r=CreerRoom(myArray[count], u);
+        r=CreerRoom(myArray[count], u, a);
         s.addRoom(myArray[count]);
         return r;
     }
@@ -635,4 +665,33 @@ static HashMap<String, String> AfficherUtilisateur() {
             return map;
         }
     }
+
+
+static ArrayList<String> getDbPseudo()
+{
+    ArrayList<String> p =new ArrayList<>();
+     try {
+    Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "Select Pseudo from users";
+
+            System.err.println(sql);
+
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
+
+            while (result.next()) {
+                 String pseudo = result.getString( "Pseudo" );
+           
+            p.add(pseudo);
+                }
+            return p;
+              } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+            return p;
+        }
+            
+}
 }

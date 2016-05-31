@@ -29,6 +29,8 @@ public class Chatroom extends javax.swing.JFrame {
         String roomname=null;
         String roomdesc=null;
      //ArrayList<String> a;
+         //HashMap<String, String> h = new HashMap<>();
+        ArrayList<String> a = new ArrayList<>();
         private static Vector classes = new Vector();
      DefaultTableModel model1;
      DefaultListModel model;
@@ -92,7 +94,8 @@ public class Chatroom extends javax.swing.JFrame {
         System.out.println(" DESC : "+d+" ROOOMNAME : "+ro);
         this.r=Room.getInstance(ro, d);
         System.out.println("DATE : "+r.getLastDate());
-        firtaff(DButilities.AfficherttMess(r));
+        a=DButilities.AfficherttMess(r);
+        firtaff(a);
        Timer timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -296,9 +299,10 @@ public class Chatroom extends javax.swing.JFrame {
         }
     }
    public void affotherstext() {
-      ArrayList<String> a = new ArrayList<>();
-       a=AfficherNvMess(DButilities.getDerMsgDate(Principale.u,r),r);
-       if(!a.isEmpty()){
+      //ArrayList<String> a = new ArrayList<>();
+       //a=AfficherNvMess(DButilities.getDerMsgDate(Principale.u,r),r);
+       a=DButilities.AfficherttMess(r);// JAI RAJOUTe
+       if(!a.isEmpty()){    
        model.clear();
        
        for (String str : a) {

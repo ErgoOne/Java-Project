@@ -7,10 +7,13 @@ package newPackage1;
 
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import javafx.beans.binding.Bindings;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -23,34 +26,52 @@ public class CreerSalon extends javax.swing.JFrame {
 
     DefaultTableModel md; 
     public String statut;
+    public int ispublic=0;
     /**
      * Creates new form CreerSalon
      */
     public CreerSalon() {
         initComponents();
-         md = (DefaultTableModel) creerSalonTable.getModel();
-        getinfos(md);
+       
     }
 
     
     
      // A changer pour afficher les pseudos à la place des salons
      public void getinfos(DefaultTableModel m) {
-        HashMap<String, String> h = new HashMap<>();
+        //HashMap<String, String> h = new HashMap<>();
+        ArrayList<String> h = new ArrayList<>();
       //  putRoomtoSalon(Principale.sl);
-        h = Principale.sl.getSalon();
+        h = DButilities.getDbPseudo();
 
-        Set cles = h.keySet();
-        Iterator it = cles.iterator();
-        while (it.hasNext()) {
-            Object cle = it.next(); // tu peux typer plus finement ici
-            Object valeur = h.get(cle); // tu peux typer plus finement ici
-
-            m.addRow(new Object[]{cle, valeur});
-
-        }
+        for (String p : h) {
+                        m.addRow(new Object[]{p});
+                        
+		}
     }
      
+     public ArrayList<String> getchoixdroit(DefaultTableModel m) {
+         ArrayList<String> a = new ArrayList<>();
+         for(int row = 0;row < m.getRowCount();row++) {
+              a.add((String) m.getValueAt(row, 0));
+              Boolean isChecked = Boolean.valueOf(m.getValueAt(row, 1).toString());
+              Boolean isChecked2 = Boolean.valueOf(m.getValueAt(row, 2).toString());
+              if(isChecked){a.add("1");}
+              else {a.add("0");}
+              
+         if(isChecked2){a.add("1");}
+         else {a.add("0");}
+         }     
+         return a;
+     }
+     public void setfalse(DefaultTableModel m){
+     
+          for(int row = 0;row < m.getRowCount();row++) {
+          m.setValueAt(Boolean.FALSE, row, 1);
+          m.setValueAt(Boolean.FALSE, row, 2);
+          }
+          System.out.println("OK");
+     }
    
 
     
@@ -79,6 +100,9 @@ public class CreerSalon extends javax.swing.JFrame {
         privateRB = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         creerSalonTable = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -129,50 +153,71 @@ public class CreerSalon extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(creerSalonTable);
+
+        jLabel1.setText("Type salon : ");
+
+        jLabel2.setText("Astuce => Pour restreindre l'accés à votre salon : ");
+
+        jLabel3.setText("Cliquez sur Privé !");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(89, 89, 89)
+                        .addComponent(privateRB))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(nomLabel)
+                            .addComponent(descLabel))
+                        .addGap(30, 30, 30)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(publicRB)
-                            .addComponent(privateRB)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(nomLabel)
-                                    .addComponent(descLabel))
-                                .addGap(30, 30, 30)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(descTF, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                                        .addComponent(nomTF)))))))
-                .addGap(33, 33, 33)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(descTF, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                .addComponent(nomTF))
+                            .addComponent(publicRB)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 85, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(creerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(titleLabel)
+                        .addGap(260, 260, 260))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(82, 82, 82)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(nomLabel)
                             .addComponent(nomTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -181,12 +226,21 @@ public class CreerSalon extends javax.swing.JFrame {
                             .addComponent(descLabel)
                             .addComponent(descTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
-                        .addComponent(publicRB)
-                        .addGap(26, 26, 26)
-                        .addComponent(privateRB)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(publicRB)
+                            .addComponent(privateRB)
+                            .addComponent(jLabel1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -198,12 +252,17 @@ public class CreerSalon extends javax.swing.JFrame {
 
     private void creerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButtonActionPerformed
         // TODO add your handling code here:
+       ArrayList<String> a = new ArrayList<>();
        boolean ispresent=false;
        if (nomTF.getText().isEmpty()) {JOptionPane.showMessageDialog(null, "Le champ room ne doit pas être vide !", "Alert", JOptionPane.ERROR_MESSAGE);
         super.dispose();}
        else {
-        ispresent = DButilities.creationRoom(Principale.sl,Principale.u ,nomTF.getText(),descTF.getText());
-        if(!ispresent){
+           if(ispublic==0)
+           {
+        a=getchoixdroit(md);
+           }
+        ispresent = DButilities.creationRoom(Principale.sl,Principale.u ,nomTF.getText(),descTF.getText(), a);
+        if(ispresent){
         JOptionPane.showMessageDialog(null, "Le nom de la room existe dejà !", "Alert", JOptionPane.ERROR_MESSAGE);
         super.dispose();
         }
@@ -216,13 +275,26 @@ public class CreerSalon extends javax.swing.JFrame {
     }//GEN-LAST:event_creerButtonActionPerformed
 
     private void publicRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publicRBActionPerformed
-      
+    creerSalonTable.setVisible(false);
+    ispublic=1;
     }//GEN-LAST:event_publicRBActionPerformed
 
     private void privateRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_privateRBActionPerformed
-   
+
+        creerSalonTable.setVisible(true);
+        md = (DefaultTableModel) creerSalonTable.getModel();
+        erasetab(md);
+       
+        getinfos(md);
+         setfalse(md);
     }//GEN-LAST:event_privateRBActionPerformed
 
+    public void erasetab(DefaultTableModel m) {
+        int rowCount = m.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            m.removeRow(i);
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -264,6 +336,9 @@ public class CreerSalon extends javax.swing.JFrame {
     private javax.swing.JTable creerSalonTable;
     private javax.swing.JLabel descLabel;
     private javax.swing.JTextField descTF;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nomLabel;
     private javax.swing.JTextField nomTF;
