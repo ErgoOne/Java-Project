@@ -635,4 +635,28 @@ static HashMap<String, String> AfficherUtilisateur() {
             return map;
         }
     }
+static void RoomPublic(String nr, int yn){
+	if(yn==1){
+		        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+           // Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql= "UPDATE room SET isRoomPublic = 1 WHERE Nom='" + nr + "'";
+            Statement stmt = null;
+            stmt = con.createStatement();
+            int statut = stmt.executeUpdate(sql);
+            if (statut == 1) {
+                System.err.println("la requete a fonctionner");
+            } else {
+                System.err.println("erreur insert ");
+            }
+            con.close();
+			
+				
+			} catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+			}  
+	}
+	
+    }
 }
