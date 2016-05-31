@@ -91,6 +91,7 @@ public class Chatroom extends javax.swing.JFrame {
         getinfos(model1);
         System.out.println(" DESC : "+d+" ROOOMNAME : "+ro);
         this.r=Room.getInstance(ro, d);
+        System.out.println("DATE : "+r.getLastDate());
         firtaff(DButilities.AfficherttMess(r));
        Timer timer = new Timer(3000, new ActionListener() {
             @Override
@@ -308,12 +309,13 @@ public class Chatroom extends javax.swing.JFrame {
    public void affotherstext() {
       ArrayList<String> a = new ArrayList<>();
        a=AfficherNvMess(DButilities.getDerMsgDate(Principale.u,r),r);
-       this.model.clear();
+       if(!a.isEmpty()){
+       model.clear();
        
        for (String str : a) {
 			  model.addElement(str);
 		}
-        affichageJL.ensureIndexIsVisible(model.size()-1);
+        affichageJL.ensureIndexIsVisible(model.size()-1);}
    }
     /**
      * @param args the command line arguments
