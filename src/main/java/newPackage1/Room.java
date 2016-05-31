@@ -5,6 +5,7 @@
  */
 package newPackage1;
 
+import java.sql.Connection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Vector;
@@ -17,11 +18,14 @@ import static newPackage1.DButilities.getDateMsg;
 public class Room {
     private String lastmsgDate;//TO DO implement function to verify our last date with the server
     HashMap<User, Mesg> chat=new HashMap<>();// Les auteurs et msg dans la room
-    
+     private static Vector classes = new Vector();
+    static Connection con;
     
     
     public void addMesg(User u, Mesg m)
     {
+        
+
         String date;
         chat.put(u, m);
         date=getDateMsg(m);
@@ -59,6 +63,7 @@ public class Room {
     
     public Room (String n, String d)
     {
+
         this.nom=n;
          this.desc=d;
     }
@@ -78,8 +83,10 @@ public class Room {
         System.out.println("\nROOM : "+getNom()+" "+getDesc()+"");
     }
    
-   private static Vector classes = new Vector();
+  
    	public static Room getInstance(String attribut1, String attribut2) {
+            
+                System.out.println("ATTT 1 /" +attribut1 +" ATTT 2 / "+attribut2);
 		Room tmp = new Room(attribut1, attribut2);
 		if (classes.contains(tmp)) {
 			// on doit retrouver l'element

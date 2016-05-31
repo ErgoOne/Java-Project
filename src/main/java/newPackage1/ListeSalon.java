@@ -9,9 +9,14 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
@@ -26,25 +31,35 @@ import static newPackage1.DButilities.putRoomtoSalon;
 public class ListeSalon extends javax.swing.JFrame {
 
     DefaultTableModel model;
-
+    ArrayList<Chatroom> cr = new ArrayList<>();
+     //Chatroom room;
+   // Chatroom  room;
     /**
      * Creates new form ListeSalon
+     * @throws java.sql.SQLException
      */
+    
+    
     public ListeSalon() {
         initComponents();
         model = (DefaultTableModel) jTableSalon.getModel();
         getinfos(model);
+       
         Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                refreshUImessage();
+
+                    refreshUImessage();
+
             }
         });
 
         timer.start();
     }
 
-    private void refreshUImessage() {
+
+
+    private void refreshUImessage(){
         erasetab(model);
         getinfos(model);
     }
@@ -64,7 +79,7 @@ public class ListeSalon extends javax.swing.JFrame {
 
         }
     }
-   Chatroom  room = new Chatroom();
+   
   
 //Remove rows one by one from the end of the table
     public void erasetab(DefaultTableModel m) {
@@ -176,22 +191,36 @@ public class ListeSalon extends javax.swing.JFrame {
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        refreshUImessage();
+             refreshUImessage();
+        
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void jTableSalonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSalonMouseClicked
+        int count = cr.size();
+        boolean r = false;
+        Chatroom [] myArray = new Chatroom[count + 1];
+        
         int index = jTableSalon.getSelectedRow();
         TableModel model= jTableSalon.getModel();
         
        
         String numroom = model.getValueAt(index, 0).toString();
         String desc = model.getValueAt(index, 1).toString();
-        room.setVisible(true);
-        room.pack();
-        room.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        myArray[count] = new Chatroom(numroom, desc);
+        cr.add(myArray[count]);
+        System.out.println("DESSSSCCCC : "+desc);
         
-        //a changer
-        room.numRoomLabel.setText(numroom);
+        
+        //room.pack();
+        Chatroom ret = (Chatroom.getInstance(numroom, desc));
+        ret.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        //room.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        ret.setVisible(true);
+        ret.numRoomLabel.setText(numroom);
+       ret.descri.setText(desc);
+        //room.setRoomname(numroom);
+        //room.setDesc(desc);
+        
      
         
         
@@ -229,7 +258,9 @@ public class ListeSalon extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListeSalon().setVisible(true);
+      
+                    new ListeSalon().setVisible(true);
+            
                 
 
             }
