@@ -28,6 +28,7 @@ public class Chatroom extends javax.swing.JFrame {
     Room r;
         String roomname=null;
         String roomdesc=null;
+        //HashMap<String, String> h = new HashMap<>();
      //ArrayList<String> a;
         private static Vector classes = new Vector();
      DefaultTableModel model1;
@@ -111,8 +112,9 @@ public class Chatroom extends javax.swing.JFrame {
     }
     
    public void getinfos(DefaultTableModel m) {
-        HashMap<String, String> h = new HashMap<>();
+        //HashMap<String, String> h = new HashMap<>(); Cree au lancement
         //putRoomtoSalon(Principale.sl);
+        HashMap<String, String> h = new HashMap<>();
         h =DButilities.AfficherUtilisateur();
 
         Set cles = h.keySet();
@@ -213,16 +215,15 @@ public class Chatroom extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(42, 42, 42)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(40, 40, 40)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(refreshButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 524, Short.MAX_VALUE)
                         .addComponent(envoyerButton))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
-                        .addComponent(envoyerTF)))
-                .addContainerGap(52, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
+                    .addComponent(envoyerTF))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
