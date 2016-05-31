@@ -102,7 +102,7 @@ public class Chatroom extends javax.swing.JFrame {
         System.out.println("DATE : "+r.getLastDate());
         a=DButilities.AfficherttMess(r);
         firtaff(a);
-       Timer timer = new Timer(3000, new ActionListener() {
+       Timer timer = new Timer(1000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                     affotherstext();
