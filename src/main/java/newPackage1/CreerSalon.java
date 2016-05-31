@@ -103,6 +103,7 @@ public class CreerSalon extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        creerButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -119,7 +120,7 @@ public class CreerSalon extends javax.swing.JFrame {
             }
         });
 
-        creerButton.setText("Créer");
+        creerButton.setText("Quitter");
         creerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 creerButtonActionPerformed(evt);
@@ -173,11 +174,27 @@ public class CreerSalon extends javax.swing.JFrame {
 
         jLabel3.setText("Cliquez sur Privé !");
 
+        creerButton1.setText("Créer");
+        creerButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                creerButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(titleLabel)
+                        .addGap(260, 260, 260))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -202,15 +219,10 @@ public class CreerSalon extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jLabel3)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(creerButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(titleLabel)
-                        .addGap(260, 260, 260))))
+                    .addComponent(creerButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,11 +251,15 @@ public class CreerSalon extends javax.swing.JFrame {
                         .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 380, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(creerButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(721, 496));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void nomTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomTFActionPerformed
@@ -251,7 +267,25 @@ public class CreerSalon extends javax.swing.JFrame {
     }//GEN-LAST:event_nomTFActionPerformed
 
     private void creerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButtonActionPerformed
-        // TODO add your handling code here:
+     super.dispose();
+    }//GEN-LAST:event_creerButtonActionPerformed
+
+    private void publicRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publicRBActionPerformed
+    creerSalonTable.setVisible(false);
+    ispublic=1;
+    }//GEN-LAST:event_publicRBActionPerformed
+
+    private void privateRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_privateRBActionPerformed
+
+        creerSalonTable.setVisible(true);
+        md = (DefaultTableModel) creerSalonTable.getModel();
+        erasetab(md);
+       
+        getinfos(md);
+         setfalse(md);
+    }//GEN-LAST:event_privateRBActionPerformed
+
+    private void creerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButton1ActionPerformed
        ArrayList<String> a = new ArrayList<>();
        boolean ispresent=false;
        if (nomTF.getText().isEmpty()) {JOptionPane.showMessageDialog(null, "Le champ room ne doit pas être vide !", "Alert", JOptionPane.ERROR_MESSAGE);
@@ -272,22 +306,7 @@ public class CreerSalon extends javax.swing.JFrame {
         }}
        
        
-    }//GEN-LAST:event_creerButtonActionPerformed
-
-    private void publicRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publicRBActionPerformed
-    creerSalonTable.setVisible(false);
-    ispublic=1;
-    }//GEN-LAST:event_publicRBActionPerformed
-
-    private void privateRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_privateRBActionPerformed
-
-        creerSalonTable.setVisible(true);
-        md = (DefaultTableModel) creerSalonTable.getModel();
-        erasetab(md);
-       
-        getinfos(md);
-         setfalse(md);
-    }//GEN-LAST:event_privateRBActionPerformed
+    }//GEN-LAST:event_creerButton1ActionPerformed
 
     public void erasetab(DefaultTableModel m) {
         int rowCount = m.getRowCount();
@@ -333,6 +352,7 @@ public class CreerSalon extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton creerButton;
+    private javax.swing.JButton creerButton1;
     private javax.swing.JTable creerSalonTable;
     private javax.swing.JLabel descLabel;
     private javax.swing.JTextField descTF;
