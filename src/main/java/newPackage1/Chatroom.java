@@ -8,12 +8,14 @@ package newPackage1;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import static java.util.Collections.list;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import static newPackage1.DButilities.AfficherNvMess;
@@ -29,7 +31,7 @@ public class Chatroom extends javax.swing.JFrame {
      //ArrayList<String> a;
         private static Vector classes = new Vector();
      DefaultTableModel model1;
-     DefaultListModel model= new DefaultListModel();
+     DefaultListModel model;
 
      public static Chatroom getInstance(String attribut1, String attribut2) {
             
@@ -75,20 +77,21 @@ public class Chatroom extends javax.swing.JFrame {
     }
 
   
-    public Chatroom(String ro, String d) {
+    public Chatroom(String ro, String d) { // CONSTRUCTEUR
         initComponents();
         this.roomname=ro;
         this.roomdesc=d;
         
         //a= new ArrayList<>();
         
-  
+        model = new DefaultListModel();
+        affichageJL.setModel(model);
         //descri.getCon
         model1 = (DefaultTableModel) jTable1.getModel();
         getinfos(model1);
         System.out.println(" DESC : "+d+" ROOOMNAME : "+ro);
         this.r=Room.getInstance(ro, d);
-        DButilities.AfficherttMess(r);
+        firtaff(DButilities.AfficherttMess(r));
        Timer timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -212,40 +215,46 @@ public class Chatroom extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(62, 62, 62)
+                        .addComponent(descri, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(numRoomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(46, 46, 46)
+                        .addGap(25, 25, 25)
+                        .addComponent(numRoomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(refreshButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 524, Short.MAX_VALUE)
                         .addComponent(envoyerButton))
-                    .addComponent(envoyerTF, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
+                        .addComponent(envoyerTF)))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(numRoomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(descri, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(numRoomLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 328, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(envoyerTF, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(descri, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(envoyerTF, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(envoyerButton)
-                    .addComponent(refreshButton))
-                .addContainerGap(197, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(refreshButton)
+                            .addComponent(envoyerButton))
+                        .addGap(93, 93, 93))))
         );
 
         pack();
@@ -254,7 +263,7 @@ public class Chatroom extends javax.swing.JFrame {
     
     
     private void add(String s){
-        affichageJL.setModel(model);
+        //affichageJL.setModel(model);
         //model.addElement("TOTO");
         afftext(s);
         
@@ -277,9 +286,11 @@ public class Chatroom extends javax.swing.JFrame {
     }//GEN-LAST:event_affichageJLValueChanged
 
     private void firtaff(ArrayList<String> a){
+        model.clear();
      for (String str : a) {
 			  model.addElement(str);
 		}
+     affichageJL.ensureIndexIsVisible(model.size()-1);
     }
     
     private void afftext(String s){
@@ -299,10 +310,10 @@ public class Chatroom extends javax.swing.JFrame {
        a=AfficherNvMess(DButilities.getDerMsgDate(Principale.u,r),r);
        this.model.clear();
        
-       
        for (String str : a) {
 			  model.addElement(str);
 		}
+        affichageJL.ensureIndexIsVisible(model.size()-1);
    }
     /**
      * @param args the command line arguments
