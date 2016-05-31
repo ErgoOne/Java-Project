@@ -196,7 +196,7 @@ public class ListeSalon extends javax.swing.JFrame {
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void jTableSalonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSalonMouseClicked
-        int count = cr.size();
+       int count = cr.size();
         boolean r = false;
         Chatroom [] myArray = new Chatroom[count + 1];
         

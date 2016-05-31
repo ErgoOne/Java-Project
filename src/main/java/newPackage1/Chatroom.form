@@ -33,7 +33,7 @@
                       <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       <Component id="numRoomLabel" min="-2" pref="165" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="232" max="-2" attributes="0"/>
                   </Group>
@@ -45,12 +45,10 @@
                       <EmptySpace pref="524" max="32767" attributes="0"/>
                       <Component id="envoyerButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jScrollPane1" pref="676" max="32767" attributes="0"/>
-                      <Component id="envoyerTF" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="jScrollPane1" pref="676" max="32767" attributes="0"/>
+                  <Component id="envoyerTF" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace pref="52" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,16 +57,12 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="numRoomLabel" min="-2" pref="40" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Component id="descri" min="-2" pref="41" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="231" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="jScrollPane1" pref="328" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" pref="261" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="envoyerTF" min="-2" pref="66" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -76,9 +70,10 @@
                           <Component id="refreshButton" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="envoyerButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

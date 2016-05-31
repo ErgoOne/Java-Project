@@ -7,7 +7,11 @@ package newPackage1;
 
 import java.awt.Toolkit;
 import java.awt.event.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -17,12 +21,37 @@ import javax.swing.JOptionPane;
  */
 public class CreerSalon extends javax.swing.JFrame {
 
+    DefaultTableModel md; 
+    public String statut;
     /**
      * Creates new form CreerSalon
      */
     public CreerSalon() {
         initComponents();
+         md = (DefaultTableModel) creerSalonTable.getModel();
+        getinfos(md);
     }
+
+    
+    
+     // A changer pour afficher les pseudos à la place des salons
+     public void getinfos(DefaultTableModel m) {
+        HashMap<String, String> h = new HashMap<>();
+      //  putRoomtoSalon(Principale.sl);
+        h = Principale.sl.getSalon();
+
+        Set cles = h.keySet();
+        Iterator it = cles.iterator();
+        while (it.hasNext()) {
+            Object cle = it.next(); // tu peux typer plus finement ici
+            Object valeur = h.get(cle); // tu peux typer plus finement ici
+
+            m.addRow(new Object[]{cle, valeur});
+
+        }
+    }
+     
+   
 
     
     public void close(){
@@ -39,12 +68,17 @@ public class CreerSalon extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         titleLabel = new javax.swing.JLabel();
         nomLabel = new javax.swing.JLabel();
         descLabel = new javax.swing.JLabel();
         nomTF = new javax.swing.JTextField();
         descTF = new javax.swing.JTextField();
         creerButton = new javax.swing.JButton();
+        publicRB = new javax.swing.JRadioButton();
+        privateRB = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        creerSalonTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -68,44 +102,91 @@ public class CreerSalon extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(publicRB);
+        publicRB.setText("Public");
+        publicRB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                publicRBActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(privateRB);
+        privateRB.setText("Privé");
+        privateRB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                privateRBActionPerformed(evt);
+            }
+        });
+
+        creerSalonTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Pseudo", "Read", "Write"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(creerSalonTable);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(15, 15, 15)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(nomLabel)
-                                .addComponent(descLabel))
-                            .addGap(30, 30, 30)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(descTF, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
-                                .addComponent(nomTF)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(40, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(publicRB)
+                            .addComponent(privateRB)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(nomLabel)
+                                    .addComponent(descLabel))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(descTF, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                        .addComponent(nomTF)))))))
+                .addGap(33, 33, 33)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 85, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nomLabel)
-                    .addComponent(nomTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(descLabel)
-                    .addComponent(descTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nomLabel)
+                            .addComponent(nomTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(descLabel)
+                            .addComponent(descTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(publicRB)
+                        .addGap(26, 26, 26)
+                        .addComponent(privateRB)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         pack();
@@ -133,6 +214,14 @@ public class CreerSalon extends javax.swing.JFrame {
        
        
     }//GEN-LAST:event_creerButtonActionPerformed
+
+    private void publicRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publicRBActionPerformed
+      
+    }//GEN-LAST:event_publicRBActionPerformed
+
+    private void privateRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_privateRBActionPerformed
+   
+    }//GEN-LAST:event_privateRBActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,11 +259,16 @@ public class CreerSalon extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton creerButton;
+    private javax.swing.JTable creerSalonTable;
     private javax.swing.JLabel descLabel;
     private javax.swing.JTextField descTF;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nomLabel;
     private javax.swing.JTextField nomTF;
+    private javax.swing.JRadioButton privateRB;
+    private javax.swing.JRadioButton publicRB;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
