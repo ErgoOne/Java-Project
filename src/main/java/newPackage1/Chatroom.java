@@ -28,6 +28,7 @@ public class Chatroom extends javax.swing.JFrame {
     Room r;
         String roomname=null;
         String roomdesc=null;
+        //HashMap<String, String> h = new HashMap<>();
      //ArrayList<String> a;
         private static Vector classes = new Vector();
      DefaultTableModel model1;
@@ -111,8 +112,9 @@ public class Chatroom extends javax.swing.JFrame {
     }
     
    public void getinfos(DefaultTableModel m) {
-        HashMap<String, String> h = new HashMap<>();
+        //HashMap<String, String> h = new HashMap<>(); Cree au lancement
         //putRoomtoSalon(Principale.sl);
+        HashMap<String, String> h = new HashMap<>();
         h =DButilities.AfficherUtilisateur();
 
         Set cles = h.keySet();
@@ -220,12 +222,7 @@ public class Chatroom extends javax.swing.JFrame {
                         .addComponent(envoyerButton))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 676, Short.MAX_VALUE)
                     .addComponent(envoyerTF))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jTable1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
