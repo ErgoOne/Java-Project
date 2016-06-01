@@ -24,40 +24,42 @@ import static newPackage1.DButilities.AfficherNvMess;
  *
  * @author Badr
  */
+
+//Room pour échanger des messages
 public class Chatroom extends javax.swing.JFrame {
     Room r;
-        String roomname=null;
-        String roomdesc=null;
+        String roomname=null; //nom de la room    
+        String roomdesc=null; //Description de la room
         int i=0;
-     //ArrayList<String> a;
-         //HashMap<String, String> h = new HashMap<>();
-        ArrayList<String> a = new ArrayList<>();
-        private static Vector classes = new Vector();
-    DefaultTableModel model1;
-     DefaultListModel model;
+        ArrayList<String> a = new ArrayList<>(); //Tableau servant pour afficher les pseudo,statut,droit des utilisateurs admis dans la room
+        private static Vector classes = new Vector(); //declaration d'un vecteur
+        DefaultTableModel model1; //declaration de la table graphique
+        DefaultListModel model; //declaration de la lise graphique
 
-     public static Chatroom getInstance(String attribut1, String attribut2) {
+     //Methode recherchant une instance d'objet chatroom en particulier en fonction de deux attributs ici le nom et la description
+    public static Chatroom getInstance(String attribut1, String attribut2) { 
             
-                System.out.println("ATTT 1 /" +attribut1 +" ATTT 2 / "+attribut2);
-		Chatroom tmp = new Chatroom(attribut1, attribut2);
-		if (classes.contains(tmp)) {
+		Chatroom tmp = new Chatroom(attribut1, attribut2); //declare une chatroom temporaire avec les attributs en paramètre
+		if (classes.contains(tmp)) { //lorsque le vecteur contient la nv instance
 			// on doit retrouver l'element
-			Enumeration enume = classes.elements();
-			while (enume.hasMoreElements()) {
-				Chatroom element = (Chatroom) enume.nextElement();
-				if (element.equals(tmp)) {
-					return element;
+			Enumeration enume = classes.elements(); //on enumere les éléments du vecteur
+			while (enume.hasMoreElements()) { //tant qu'il reste des éléments à comparer
+				Chatroom element = (Chatroom) enume.nextElement();  //on prend les elements de chaque instance de chatroom crée
+				if (element.equals(tmp)) { //si une est egale a notre chatroom temporaire
+					return element; //on retourne cet élément
 				}
 			}
 		}
-		else {
+		else { //on place la chatroom temporaire dans le vecteur si elle n'y est pas deja
 			classes.add(tmp);
-			return tmp;
+			return tmp; //retourne la chatroom temporaire
 		}
                                 // si on arrive là, c'est qu'il y à un problème
                                 return null;
 	}
-    public void setRoomname(String roomname) {
+    
+// A suivre: les getteur et setteur de la classe chatroom
+    public void setRoomname(String roomname) { 
         this.roomname = roomname;
     }
 
@@ -69,110 +71,125 @@ public class Chatroom extends javax.swing.JFrame {
         this.roomdesc = roomdesc;
     }
 
-    /**
-     * Creates new form chatroom
-     */
-
-
-
     public String getRoomname() {
         return roomname;
     }
 
-  
-    public Chatroom(String ro, String d) { // CONSTRUCTEUR
+    public Chatroom(String ro, String d) { // CONSTRUCTEUR (nom + description)
        
-        initComponents();
+        initComponents(); //initialisation de la frame
+        //initialisation des variables utilisées
         i=0;
         this.roomname=ro;
         this.roomdesc=d;
         String droit=null;
+        //on recupere les droit en fonction du nom de la chatroom
         droit=DButilities.getDroitUR(roomname);
-        System.out.println("DROIT DROIT "+droit);
+
+        //si le droit de l'utilisateur est read les champ envoyer et texte ne sont pas affiché
         if (droit.equals("r"))
-        {
+                {
                 envoyerTF.setVisible(false);
                 envoyerButton.setVisible(false);
             
-        }
+              }
         
-        //a= new ArrayList<>();
         
         model = new DefaultListModel();
         affichageJL.setModel(model);
-        //descri.getCon
-       model1 = (DefaultTableModel) jTable1.getModel();
-       i=DButilities.ispublique(roomname);
-      if(i==1){
-        getinfos(model1, ro);
-       }
-       else {
+     
+        model1 = (DefaultTableModel) jTable1.getModel();
+        
+        //on cherhce si la room est publique ou non 
+        i=DButilities.ispublique(roomname);
+        
+        if(i==1){
+            //si room privé on envoie les room en parametre pour afficher les informations correspondante
+             getinfos(model1, ro);
+            }
+        else {
+            //on envoie juste le model a la methode qui affichera les infos de droit en dur
                getinfosS(model1);
                }
-        System.out.println(" DESC : "+d+" ROOOMNAME : "+ro);
+        
+        //recherche de l'instance en fonction de la room choisit ( nom + desc)
         this.r=Room.getInstance(ro, d);
-        System.out.println("DATE : "+r.getLastDate());
+        
+        //on place dans l'array list les messages en fonction de la room
         a=DButilities.AfficherttMess(r);
+        
+        //appelle a la fonction d'affichage
         firtaff(a);
-       Timer timer = new Timer(2000, new ActionListener() {
-            @Override
+        
+        //utilisation d'un timer pour un refresh toute les 2 secondes sur les informations affichées
+        Timer timer = new Timer(2000, new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                     affotherstext();
-                    refreshUImessage(i);
-             
-           }
+                    refreshUImessage(i);     
+                    }
         });
 
         timer.start();
     }
-public void getinfosS(DefaultTableModel m) {
+    
+    //Methode d'affichage pour la tableModel correspondant a une room publique 
+    public void getinfosS(DefaultTableModel m) {
+        //on utilise ici une HashMap
         HashMap<String, String> h = new HashMap<>();
-        //putRoomtoSalon(Principale.sl);
         h =DButilities.AfficherUtilisateur();
 
         Set cles = h.keySet();
         Iterator it = cles.iterator();
         while (it.hasNext()) {
-            Object cle = it.next(); // tu peux typer plus finement ici
-            String valeur = h.get(cle); // tu peux typer plus finement ici
+            Object cle = it.next(); 
+            String valeur = h.get(cle); 
+            //placement de valeur unique pour la troisieme colonne
             if(valeur.equals("off")){m.addRow(new Object[]{cle, "Hors Ligne", "Lecture - Ecriture"});}
             else if(valeur.equals("on")) {m.addRow(new Object[]{cle, "En Ligne","Lecture - Ecriture"});}
             else { m.addRow(new Object[]{cle, "Abscent","Lecture - Ecriture"}); }
 
         }
     }
+    //Methode utilisé par le Timer pour rafraichir les informations sur room publique et privé
     private void refreshUImessage(int i){
-   if(i==1){
-    erasetab(model1);
-    getinfos(model1, roomname);}
-   else {
-       erasetab(model1);
-      getinfosS(model1);
-   }
-    }
+        if(i==1){
+         erasetab(model1);
+         getinfos(model1, roomname);}
+        else {
+            erasetab(model1);
+           getinfosS(model1);
+             }
+        }
     
-   public void getinfos(DefaultTableModel m, String ro) {
+     //Methode d'affichage pour la tableModel correspondant a une room privé
+    public void getinfos(DefaultTableModel m, String ro) {
         ArrayList<String> aroom = new ArrayList<>();
-        //putRoomtoSalon(Principale.sl);
+        //affiche les infos utilisateurs qui ont acces a cette room
         aroom =DButilities.AfficherUtilisateurRoom(ro);
-        System.out.println("nom de la room"+numRoomLabel.getText());
         int i=0;
-      //for (int i = 0; i < aroom.size(); i++) {
-      String chg=null,chk=null;
-      while(i<aroom.size()){
-          System.out.println("array list: "+aroom.get(i));
-        if(aroom.get(i+1).equals("off")){chg = "Hors Ligne";}
-        else if(aroom.get(i+1).equals("on")) {chg = "En Ligne";;}
-            else { chg = "Abscent"; }
         
-        if(aroom.get(i+2).equals("rw")){chk = "Lecture / Ecriture";}
-        else {chk = "Lecture Seule";}
-	m.addRow(new Object[]{aroom.get(i), chg, chk});
-                        System.out.println("j'en suis a l'index : "+i);
+        String chg=null,chk=null;
+        while(i<aroom.size()){
+        //recupere les statut dans l'arraylist pour les afficher proprement
+        if(aroom.get(i+1).equals("off")){
+            chg = "Hors Ligne";
+        }
+            else if(aroom.get(i+1).equals("on")) {
+                chg = "En Ligne";
+            }
+                else { chg = "Abscent"; }
+        
+        if(aroom.get(i+2).equals("rw")){
+            chk = "Lecture / Ecriture";
+        }
+            else {chk = "Lecture Seule";}
+            m.addRow(new Object[]{aroom.get(i), chg, chk});
                         i=i+3;
         }
     }
-        public void erasetab(DefaultTableModel m) {
+
+    //utiliser pour le refresh
+    public void erasetab(DefaultTableModel m) {
         int rowCount = m.getRowCount();
         for (int i = rowCount - 1; i >= 0; i--) {
             m.removeRow(i);
@@ -337,13 +354,12 @@ public void getinfosS(DefaultTableModel m) {
     }// </editor-fold>//GEN-END:initComponents
 
     
-    
+    //on ajoute un message 
     private void add(String s){
-        //affichageJL.setModel(model);
-        //model.addElement("TOTO");
         afftext(s);
         
     }
+    
     private void envoyerTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_envoyerTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_envoyerTFActionPerformed
@@ -399,7 +415,8 @@ public void getinfosS(DefaultTableModel m) {
             envoyerTF.setText("");
          }
     }//GEN-LAST:event_envoyerTFKeyTyped
-
+    
+    //Premier affichage des messages de la chatroom (si le model est vide)
     private void firtaff(ArrayList<String> a){
         model.clear();
      for (String str : a) {
@@ -408,27 +425,23 @@ public void getinfosS(DefaultTableModel m) {
      affichageJL.ensureIndexIsVisible(model.size()-1);
     }
     
+    //Methode pour l'affichage et la creation dans java d'un nouveau message saisie dans la room
     private void afftext(String s){
  
         if(s != null && !s.isEmpty() && (s.trim().length() > 0)) 
         {
-            //String temp= ("MSG - "+DButilities.getdate()+" : "+Principale.u.getPseudo()+ " : "+s);
-        //envoyerTF.setText(temp);
-        //model.addElement(temp);
-        Mesg m = new Mesg(s);
-        m.setDate(DButilities.getdate());
-        DButilities.CreerMsg(m, Principale.u, r);
+            Mesg m = new Mesg(s);
+            m.setDate(DButilities.getdate());
+            DButilities.CreerMsg(m, Principale.u, r);
         }
     }
+    
+   //Afficher les messages
    public void affotherstext() {
-      //ArrayList<String> a = new ArrayList<>();
-       //a=AfficherNvMess(DButilities.getDerMsgDate(Principale.u,r),r);
-       a=DButilities.AfficherttMess(r);// JAI RAJOUTe
+  
+       a=DButilities.AfficherttMess(r);
        if(!a.isEmpty()){    
        model.clear();
-       //String sff="***************************************************************************************************************";
-       /*for (String str : a) {
-			  model.addElement(str);*/
 		}
        for (int i = 0; i < a.size(); i++) {
 			 model.addElement(a.get(i));
