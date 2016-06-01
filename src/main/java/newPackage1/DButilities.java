@@ -258,7 +258,6 @@ static void putRoomtoSalon(Salon s) {
             }
             r.setNom(aroom.get(0));
             r.setDesc(aroom.get(1));
-            r.Hello();
         } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
         }

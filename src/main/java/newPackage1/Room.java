@@ -15,10 +15,13 @@ import static newPackage1.DButilities.getDateMsg;
  *
  * @author Badr
  */
+
+//Informations à récuperer par le serveur pour le salon.
 public class Room {
-    private String lastmsgDate;//TO DO implement function to verify our last date with the server
+    
+    private String lastmsgDate;
     HashMap<User, Mesg> chat=new HashMap<>();// Les auteurs et msg dans la room
-     private static Vector classes = new Vector();
+    private static Vector classes = new Vector();
     static Connection con;
     
     
@@ -39,8 +42,6 @@ public class Room {
         else if(lastmsgDate==null){
                 lastmsgDate=date;
             }
-        
-        //TO DO function on dbutilities to add the msg to the DB
     }
 
     public void setLastmsgDate(String lastmsgDate) {
@@ -78,18 +79,12 @@ public class Room {
         return lastmsgDate;
     }
 
-   public void Hello()
-    {
-        System.out.println("\nROOM : "+getNom()+" "+getDesc()+"");
-    }
-   
+  
   
    	public static Room getInstance(String attribut1, String attribut2) {
             
-                System.out.println("ATTT 1 /" +attribut1 +" ATTT 2 / "+attribut2);
 		Room tmp = new Room(attribut1, attribut2);
 		if (classes.contains(tmp)) {
-			// on doit retrouver l'element
 			Enumeration enume = classes.elements();
 			while (enume.hasMoreElements()) {
 				Room element = (Room) enume.nextElement();
@@ -102,8 +97,7 @@ public class Room {
 			classes.add(tmp);
 			return tmp;
 		}
-                                // si on arrive là, c'est qu'il y à un problème
-                                return null;
+                    return null;
 	}
  
 

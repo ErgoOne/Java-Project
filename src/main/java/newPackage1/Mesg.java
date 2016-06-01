@@ -9,10 +9,14 @@ package newPackage1;
  *
  * @author Badr
  */
+
+/*C'est une classe message permettant de créer et attribuer à chaque objet message,
+  une date et un type string que nous pourrons utiliser dans une autre classe.*/
 public class Mesg {
     private String msg;
     private String date;
 
+    
     public Mesg(String msg) {
         this.msg = msg;
   
