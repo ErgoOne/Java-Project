@@ -80,7 +80,6 @@ public class CreerSalon extends javax.swing.JFrame {
           m.setValueAt(Boolean.FALSE, row, 1);
           m.setValueAt(Boolean.FALSE, row, 2);
           }
-          System.out.println("OK");
      }
    
     /**

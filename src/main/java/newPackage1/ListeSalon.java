@@ -32,76 +32,61 @@ public class ListeSalon extends javax.swing.JFrame {
 
     DefaultTableModel model;
     ArrayList<Chatroom> cr = new ArrayList<>();
-     //Chatroom room;
-   // Chatroom  room;
+     
     /**
      * Creates new form ListeSalon
      * @throws java.sql.SQLException
      */
     
-    
+    //Création de mon constructeur avec les composants 
     public ListeSalon() {
+        
         initComponents();
         model = (DefaultTableModel) jTableSalon.getModel();
-        erasetab(model);
+        erasetab(model); 
         getinfos(model);
        
+        // Rafraichissement automatique toutes les 3 secondes
         Timer timer = new Timer(3000, new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            
+        public void actionPerformed(ActionEvent e) {
 
                     refreshUImessage();
-                    System.out.println(" ALORS SA REFRESH ??? .actionPerformed()");
-
             }
         });
-
         timer.start();
     }
 
-
-
+    //Effacer la table et récuperer les informations. (refresh)
     private void refreshUImessage(){
         erasetab(model);
         getinfos(model);
     }
 
+    // Récupération des données de notre jTable.
     public void getinfos(DefaultTableModel m) {
         HashMap<String, String> h = new HashMap<>();
-       // String admin;
         putRoomtoSalon(Principale.sl);
         h = Principale.sl.getSalon();
-
         Set cles = h.keySet();
         Iterator it = cles.iterator();
-        //int i=0;
+ 
         while (it.hasNext()) {
-            Object cle = it.next(); // tu peux typer plus finement ici
-            Object valeur = h.get(cle); // tu peux typer plus finement ici
+            Object cle = it.next(); 
+            Object valeur = h.get(cle); 
 
-            m.addRow(new Object[]{cle, valeur, (DButilities.GetModerateur((String)cle))}); 
-            //System.out.println("XXXXX newPackage1.ListeSalon.getinfos() "+);
-            //m.setValueAt((DButilities.GetModerateur((String)cle)), i, 3);
-           // i++;
-            
+            m.addRow(new Object[]{cle, valeur, (DButilities.GetModerateur((String)cle))});             
         }
-        
-        
     }
    
   
-//Remove rows one by one from the end of the table
+    //Effacer les données de la table pour chaque ligne.
     public void erasetab(DefaultTableModel m) {
         int rowCount = m.getRowCount();
         for (int i = rowCount - 1; i >= 0; i--) {
             m.removeRow(i);
         }
-    }
-
-    public void close() {
-
-        WindowEvent winClosingEvent = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
     }
 
     /**
@@ -203,17 +188,15 @@ public class ListeSalon extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    // Bouton quitter.
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        // TODO add your handling code here:
         super.dispose();
     }//GEN-LAST:event_exitButtonActionPerformed
 
- 
+    //Table avec action sur clic de souris. Permet d'ouvrir un salon cliqué.
     private void jTableSalonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableSalonMouseClicked
-       int count = cr.size();
-        boolean r = false;
-        Chatroom [] myArray = new Chatroom[count + 1];
-        
+        int count = cr.size();
+        Chatroom [] myArray = new Chatroom[count + 1]; 
         int index = jTableSalon.getSelectedRow();
         TableModel model= jTableSalon.getModel();
         
@@ -221,29 +204,19 @@ public class ListeSalon extends javax.swing.JFrame {
         String numroom = model.getValueAt(index, 0).toString();
         String desc = model.getValueAt(index, 1).toString();
         myArray[count] = new Chatroom(numroom, desc);
-        cr.add(myArray[count]);
-        System.out.println("DESSSSCCCC : "+desc);
-        
-        
-        //room.pack();
+        cr.add(myArray[count]);    
         Chatroom ret = (Chatroom.getInstance(numroom, desc));
         ret.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        //room.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ret.setVisible(true);
         ret.numRoomLabel.setText(numroom);
-       ret.descri.setText(desc);
-        //room.setRoomname(numroom);
-        //room.setDesc(desc);
-        
-     
-        
-        
-    }//GEN-LAST:event_jTableSalonMouseClicked
+        ret.descri.setText(desc);
    
+    }//GEN-LAST:event_jTableSalonMouseClicked
 
     /**
      * @param args the command line arguments
      */
+    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -272,11 +245,7 @@ public class ListeSalon extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-      
-                    new ListeSalon().setVisible(true);
-            
-                
-
+              new ListeSalon().setVisible(true);
             }
         });
 
