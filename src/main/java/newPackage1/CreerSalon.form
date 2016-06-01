@@ -73,9 +73,9 @@
                           <EmptySpace min="-2" pref="260" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="creerButton1" min="-2" pref="74" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="creerButton" min="-2" pref="74" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="quitterButton" min="-2" pref="74" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -117,8 +117,8 @@
               </Group>
               <EmptySpace pref="50" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="quitterButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="creerButton" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="creerButton1" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
           </Group>
@@ -156,9 +156,6 @@
           <Font name="Tahoma" size="12" style="0"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nomTFActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="descTF">
       <Properties>
@@ -167,12 +164,12 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="creerButton">
+    <Component class="javax.swing.JButton" name="quitterButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Quitter"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creerButtonActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="quitterButtonActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="publicRB">
@@ -269,12 +266,12 @@
         <Property name="text" type="java.lang.String" value="Cliquez sur Priv&#xe9; !"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="creerButton1">
+    <Component class="javax.swing.JButton" name="creerButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cr&#xe9;er"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creerButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="creerButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
