@@ -4,9 +4,11 @@ import java.awt.CardLayout;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -20,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.xml.bind.annotation.XmlElementDecl;
      
 import static newPackage1.DButilities.auth;
@@ -34,11 +37,12 @@ public class Principale extends javax.swing.JFrame {
    public static String s="papa";
   public static User u=new User("test");
    public Statut st=new Statut();
-   public static Salon sl=new Salon();
+   public static Salon sl;
    public String date = null;
    public Connection con=null;
         DefaultTableModel model;
   
+        
          
    
 
@@ -68,7 +72,10 @@ public class Principale extends javax.swing.JFrame {
           
         timer.start();
     }
+    
+    
        private void refreshUImessage(){
+           sl=new Salon();
     erasetab(model);
     getinfos(model);
     }
@@ -82,9 +89,10 @@ public class Principale extends javax.swing.JFrame {
         Iterator it = cles.iterator();
         while (it.hasNext()) {
             Object cle = it.next(); // tu peux typer plus finement ici
-            Object valeur = h.get(cle); // tu peux typer plus finement ici
-
-            m.addRow(new Object[]{cle, valeur});
+            String valeur = h.get(cle); // tu peux typer plus finement ici
+            if(valeur.equals("off")){m.addRow(new Object[]{cle, "Hors Ligne"});}
+            else if(valeur.equals("on")) {m.addRow(new Object[]{cle, "En Ligne"});}
+            else { m.addRow(new Object[]{cle, "Abscent"}); }
 
         }
     }
@@ -197,6 +205,11 @@ public class Principale extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 204, 204));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         nomLabel.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         nomLabel.setText("Nom :");
@@ -269,6 +282,11 @@ public class Principale extends javax.swing.JFrame {
                 "Pseudo", "Statut"
             }
         ));
+        pseudoTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pseudoTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(pseudoTable);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -416,6 +434,35 @@ public class Principale extends javax.swing.JFrame {
     private void mesSalonsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesSalonsButtonActionPerformed
        new MyRooms().setVisible(true);
     }//GEN-LAST:event_mesSalonsButtonActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        chgStatUser(u,"off");
+        System.out.println("newPackage1.Principale.formWindowClosing() BYE BYE");
+        System.exit(0); // Pour commencer
+    }//GEN-LAST:event_formWindowClosing
+
+    private void pseudoTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pseudoTableMouseClicked
+        ArrayList<String> a = new ArrayList<>();
+       
+       
+        UserInfo us = new UserInfo();
+        us.setVisible(true);
+        int index = pseudoTable.getSelectedRow();
+        TableModel model= pseudoTable.getModel();
+        String pseudo = model.getValueAt(index, 0).toString();
+        String status = model.getValueAt(index, 1).toString();
+          a=DButilities.GetInfoUser (pseudo);
+           User ux = new User(a.get(0));
+         ux.setNom(a.get(1));
+         ux.setEmail(a.get(2));
+         ux.setTel(a.get(3));
+         ux.setStatus(status);
+         us.mailLabel2.setText(ux.getEmail());
+         us.nomLabel2.setText(ux.getNom());
+         us.pseudoLabel2.setText(ux.getPseudo());
+         us.telLabel2.setText(ux.getTel());
+         us.statutLabel2.setText(ux.getStatus());
+    }//GEN-LAST:event_pseudoTableMouseClicked
 public  void con(){   
 try {
             Class.forName("com.mysql.jdbc.Driver");

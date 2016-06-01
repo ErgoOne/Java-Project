@@ -202,7 +202,29 @@ static void putRoomtoSalon(Salon s) {
         }
 
     }
-    
+    static String GetModerateur(String room)
+    {
+        String admin=null;
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+            //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql = "Select c.pseudo as ps from room as r, creerroom as c where r.Nom='" + room + "' AND c.nom=r.nom";
+            System.out.println("NEW SQL : "+sql);
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
+            while (result.next()) {
+                    admin=result.getString("ps");
+                    //System.out.print(result.getString(i)+"\n");
+                }
+            
+                return admin;
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+            return admin;
+        }
+    }
     static boolean CreerRoom(Room r2, User u, ArrayList<String> a) {
         boolean isroomalreadypresent=false; 
         int statut;
@@ -330,12 +352,25 @@ static void putRoomtoSalon(Salon s) {
 
     static void CreerMsg(Mesg m, User u, Room r) {
         try {
+            String sql = null;
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
            // Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "INSERT INTO ecrit VALUES ('" + m.getMsg() + "', NOW(), '" + u.getPseudo() + "', '" + r.getName() + "')";
-            Statement stmt = null;
-            stmt = con.createStatement();
+            //String sql = "INSERT INTO ecrit VALUES ('" + m.getMsg() + "', NOW(), '" + u.getPseudo() + "', '" + r.getName() + "')";
+             
+             String clean_string = m.getMsg();
+         clean_string = clean_string.replaceAll("\\\\", "\\\\\\\\");
+         clean_string = clean_string.replaceAll("\\n","\\\\n");
+         clean_string = clean_string.replaceAll("\\r", "\\\\r");
+         clean_string = clean_string.replaceAll("\\t", "\\\\t");
+         clean_string = clean_string.replaceAll("\\00", "\\\\0");
+         clean_string = clean_string.replaceAll("'", "\\\\'");
+         clean_string = clean_string.replaceAll("\\\"", "\\\\\"");
+         sql = "INSERT INTO ecrit VALUES ('" +clean_string+ "', NOW(), '" + u.getPseudo() + "', '" + r.getName() + "')";
+
+            PreparedStatement stmt = con.prepareStatement(sql);
+            //Statement stmt = null;
+            //stmt = con.createStatement();
             int statut = stmt.executeUpdate(sql);
 
             if (statut == 1) {
@@ -459,8 +494,15 @@ static ArrayList<String> AfficherNvMess(String date, Room r) {
 
                  String Pseudo = result.getString( "Pseudo" );
                
-          String s = "# "+Pseudo+" "+date_cre+" : "+msg;
+           String date = date_cre;
+            String[] parts = date.split(" ");
+        //    System.out.println("Date: " + parts[0]);
+       //     System.out.println("Time: " + parts[1] + " " + parts[2]);
+               // System.out.println("LHEUUUUUREEE "+parts[1]);
+            String s = ""+Pseudo+" a écrit le " +parts[0]+" à " +parts[1]+" : ";
+            String m= "  => "+msg;
           a.add(s);
+          a.add(m);
           
                 }
             return a;
@@ -532,7 +574,33 @@ static ArrayList<String> AfficherNvMess(String date, Room r) {
         CreerMsg(Arraymsg[numero], u, r);
         r.addMesg(u, Arraymsg[numero]);
     }
+static ArrayList<String> GetInfoUser (String pseudo)
+{
+ArrayList<String> a = new ArrayList<>();
+String sql = "SELECT * from users where Pseudo='"+pseudo+"'";
+  try {
+            Class.forName("com.mysql.jdbc.Driver");
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
 
+            while (result.next()) {
+                a.add(pseudo);
+                 String nom = result.getString( "nom" );
+                 a.add(nom);
+                 String email = result.getString( "email" );
+                 a.add(email);
+                 String tel = result.getString( "telephone" );
+                 a.add(tel);
+                 String st = result.getString( "statut" );
+                 a.add(st);  
+            }
+            return a;
+            } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+            return a;
+        }
+}
 static void AjouterUtilisateur(User u, Room r, TypeDroit t) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
@@ -781,36 +849,47 @@ static void suppmyroom(ArrayList<String> a)
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
            // Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+           
            String sql1= "DELETE FROM creerroom where nom='"+nom+"'";
              System.out.println("newPackage1.DButilities.suppmyroom() SQL : "+sql1);
              Statement stmt1 = null;
              stmt1 = con.createStatement();
              int statut= stmt1.executeUpdate(sql1);
              
-             if (statut==1){
+             String verif= "SELECT COUNT(*) AS count FROM ecrit WHERE nom='"+nom+"'";
+            Statement s=con.createStatement();
+            ResultSet result = s.executeQuery(verif);
+            //ResultSetMetaData resultMeta = result.getMetaData();
+            int i=0;
+            while (result.next()){ // A RAJOUTER A CHAQUE FOIS AVEC LES CONT
+           i = result.getInt("count");}
+            if(i!=0){
+                String sql4= "DELETE FROM ecrit WHERE nom='"+nom+"'";
+             System.out.println("newPackage1.DButilities.suppmyroom() SQL2 : "+sql4);
+            Statement stmt4 = null;
+            stmt4 = con.createStatement();
+           stmt4.executeUpdate(sql4);
+           }
+            verif= "SELECT COUNT(*) AS count FROM room WHERE nom='"+nom+"' and isRprive=1";
+             s=con.createStatement();
+            result = s.executeQuery(verif);
+            //ResultSetMetaData resultMeta = result.getMetaData();
+           i=0;
+            while (result.next()){ // A RAJOUTER A CHAQUE FOIS AVEC LES CONT
+           i = result.getInt("count");}
+            if (i!=0){
+           String sql3= "DELETE FROM acceder WHERE nom='"+nom+"'";
+             System.out.println("newPackage1.DButilities.suppmyroom() SQL2 : "+sql3);
+            Statement stmt3 = null;
+            stmt3 = con.createStatement();
+           stmt3.executeUpdate(sql3);
+            }
            String sql= "DELETE FROM room WHERE nom='"+nom+"'";
              System.out.println("newPackage1.DButilities.suppmyroom() SQL2 : "+sql);
             Statement stmt = null;
             stmt = con.createStatement();
-             int s=stmt.executeUpdate(sql);
-            
-             if(s==1)
-             {
-               String sql3= "DELETE FROM acceder WHERE nom='"+nom+"'";
-             System.out.println("newPackage1.DButilities.suppmyroom() SQL2 : "+sql);
-            Statement stmt3 = null;
-            stmt3 = con.createStatement();
-           s=stmt3.executeUpdate(sql3);
-           
-           if (s==1){
-           String sql4= "DELETE FROM ecrit WHERE nom='"+nom+"'";
-             System.out.println("newPackage1.DButilities.suppmyroom() SQL2 : "+sql);
-            Statement stmt4 = null;
-            stmt4 = con.createStatement();
-           s=stmt4.executeUpdate(sql4);
-           }
-             }
-              }
+             stmt.executeUpdate(sql);
+        
             } catch (ClassNotFoundException | SQLException ex) {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);}
 	}

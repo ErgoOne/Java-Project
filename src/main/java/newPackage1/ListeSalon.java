@@ -43,13 +43,15 @@ public class ListeSalon extends javax.swing.JFrame {
     public ListeSalon() {
         initComponents();
         model = (DefaultTableModel) jTableSalon.getModel();
+        erasetab(model);
         getinfos(model);
        
-        Timer timer = new Timer(1000, new ActionListener() {
+        Timer timer = new Timer(3000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
                     refreshUImessage();
+                    System.out.println(" ALORS SA REFRESH ??? .actionPerformed()");
 
             }
         });
@@ -66,17 +68,24 @@ public class ListeSalon extends javax.swing.JFrame {
 
     public void getinfos(DefaultTableModel m) {
         HashMap<String, String> h = new HashMap<>();
+       // String admin;
         putRoomtoSalon(Principale.sl);
         h = Principale.sl.getSalon();
 
         Set cles = h.keySet();
         Iterator it = cles.iterator();
+        //int i=0;
         while (it.hasNext()) {
             Object cle = it.next(); // tu peux typer plus finement ici
             Object valeur = h.get(cle); // tu peux typer plus finement ici
 
-            m.addRow(new Object[]{cle, valeur});
+            m.addRow(new Object[]{cle, valeur, (DButilities.GetModerateur((String)cle))}); 
+            //System.out.println("XXXXX newPackage1.ListeSalon.getinfos() "+);
+            //m.setValueAt((DButilities.GetModerateur((String)cle)), i, 3);
+           // i++;
+            
         }
+        
         
     }
    
@@ -118,6 +127,8 @@ public class ListeSalon extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 22)); // NOI18N
         jLabel1.setText("Liste des salons");
 
+        exitButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        exitButton.setForeground(new java.awt.Color(204, 0, 0));
         exitButton.setText("Quitter");
         exitButton.setToolTipText("");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
@@ -131,9 +142,17 @@ public class ListeSalon extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Room", "Description"
+                "Room", "Description", "Moderateur"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTableSalon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableSalonMouseClicked(evt);
@@ -154,7 +173,7 @@ public class ListeSalon extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()

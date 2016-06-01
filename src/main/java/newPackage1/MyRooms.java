@@ -30,25 +30,10 @@ public class MyRooms extends javax.swing.JFrame {
         initComponents();
         jTable1.setVisible(true);
         md = (DefaultTableModel) jTable1.getModel();;
-        
+        putmyrooms();
         
       
-        a=DButilities.getmyrooms();
-        	for (String name : a) {
-			System.out.println(name);
-		}
-        int j=0;
-        int i=0;
-        System.out.println(a.size());
-        
-        while(i<a.size()){
-          System.out.println("array list: "+a.get(i));
-                      
-	md.addRow(new Object[]{a.get(i), a.get(i+1)});
-                        System.out.println("j'en suis a l'index : "+i);
-                        i=i+2;
-        }
-          setfalse(md);
+       
         /*for ( i = 0; i < a.size(); i++) {
                         
 			md.setValueAt(a.get(j), i,0);
@@ -57,6 +42,32 @@ public class MyRooms extends javax.swing.JFrame {
      
 		}*/
        
+    }
+    public void putmyrooms()
+    {
+        
+         a=DButilities.getmyrooms();
+        	for (String name : a) {
+			System.out.println(name);
+		}
+        int j=0;
+        int i=0;
+        System.out.println(a.size());
+        erasetab(md);
+        while(i<a.size()){
+          System.out.println("array list: "+a.get(i));
+                      
+	md.addRow(new Object[]{a.get(i), a.get(i+1)});
+                        System.out.println("j'en suis a l'index : "+i);
+                        i=i+2;
+        }
+          setfalse(md);
+    }
+    public void erasetab(DefaultTableModel m) {
+        int rowCount = m.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            m.removeRow(i);
+        }
     }
         public ArrayList<String> getchoixsupp (DefaultTableModel m) {
          ArrayList<String> a = new ArrayList<>();
@@ -135,13 +146,17 @@ public void setfalse(DefaultTableModel m){
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Mes salons");
 
-        applyButton.setText("Appliquer");
+        applyButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        applyButton.setForeground(new java.awt.Color(0, 102, 0));
+        applyButton.setText("Supprimer");
         applyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 applyButtonActionPerformed(evt);
             }
         });
 
+        quitterButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        quitterButton.setForeground(new java.awt.Color(204, 51, 0));
         quitterButton.setText("Quitter");
         quitterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -197,16 +212,18 @@ super.dispose();
 		}
          if(b.isEmpty()){
          JOptionPane jco = new JOptionPane();    
-         JOptionPane.showMessageDialog(null, "Le champ est vide", "Erreur", JOptionPane.WARNING_MESSAGE );
+         JOptionPane.showMessageDialog(null, "Vous n'avez selectionné aucun salon ! ", "Erreur", JOptionPane.WARNING_MESSAGE );
          //super.dispose();
          }
          else {
          DButilities.suppmyroom(b);
           JOptionPane jco = new JOptionPane();    
          
-         JOptionPane.showMessageDialog(null, "Instruction executée avec succés ", "OK", JOptionPane.INFORMATION_MESSAGE );
+         JOptionPane.showMessageDialog(null, "Instruction executée avec succés ! ", "OK", JOptionPane.INFORMATION_MESSAGE );
         //super.dispose();
-        super.dispose();
+       // super.dispose();
+             erasetab(md);
+             putmyrooms();
          }
         
     }//GEN-LAST:event_applyButtonActionPerformed
