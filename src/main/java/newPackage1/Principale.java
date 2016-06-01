@@ -1,10 +1,11 @@
+/* Cette classe sera la classe Principale de l'application comme son nom l'indique. tout les autre Frames
+ * fonctions et methodes seront appelés d'ici
+ *
+ */
 package newPackage1;
 
-import java.awt.CardLayout;
-import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -14,89 +15,69 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-import javax.xml.bind.annotation.XmlElementDecl;
-     
+import javax.swing.table.TableModel;    
 import static newPackage1.DButilities.auth;
 import static newPackage1.DButilities.chgStatUser;
 import static newPackage1.DButilities.getUser;
 
 
-
 public class Principale extends javax.swing.JFrame {
 
-   public static int a=1;
-   public static String s="papa";
-  public static User u=new User("test");
-   public Statut st=new Statut();
-   public static Salon sl;
-   public String date = null;
-   public Connection con=null;
-        DefaultTableModel model;
+  public static int a=1; // Var de verif
+  public static String s="toto"; //String pour initialiser le User 
+  public static User u=new User("test"); // Creation du User
+  public Statut st=new Statut();
+  public static Salon sl; // Declarion un objet Salon
+  public String date = null;
+  public Connection con=null;
+  DefaultTableModel model; // Declaration du model qu'on utilisera par la suite
   
-        
-         
-   
-
-   
+  
+    //Constructeur de la classe et initialisation des composantes
     public Principale() {
  
         initComponents();
-        
-        con();
-          u.setPseudo(s);
-                getUser(u);
-        
-       nomLabel2.setText(u.getNom());
+        u.setPseudo(s);
+        getUser(u);
+        nomLabel2.setText(u.getNom());
         mailLabel2.setText(u.getEmail());
-     pseudoLabel2.setText(u.getPseudo());
-       telLabel2.setText(u.getTel());
-      statutLabel2.setText(st.getstat(u.getStatus())); // On change les valeurs de la bd par des trucs lisibles
-        
-        model = (DefaultTableModel) pseudoTable.getModel();
+        pseudoLabel2.setText(u.getPseudo());
+        telLabel2.setText(u.getTel());
+        statutLabel2.setText(st.getstat(u.getStatus())); // On change les valeurs de la bd par des choses lisibles
+        model = (DefaultTableModel) pseudoTable.getModel(); // Declaration d'un model sur la table pseudo
         getinfos(model);
-              Timer timer = new Timer(3000, new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                    refreshUImessage();
-             
-           }
-        });
-          
+        Timer timer = new Timer(3000, new ActionListener() { // Set du timer pour recuperer les utilisateurs et leurs statuts
+        public void actionPerformed(ActionEvent e) {
+            refreshUImessage();     
+        }
+        }); 
         timer.start();
     }
     
     
-       private void refreshUImessage(){
-           sl=new Salon();
+    private void refreshUImessage(){
+    sl=new Salon();
     erasetab(model);
     getinfos(model);
     }
     
-   public void getinfos(DefaultTableModel m) {
-        HashMap<String, String> h = new HashMap<>();
-        //putRoomtoSalon(Principale.sl);
-        h =DButilities.AfficherUtilisateur();
-
-        Set cles = h.keySet();
-        Iterator it = cles.iterator();
-        while (it.hasNext()) {
+    public void getinfos(DefaultTableModel m) {
+    HashMap<String, String> h = new HashMap<>();
+    h =DButilities.AfficherUtilisateur();
+    Set cles = h.keySet();
+    Iterator it = cles.iterator();
+    while (it.hasNext()) {
             Object cle = it.next(); // tu peux typer plus finement ici
             String valeur = h.get(cle); // tu peux typer plus finement ici
             if(valeur.equals("off")){m.addRow(new Object[]{cle, "Hors Ligne"});}
             else if(valeur.equals("on")) {m.addRow(new Object[]{cle, "En Ligne"});}
             else { m.addRow(new Object[]{cle, "Abscent"}); }
-
         }
     }
-        public void erasetab(DefaultTableModel m) {
+    public void erasetab(DefaultTableModel m) {
         int rowCount = m.getRowCount();
         for (int i = rowCount - 1; i >= 0; i--) {
             m.removeRow(i);
@@ -413,8 +394,8 @@ public class Principale extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelButtonClicked
 
     private void deconnexionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deconnexionButtonActionPerformed
-        chgStatUser(u,"off");
-        System.exit(0); // Pour commencer
+        chgStatUser(u,"off"); // Si deconnexion changement du status en offline
+        System.exit(0); 
     }//GEN-LAST:event_deconnexionButtonActionPerformed
 
     private void statutComboBoxClicked(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_statutComboBoxClicked
@@ -425,12 +406,10 @@ public class Principale extends javax.swing.JFrame {
 
     private void creerSalonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerSalonButtonActionPerformed
        new CreerSalon().setVisible(true);
-       
     }//GEN-LAST:event_creerSalonButtonActionPerformed
 
     private void listeSalonButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listeSalonButtonActionPerformed
               new ListeSalon().setVisible(true);
-  
     }//GEN-LAST:event_listeSalonButtonActionPerformed
 
     private void mesSalonsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mesSalonsButtonActionPerformed
@@ -445,74 +424,52 @@ public class Principale extends javax.swing.JFrame {
 
     private void pseudoTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pseudoTableMouseClicked
         ArrayList<String> a = new ArrayList<>();
-       
-       
         UserInfo us = new UserInfo();
         us.setVisible(true);
         int index = pseudoTable.getSelectedRow();
         TableModel model= pseudoTable.getModel();
         String pseudo = model.getValueAt(index, 0).toString();
         String status = model.getValueAt(index, 1).toString();
-          a=DButilities.GetInfoUser (pseudo);
-           User ux = new User(a.get(0));
-         ux.setNom(a.get(1));
-         ux.setEmail(a.get(2));
-         ux.setTel(a.get(3));
-         ux.setStatus(status);
-         us.mailLabel2.setText(ux.getEmail());
-         us.nomLabel2.setText(ux.getNom());
-         us.pseudoLabel2.setText(ux.getPseudo());
-         us.telLabel2.setText(ux.getTel());
-         us.statutLabel2.setText(ux.getStatus());
+        a=DButilities.GetInfoUser (pseudo);
+        User ux = new User(a.get(0));
+        ux.setNom(a.get(1));
+        ux.setEmail(a.get(2));
+        ux.setTel(a.get(3));
+        ux.setStatus(status);
+        us.mailLabel2.setText(ux.getEmail());
+        us.nomLabel2.setText(ux.getNom());
+        us.pseudoLabel2.setText(ux.getPseudo());
+        us.telLabel2.setText(ux.getTel());
+        us.statutLabel2.setText(ux.getStatus());
     }//GEN-LAST:event_pseudoTableMouseClicked
-public  void con(){   
-try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");
-} catch (ClassNotFoundException | SQLException ex) {
-            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
-        
-}}
- 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-       
-         
+    public static void main(String args[]) { 
       do
-        {   
-       String reponse=null;   
-            JOptionPane jco = new JOptionPane();  
-    reponse = jco.showInputDialog(null, "Veuillez rentrer votre identifiant.","Connexion", JOptionPane.YES_NO_CANCEL_OPTION);
-   
-            //System.out.println("REP : "+i);
-   
-   
-   s=reponse;
-   int rep=0;
-    if(reponse == null) {System.exit(0);} // si cancel (Joption_cancel vaut null) alors sortir
-   if(!reponse.isEmpty()){ rep=auth(reponse);}// Si rep pas vide alors verif du pseudo
-   else {rep=5;}// Sinon dire que le champ est vide
-   //else {rep=0;}
-      
-   if(rep==1)
+      {   
+        String reponse=null;   
+        JOptionPane jco = new JOptionPane();  //Declaration d'une JOP faisant office de platforme de connexion
+        reponse = jco.showInputDialog(null, "Veuillez rentrer votre identifiant.","Connexion", JOptionPane.YES_NO_CANCEL_OPTION);
+        s=reponse;
+        int rep=0;
+        if(reponse == null) {System.exit(0);} // si cancel (Joption_cancel vaut null) alors sortir
+        if(!reponse.isEmpty()){ rep=auth(reponse);}// Si rep pas vide alors verif du pseudo
+        else {rep=5;}// Sinon dire que le champ est vide
+        if(rep==1)
         {
-            JOptionPane.showMessageDialog(null, "Bienvenue " + reponse+".", "Authentification réussie", JOptionPane.INFORMATION_MESSAGE);
-            break;
+             JOptionPane.showMessageDialog(null, "Bienvenue " + reponse+".", "Authentification réussie", JOptionPane.INFORMATION_MESSAGE);
+             break;
         }
-   else if(rep==5)
-            {
-            JOptionPane.showMessageDialog(null, "Le champ est vide", "Erreur", JOptionPane.WARNING_MESSAGE );
-            //System.exit(0);    
-       }     
-   else if(rep==0){
-   JOptionPane.showMessageDialog(null, "Pseudo introuvable", "Erreur", JOptionPane.WARNING_MESSAGE );
-   }
-      }while(a==1);
-        
-      
-        try {
+         else if(rep==5)
+             {
+             JOptionPane.showMessageDialog(null, "Le champ est vide", "Erreur", JOptionPane.WARNING_MESSAGE );   
+             }     
+         else if(rep==0){
+             JOptionPane.showMessageDialog(null, "Pseudo introuvable", "Erreur", JOptionPane.WARNING_MESSAGE );
+             }
+       }while(a==1);
+      try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -529,19 +486,13 @@ try {
             java.util.logging.Logger.getLogger(Principale.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
                 
                 new Principale().setVisible(true);
-                new Principale().setResizable(false);
-                
-                
-                
-              
-                 
+                new Principale().setResizable(false);   
             }
         });
     }
