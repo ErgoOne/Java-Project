@@ -104,7 +104,7 @@ public class DButilities {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
-            con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");
+            con = (Connection) DriverManager.getConnection("jdbc:mysql://192.168.1.97:3306/java_chat", "java_user", "123456");
             String sql = "Select pseudo from users where pseudo='" + user + "'";
 
             /*          + utilisateur.getPseudo()
@@ -182,7 +182,7 @@ static void putRoomtoSalon(Salon s) {
             /*make connection with the database*/
             String user=Principale.u.getPseudo();
             //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select DISTINCT r.Nom,r.Descrptif from room as r, acceder as a, users as u WheRE r.isRprive=0 OR(r.nom=a.nom AND u.pseudo='"+user+"' AND u.Pseudo=a.Pseudo)" ;
+            String sql = "Select DISTINCT r.Nom,r.Descrptif from room as r, acceder as a, users as u WheRE r.isRprive=0 OR(r.nom=a.nom AND u.pseudo='"+user+"' AND u.Pseudo=a.Pseudo) OR(r.nom IN (SELECT ro.nom FROM creerroom as ro WHERE ro.pseudo='"+user+"'))" ;
             System.err.println(sql);
             PreparedStatement statement = con.prepareStatement(sql);
             ResultSet result = statement.executeQuery();
@@ -190,7 +190,7 @@ static void putRoomtoSalon(Salon s) {
 
             while (result.next()) {
                 for (int i = 1; i <= resultMeta.getColumnCount(); i++) {
-                    //System.out.print(result.getString(i)+"\n");
+                    //System.out.print(result.getString(i)+"\n"+result.getString(i + 1));
                     // s.addRoom(result.getString(i),result.getString(i+1) );//Ajouter les room de la BD dans la salon
                     creationRoomS(s, result.getString(i), result.getString(i + 1));
                     i++;
@@ -794,11 +794,12 @@ static ArrayList<String> AfficherUtilisateurRoom(String nr) {
 static ArrayList<String> getDbPseudo()
 {
     ArrayList<String> p =new ArrayList<>();
+    String user=Principale.u.getPseudo();
      try {
     Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             //Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select Pseudo from users";
+            String sql = "Select Pseudo from users WHERE pseudo!='"+user+"'";
 
             System.err.println(sql);
 
