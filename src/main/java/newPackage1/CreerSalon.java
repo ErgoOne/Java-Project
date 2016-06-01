@@ -24,12 +24,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class CreerSalon extends javax.swing.JFrame {
 
-    DefaultTableModel md; 
-    public String statut;
+    DefaultTableModel md;  
     public int ispublic=0;
     /**
      * Creates new form CreerSalon
      */
+    
+    //Création de mon constructeurs avec ma fenêtre et mes composants.
     public CreerSalon() {
         initComponents();
        
@@ -37,34 +38,42 @@ public class CreerSalon extends javax.swing.JFrame {
 
     
     
-     // A changer pour afficher les pseudos à la place des salons
+     //Fonction affichant le pseudo des personnes à rajouter dans le salon
      public void getinfos(DefaultTableModel m) {
-        //HashMap<String, String> h = new HashMap<>();
+      
         ArrayList<String> h = new ArrayList<>();
-      //  putRoomtoSalon(Principale.sl);
         h = DButilities.getDbPseudo();
 
         for (String p : h) {
-                        m.addRow(new Object[]{p});
-                        
-		}
-       
+            m.addRow(new Object[]{p});      
+		} 
     }
      
+     //Fonction affichant les droits read/write de notre personne à ajouter au salon
      public ArrayList<String> getchoixdroit(DefaultTableModel m) {
          ArrayList<String> a = new ArrayList<>();
          for(int row = 0;row < m.getRowCount();row++) {
               a.add((String) m.getValueAt(row, 0));
               Boolean isChecked = Boolean.valueOf(m.getValueAt(row, 1).toString());
               Boolean isChecked2 = Boolean.valueOf(m.getValueAt(row, 2).toString());
-              if(isChecked){a.add("1");}
-              else {a.add("0");}
+              if(isChecked){
+                  a.add("1");
+              }
+              else {
+                  a.add("0");
+              }
               
-         if(isChecked2){a.add("1");}
-         else {a.add("0");}
+              if(isChecked2){
+                  a.add("1");
+              }
+              else {
+                  a.add("0");
+              }
          }     
          return a;
      }
+     
+     //Fonction permettant de mettre de base tout les droits non cochés.
      public void setfalse(DefaultTableModel m){
      
           for(int row = 0;row < m.getRowCount();row++) {
@@ -74,13 +83,6 @@ public class CreerSalon extends javax.swing.JFrame {
           System.out.println("OK");
      }
    
-
-    
-    public void close(){
-        
-        WindowEvent winClosingEvent = new WindowEvent(this,WindowEvent.WINDOW_CLOSING);
-        Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(winClosingEvent);
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,7 +98,7 @@ public class CreerSalon extends javax.swing.JFrame {
         descLabel = new javax.swing.JLabel();
         nomTF = new javax.swing.JTextField();
         descTF = new javax.swing.JTextField();
-        creerButton = new javax.swing.JButton();
+        quitterButton = new javax.swing.JButton();
         publicRB = new javax.swing.JRadioButton();
         privateRB = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -104,7 +106,7 @@ public class CreerSalon extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        creerButton1 = new javax.swing.JButton();
+        creerButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -118,18 +120,13 @@ public class CreerSalon extends javax.swing.JFrame {
         descLabel.setText("Descriptif :");
 
         nomTF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        nomTF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nomTFActionPerformed(evt);
-            }
-        });
 
         descTF.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
 
-        creerButton.setText("Quitter");
-        creerButton.addActionListener(new java.awt.event.ActionListener() {
+        quitterButton.setText("Quitter");
+        quitterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                creerButtonActionPerformed(evt);
+                quitterButtonActionPerformed(evt);
             }
         });
 
@@ -185,10 +182,10 @@ public class CreerSalon extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Light", 3, 12)); // NOI18N
         jLabel3.setText("Cliquez sur Privé !");
 
-        creerButton1.setText("Créer");
-        creerButton1.addActionListener(new java.awt.event.ActionListener() {
+        creerButton.setText("Créer");
+        creerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                creerButton1ActionPerformed(evt);
+                creerButtonActionPerformed(evt);
             }
         });
 
@@ -230,9 +227,9 @@ public class CreerSalon extends javax.swing.JFrame {
                             .addComponent(titleLabel)
                             .addGap(260, 260, 260))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                            .addComponent(creerButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(quitterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addContainerGap()))))
         );
         layout.setVerticalGroup(
@@ -263,8 +260,8 @@ public class CreerSalon extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(creerButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(quitterButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(creerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5))
         );
 
@@ -272,19 +269,18 @@ public class CreerSalon extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nomTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomTFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_nomTFActionPerformed
-
-    private void creerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButtonActionPerformed
+    // Bouton pour quitter la fenêtre
+    private void quitterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitterButtonActionPerformed
      super.dispose();
-    }//GEN-LAST:event_creerButtonActionPerformed
+    }//GEN-LAST:event_quitterButtonActionPerformed
 
+    //Radio bouton "public", pas besoin de voir la jTable avec les pseudos.
     private void publicRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publicRBActionPerformed
     creerSalonTable.setVisible(false);
     ispublic=1;
     }//GEN-LAST:event_publicRBActionPerformed
 
+    //Radio bouton privé avec affichage Table + pseudos ...
     private void privateRBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_privateRBActionPerformed
 
         creerSalonTable.setVisible(true);
@@ -295,30 +291,34 @@ public class CreerSalon extends javax.swing.JFrame {
          setfalse(md);
     }//GEN-LAST:event_privateRBActionPerformed
 
-    private void creerButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButton1ActionPerformed
-       ArrayList<String> a = new ArrayList<>();
-       boolean ispresent=false;
-       if (nomTF.getText().isEmpty()) {JOptionPane.showMessageDialog(null, "Le champ room ne doit pas être vide !", "Alert", JOptionPane.ERROR_MESSAGE);
-        }
-       else {
-           if(ispublic==0)
-           {
-        a=getchoixdroit(md);
-           }
-        ispresent = DButilities.creationRoom(Principale.sl,Principale.u ,nomTF.getText(),descTF.getText(), a);
-        if(ispresent){
-        JOptionPane.showMessageDialog(null, "Le nom de la room existe dejà !", "Alert", JOptionPane.ERROR_MESSAGE);
-        super.dispose();
-        }
-        else  {
-            JOptionPane.showMessageDialog(null, "Room Ajoutée", "Info", JOptionPane.INFORMATION_MESSAGE);
-        super.dispose();
-        }}
+    //Bouton de création de salon + implémentation dans la DB.
+    private void creerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_creerButtonActionPerformed
        
-       
-    }//GEN-LAST:event_creerButton1ActionPerformed
+        ArrayList<String> a = new ArrayList<>();
+        boolean ispresent=false;
+        
+             if (nomTF.getText().isEmpty()) {
+                 JOptionPane.showMessageDialog(null, "Le champ room ne doit pas être vide !", "Alert", JOptionPane.ERROR_MESSAGE);
+            }
+             else{
+                if(ispublic==0){
+                    a=getchoixdroit(md);
+            }
+                ispresent = DButilities.creationRoom(Principale.sl,Principale.u ,nomTF.getText(),descTF.getText(), a);
+                if(ispresent){
+                    JOptionPane.showMessageDialog(null, "Le nom de la room existe dejà !", "Alert", JOptionPane.ERROR_MESSAGE);
+                    super.dispose();
+                    }
+                else{
+                    JOptionPane.showMessageDialog(null, "Room Ajoutée", "Info", JOptionPane.INFORMATION_MESSAGE);
+                    super.dispose();
+                    }
+                }
+    }//GEN-LAST:event_creerButtonActionPerformed
 
-    public void erasetab(DefaultTableModel m) {
+    //Fonction permettant d'effacer une jTable pour pouvoir réécrire dessus (refresh)
+    public void erasetab(DefaultTableModel m){
+        
         int rowCount = m.getRowCount();
         for (int i = rowCount - 1; i >= 0; i--) {
             m.removeRow(i);
@@ -362,7 +362,6 @@ public class CreerSalon extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton creerButton;
-    private javax.swing.JButton creerButton1;
     private javax.swing.JTable creerSalonTable;
     private javax.swing.JLabel descLabel;
     private javax.swing.JTextField descTF;
@@ -374,6 +373,7 @@ public class CreerSalon extends javax.swing.JFrame {
     private javax.swing.JTextField nomTF;
     private javax.swing.JRadioButton privateRB;
     private javax.swing.JRadioButton publicRB;
+    private javax.swing.JButton quitterButton;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
