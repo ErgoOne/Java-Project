@@ -15,10 +15,13 @@ import java.util.Set;
  *
  * @author Badr
  */
-public class Salon {
-    private int nbUsers;
-    private String host;
 
+//Classe contenant une ou plusieurs room 
+public class Salon {
+    private int nbUsers; 
+    private String host; 
+
+    //Getteur et setteur de la class
     public int getNbUsers() {
         return nbUsers;
     }
@@ -35,23 +38,28 @@ public class Salon {
         this.host = host;
     }
     
+    //Constructeur
     public Salon() {
     }
-   ArrayList<Room> rooms= new ArrayList<>();
+    
+    //Arraylist de rooms
+    ArrayList<Room> rooms= new ArrayList<>();
    
-   public void addRoom(Room r)
-   {
+    //Methode d'ajout de room au salon
+    public void addRoom(Room r)
+    {
        rooms.add(r);
-   }
+     }
    
-   public HashMap<String, String> getSalon()
-   {
-    HashMap<String, String> h = new HashMap<>();
-    for(Room R : rooms){
-	h.put(R.getName(), R.getDesc());
-	}       
+    //Afficher le salon en utilisant une HashMap
+    public HashMap<String, String> getSalon()
+     {
+        //Place le nom et la description de chaque room parcurue qui sont dans l'array list , dans la hash map
+        HashMap<String, String> h = new HashMap<>(); 
+        for(Room R : rooms){
+            h.put(R.getName(), R.getDesc());
+            }       
     return h;
-   } 
-   
+    } 
    
 }
