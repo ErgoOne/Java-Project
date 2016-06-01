@@ -18,88 +18,77 @@ public class MyRooms extends javax.swing.JFrame {
     ArrayList<String> b ;
     ArrayList<String> a;
     DefaultTableModel md; 
-      public void getinfos(DefaultTableModel m) {
-      
-      }
+    
     /**
      * Creates new form MyRooms
      */
+    
+    //Création de mon constructeur et de ses composants
     public MyRooms() {
+        
         a = new ArrayList<>();
         b = new ArrayList<>();
         initComponents();
         jTable1.setVisible(true);
         md = (DefaultTableModel) jTable1.getModel();;
         putmyrooms();
-        
-      
-       
-        /*for ( i = 0; i < a.size(); i++) {
-                        
-			md.setValueAt(a.get(j), i,0);
-                        md.setValueAt(a.get(j+1), i,1); 
-                        j+=2;
-     
-		}*/
-       
     }
+    
+    //Récupération de mes salons dans la table 
     public void putmyrooms()
     {
-        
          a=DButilities.getmyrooms();
-        	for (String name : a) {
-			System.out.println(name);
-		}
-        int j=0;
         int i=0;
-        System.out.println(a.size());
         erasetab(md);
-        while(i<a.size()){
-          System.out.println("array list: "+a.get(i));
-                      
-	md.addRow(new Object[]{a.get(i), a.get(i+1)});
-                        System.out.println("j'en suis a l'index : "+i);
-                        i=i+2;
+        
+        while(i<a.size()){                   
+            md.addRow(new Object[]{a.get(i), a.get(i+1)});
+            i=i+2;
         }
-          setfalse(md);
+        setfalse(md);
     }
+    
+    //Effacer les données de la jTable
     public void erasetab(DefaultTableModel m) {
         int rowCount = m.getRowCount();
         for (int i = rowCount - 1; i >= 0; i--) {
             m.removeRow(i);
         }
     }
+    
+        // Fonction permettant de supprimer un salon.
         public ArrayList<String> getchoixsupp (DefaultTableModel m) {
          ArrayList<String> a = new ArrayList<>();
          int x=0;
-            System.out.println("newPackage1.MyRooms.getchoixsupp() ROW COUNT  : "+m.getRowCount());
-         for(int i =0; i<m.getRowCount() ; i++){
-          Boolean isChecked = Boolean.valueOf(m.getValueAt(i,2 ).toString());
-          if(isChecked){x=1;}}
-         if(x==1){
-          for(int row = 0;row < m.getRowCount();row++) {
-            Boolean isChecked = Boolean.valueOf(m.getValueAt(row,2 ).toString());
-             if(isChecked){
-             a.add((String) m.getValueAt(row, 0)); }
-         }
-          	for (String name : a) {
-			System.out.println("SA MARCHE ? ! "+name);
-		}
-          return a;
-          }
-         else 
-         {a=new ArrayList<>();
-         return a;
-         }
+            for(int i =0; i<m.getRowCount() ; i++){
+                Boolean isChecked = Boolean.valueOf(m.getValueAt(i,2 ).toString());
+                if(isChecked){
+                    x=1;
+                }
+            }
+            if(x==1){
+                for(int row = 0;row < m.getRowCount();row++){
+                    Boolean isChecked = Boolean.valueOf(m.getValueAt(row,2 ).toString());
+                    if(isChecked){
+                         a.add((String) m.getValueAt(row, 0)); 
+                    }
+                }
+                return a;
+            }
+            else {
+                a=new ArrayList<>();
+                return a;
+            }
         
      }
-public void setfalse(DefaultTableModel m){
+
+        //Mettre de base, choix des booleens non cochés.
+        public void setfalse(DefaultTableModel m){
      
           for(int row = 0;row < m.getRowCount();row++) {
           m.setValueAt(Boolean.FALSE, row, 2);
           }
-          System.out.println("OK");
-     }
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -201,31 +190,25 @@ public void setfalse(DefaultTableModel m){
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    //Bouton pour quitter la fenêtre.
     private void quitterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitterButtonActionPerformed
-super.dispose();        
+        super.dispose();        
     }//GEN-LAST:event_quitterButtonActionPerformed
 
+    //Bouton pour appliquer les changements ( effacer une fenêtre).
     private void applyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_applyButtonActionPerformed
          b=getchoixsupp(md);
-         	for (String name : b) {
-			System.out.println("DANS BUTTON : "+name);
-		}
          if(b.isEmpty()){
-         JOptionPane jco = new JOptionPane();    
-         JOptionPane.showMessageDialog(null, "Vous n'avez selectionné aucun salon ! ", "Erreur", JOptionPane.WARNING_MESSAGE );
-         //super.dispose();
+            JOptionPane jco = new JOptionPane();    
+            JOptionPane.showMessageDialog(null, "Vous n'avez selectionné aucun salon ! ", "Erreur", JOptionPane.WARNING_MESSAGE );
          }
          else {
-         DButilities.suppmyroom(b);
-          JOptionPane jco = new JOptionPane();    
-         
-         JOptionPane.showMessageDialog(null, "Instruction executée avec succés ! ", "OK", JOptionPane.INFORMATION_MESSAGE );
-        //super.dispose();
-       // super.dispose();
-             erasetab(md);
-             putmyrooms();
+            DButilities.suppmyroom(b);
+            JOptionPane jco = new JOptionPane();       
+            JOptionPane.showMessageDialog(null, "Instruction executée avec succés ! ", "OK", JOptionPane.INFORMATION_MESSAGE );
+            erasetab(md);
+            putmyrooms();
          }
-        
     }//GEN-LAST:event_applyButtonActionPerformed
 
     /**
