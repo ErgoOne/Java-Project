@@ -266,6 +266,8 @@ public class Principale extends javax.swing.JFrame {
         statutLabel2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         statutLabel2.setText("jLabel8");
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/bloggif_574adaee2581a.png"))); // NOI18N
+
         listeSalonButton.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         listeSalonButton.setText("Liste des salons");
         listeSalonButton.addActionListener(new java.awt.event.ActionListener() {
@@ -333,9 +335,9 @@ public class Principale extends javax.swing.JFrame {
                                 .addComponent(pseudoLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(30, 30, 30))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()

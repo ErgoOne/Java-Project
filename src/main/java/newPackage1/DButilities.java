@@ -132,20 +132,20 @@ public class DButilities {
         return tmp;
     }
 
-    static String getDroitUR() {
+    static String getDroitUR(String room) {
         //TypeDroit tmp = TypeDroit.none;
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
             //con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
-            String sql = "Select type_droit from acceder where pseudo=?";
+            String sql = "Select type_droit from acceder where pseudo=? and nom='"+room+"'";
 
             /*          + utilisateur.getPseudo()
                     + "' AND nom='" + r.getName()
                     + "'  ";*/
  /*select instances from the table*/
-            System.err.println(sql);
+            System.err.println("SQL DROIT ! "+sql);
 
             PreparedStatement statement = con.prepareStatement(sql);
             statement.setString(1, Principale.u.getPseudo());
@@ -172,11 +172,10 @@ public class DButilities {
             Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
            return "Error";
         }
-        return "Error";
         
+        return "Error";
     }
 static void putRoomtoSalon(Salon s) {
-
         try {
             Class.forName("com.mysql.jdbc.Driver");
             /*make connection with the database*/
@@ -728,6 +727,27 @@ static HashMap<String, String> AfficherUtilisateur() {
             return map;
         }
     }
+static int ispublique(String room){
+ int r=0;
+    try {
+            Class.forName("com.mysql.jdbc.Driver");
+            /*make connection with the database*/
+           // Connection con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/java_chat", "root", "");/* red colored part has to be as per your database*/
+            String sql= "SELECT isRprive as irp from room where nom='"+room+"'";
+            PreparedStatement statement = con.prepareStatement(sql);
+            ResultSet result = statement.executeQuery();
+            ResultSetMetaData resultMeta = result.getMetaData();
+
+            while (result.next()) {
+                r=result.getInt("irp");
+            }
+            if(r!=0) return 1;
+            else return 0;
+            } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(DButilities.class.getName()).log(Level.SEVERE, null, ex);
+            return r;
+        }
+}
 static void RoomPublic(String nr, int yn){
 	if(yn==1){
 		        try {

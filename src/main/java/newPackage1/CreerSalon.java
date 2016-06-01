@@ -299,7 +299,7 @@ public class CreerSalon extends javax.swing.JFrame {
        ArrayList<String> a = new ArrayList<>();
        boolean ispresent=false;
        if (nomTF.getText().isEmpty()) {JOptionPane.showMessageDialog(null, "Le champ room ne doit pas être vide !", "Alert", JOptionPane.ERROR_MESSAGE);
-        super.dispose();}
+        }
        else {
            if(ispublic==0)
            {

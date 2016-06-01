@@ -10,6 +10,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.Vector;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -25,6 +28,7 @@ public class Chatroom extends javax.swing.JFrame {
     Room r;
         String roomname=null;
         String roomdesc=null;
+        int i=0;
      //ArrayList<String> a;
          //HashMap<String, String> h = new HashMap<>();
         ArrayList<String> a = new ArrayList<>();
@@ -79,11 +83,12 @@ public class Chatroom extends javax.swing.JFrame {
     public Chatroom(String ro, String d) { // CONSTRUCTEUR
        
         initComponents();
+        i=0;
         this.roomname=ro;
         this.roomdesc=d;
         String droit=null;
-        droit=DButilities.getDroitUR();
-        
+        droit=DButilities.getDroitUR(roomname);
+        System.out.println("DROIT DROIT "+droit);
         if (droit.equals("r"))
         {
                 envoyerTF.setVisible(false);
@@ -97,7 +102,13 @@ public class Chatroom extends javax.swing.JFrame {
         affichageJL.setModel(model);
         //descri.getCon
        model1 = (DefaultTableModel) jTable1.getModel();
+       i=DButilities.ispublique(roomname);
+      if(i==1){
         getinfos(model1, ro);
+       }
+       else {
+               getinfosS(model1);
+               }
         System.out.println(" DESC : "+d+" ROOOMNAME : "+ro);
         this.r=Room.getInstance(ro, d);
         System.out.println("DATE : "+r.getLastDate());
@@ -107,17 +118,37 @@ public class Chatroom extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                     affotherstext();
-                    refreshUImessage();
+                    refreshUImessage(i);
              
            }
         });
 
         timer.start();
     }
+public void getinfosS(DefaultTableModel m) {
+        HashMap<String, String> h = new HashMap<>();
+        //putRoomtoSalon(Principale.sl);
+        h =DButilities.AfficherUtilisateur();
 
-    private void refreshUImessage(){
+        Set cles = h.keySet();
+        Iterator it = cles.iterator();
+        while (it.hasNext()) {
+            Object cle = it.next(); // tu peux typer plus finement ici
+            String valeur = h.get(cle); // tu peux typer plus finement ici
+            if(valeur.equals("off")){m.addRow(new Object[]{cle, "Hors Ligne", "Lecture - Ecriture"});}
+            else if(valeur.equals("on")) {m.addRow(new Object[]{cle, "En Ligne","Lecture - Ecriture"});}
+            else { m.addRow(new Object[]{cle, "Abscent","Lecture - Ecriture"}); }
+
+        }
+    }
+    private void refreshUImessage(int i){
+   if(i==1){
     erasetab(model1);
-    getinfos(model1, roomname);
+    getinfos(model1, roomname);}
+   else {
+       erasetab(model1);
+      getinfosS(model1);
+   }
     }
     
    public void getinfos(DefaultTableModel m, String ro) {
@@ -175,6 +206,7 @@ public class Chatroom extends javax.swing.JFrame {
         envoyerButton = new javax.swing.JButton();
         quitterButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addKeyListener(new java.awt.event.KeyAdapter() {
@@ -262,7 +294,8 @@ public class Chatroom extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -287,7 +320,9 @@ public class Chatroom extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 127, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(0, 109, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addComponent(envoyerTF, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -446,6 +481,7 @@ public class Chatroom extends javax.swing.JFrame {
     private javax.swing.JButton envoyerButton;
     private javax.swing.JTextField envoyerTF;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
